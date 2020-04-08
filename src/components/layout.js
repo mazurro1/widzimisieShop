@@ -1,7 +1,7 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import "./bootstrap.min.css"
-import Header from "./Header"
+import Header from "./header"
 import Footer from "./Footer"
 import styled from "styled-components"
 import Typed from "react-typed"
