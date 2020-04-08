@@ -6,7 +6,7 @@ import Footer from "./Footer"
 import styled from "styled-components"
 import Typed from "react-typed"
 import { Colors } from "../common"
-import Navigation from "./navigation"
+import Navigation from "./Navigation"
 import "./layout.css"
 
 import MessengerCustomerChat from "react-messenger-customer-chat"
