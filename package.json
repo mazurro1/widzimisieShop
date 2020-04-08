@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "widzimisie",
   "private": true,
   "description": "A simple starter to get up and developing quickly with Gatsby",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Hubert Mazur",
   "dependencies": {
     "@material-ui/core": "^4.9.9",
     "babel-plugin-styled-components": "^1.10.7",
