@@ -81,13 +81,13 @@ const Layout = ({
         </Header>
       </header>
       {children}
-      <iframe>
-        <MessengerCustomerChat
-          pageId="109616830550928"
-          appId="224093935318863"
-          htmlRef="<REF_STRING>"
-        />
-      </iframe>
+
+      <MessengerCustomerChat
+        pageId="109616830550928"
+        appId="224093935318863"
+        htmlRef="<REF_STRING>"
+      />
+
       <Footer />
     </>
   )
