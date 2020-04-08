@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Lato|Montserrat");
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -22,6 +23,7 @@ section,
 summary {
   display: block;
 }
+
 audio,
 canvas,
 progress,
@@ -45,7 +47,8 @@ a {
 }
 a:active,
 a:hover {
-  outline-width: 0;
+  outline: none;
+  text-decoration: none;
 }
 abbr[title] {
   border-bottom: none;
@@ -105,6 +108,11 @@ hr {
   height: 0;
   overflow: visible;
 }
+button:active,
+button:focus {
+  outline: none;
+}
+
 button,
 input,
 optgroup,
@@ -198,9 +206,20 @@ html {
 *:after {
   box-sizing: inherit;
 }
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  background: #2e2e2e;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #676767;
+  border-radius: 20px;
+}
 body {
+  font-family: "Montserrat", sans-serif !important;
   color: hsla(0, 0%, 0%, 0.8);
-  font-family: georgia, serif;
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;

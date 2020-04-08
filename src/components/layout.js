@@ -1,51 +1,96 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
-import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-
-import Header from "./header"
+import "./bootstrap.min.css"
+import Header from "./Header"
+import Footer from "./Footer"
+import styled from "styled-components"
+import Typed from "react-typed"
+import { Colors } from "../common"
+import Navigation from "./navigation"
 import "./layout.css"
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
+import MessengerCustomerChat from "react-messenger-customer-chat"
+
+const getData = graphql`
+  {
+    file(name: { eq: "792-scaled" }) {
+      childImageSharp {
+        fluid {
+          ...GatsbyImageSharpFluid_tracedSVG
         }
       }
     }
-  `)
+  }
+`
 
-  return (
+const TextStyled = styled.div`
+  position: absolute;
+  width: 400px;
+  max-width: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: ${Colors.headerText};
+`
+
+const TextStyledOneLine = styled.div`
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-style: normal;
+`
+
+const Layout = ({
+  children,
+  history = "",
+  image,
+  home = false,
+  headerText,
+}) => {
+  const data = useStaticQuery(getData)
+  const imageToHeader = image ? image : data.file.childImageSharp.fluid
+  const headerTextTyped = !home || (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
+      <TextStyled>
+        <div>
+          <Typed
+            strings={[headerText ? headerText.text1 : ""]}
+            typeSpeed={40}
+          ></Typed>
+        </div>
+        <TextStyledOneLine>
+          <Typed
+            strings={[headerText ? headerText.text2 : ""]}
+            typeSpeed={20}
+            startDelay={2500}
+            showCursor={false}
+          ></Typed>
+        </TextStyledOneLine>
+      </TextStyled>
     </>
   )
-}
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+  return (
+    <>
+      <Navigation history={history} />
+      <header>
+        <Header image={imageToHeader} home={home}>
+          {headerTextTyped}
+        </Header>
+      </header>
+      {children}
+      <iframe>
+        <MessengerCustomerChat
+          pageId="109616830550928"
+          appId="224093935318863"
+          htmlRef="<REF_STRING>"
+        />
+      </iframe>
+      <Footer />
+    </>
+  )
 }
 
 export default Layout
