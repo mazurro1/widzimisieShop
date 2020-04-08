@@ -41,19 +41,13 @@ module.exports = {
     {
       resolve: `gatsby-source-contentful`,
       options: {
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+        spaceId: "hokf42yvskfi",
+        accessToken: "ZrX8p3APL-gmx0gLNIEUuE7K9lD39npyhQIky3JLb7Y",
+        // spaceId: process.env.CONTENTFUL_SPACE_ID,
+        // accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
     },
-    {
-      resolve: `gatsby-plugin-facebook-sdk`,
-      options: {
-        appId: "224093935318863",
-        status: true,
-        xfbml: true,
-        version: "v2.7",
-      },
-    },
+
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     `gatsby-plugin-offline`,

@@ -43,6 +43,13 @@ const TextStyledOneLine = styled.div`
   font-style: normal;
 `
 
+const Messanger = styled.div`
+  position: relative;
+  background-color: red;
+  height: 200px;
+  width: 200px;
+`
+
 const Layout = ({
   children,
   history = "",
@@ -81,13 +88,13 @@ const Layout = ({
         </Header>
       </header>
       {children}
-
-      <MessengerCustomerChat
-        pageId="109616830550928"
-        appId="224093935318863"
-        htmlRef="<REF_STRING>"
-      />
-
+      <Messanger>
+        <MessengerCustomerChat
+          pageId="109616830550928"
+          appId="224093935318863"
+          htmlRef="<REF_STRING>"
+        />
+      </Messanger>
       <Footer />
     </>
   )
