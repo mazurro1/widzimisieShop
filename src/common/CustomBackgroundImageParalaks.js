@@ -10,11 +10,15 @@ const CustomBackgroundImageParalaks = ({ img, className, children }) => {
   )
 }
 export default styled(CustomBackgroundImageParalaks)`
-  background-attachment: fixed;
-  background-position: 50% 0;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 20vh;
   max-height: 300px;
   min-height: 200px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    background-attachment: fixed;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 `

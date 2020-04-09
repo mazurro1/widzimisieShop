@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button"
 import MenuMobile from "./MenuMobile"
 import { MdShoppingCart, MdPhoneIphone } from "react-icons/md"
 import { IoMdHome } from "react-icons/io"
-import { FaCalendarAlt } from "react-icons/fa"
+import { FaCalendarAlt, FaImages } from "react-icons/fa"
 
 const UpperDiv = styled.div`
   position: relative;
@@ -18,7 +18,7 @@ const UpperDiv = styled.div`
 
 const HeaderStyled = styled.div`
   background-color: ${props =>
-    props.scrollPosition > 100 ? Colors.navColor : "rgba(255, 255, 255, 0.8)"};
+    props.scrollPosition > 100 ? Colors.navColor : "rgba(255, 255, 255, 0.9)"};
   transition-property: background-color;
   transition-duration: 0.3s;
   transition-timing-function: ease;
@@ -135,21 +135,21 @@ const ButtonWidthDiv = styled.div`
 `
 
 const Navigation = ({ history }) => {
-  const [scrollPosition, setSrollPosition] = useState(0)
-  const handleScroll = () => {
-    const position = window.pageYOffset
-    setSrollPosition(position)
-  }
+  // const [scrollPosition, setSrollPosition] = useState(0)
+  // const handleScroll = () => {
+  //   const position = window.pageYOffset
+  //   setSrollPosition(position)
+  // }
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true })
-  }, [])
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll, { passive: true })
+  // }, [])
 
-  useEffect(() => {
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
+  // useEffect(() => {
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll)
+  //   }
+  // }, [])
 
   const [menuActive, setMenuActive] = useState({
     menu: false,
@@ -233,7 +233,7 @@ const Navigation = ({ history }) => {
           </div>
         </div>
       </UpperDiv>
-      <HeaderStyled scrollPosition={scrollPosition}>
+      <HeaderStyled scrollPosition={0}>
         <ul className="m-0 text-center d-none d-md-block">{links}</ul>
         <DivMobile className="d-md-none">
           <MenuMobile

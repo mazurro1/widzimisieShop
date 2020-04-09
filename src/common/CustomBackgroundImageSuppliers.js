@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import BackgroundImage from "gatsby-background-image"
+import { Colors } from "../common"
 
 const CustomBackgroundImageSuppliers = ({
   img,
@@ -23,10 +24,6 @@ const CustomBackgroundImageSuppliers = ({
 export default styled(CustomBackgroundImageSuppliers)`
   position: relative;
   min-height: ${props => (props.big ? "400px" : "200px")};
-  /* width: ${props => (props.big ? "545px" : "262.5px")}; */
-  /* background: none; */
-  /* background-position: center; */
-  /* background-size: cover; */
   grid-area: ${props => (props.big ? "BigImage" : "")};
   max-width: 100%;
   opacity: 1 !important;

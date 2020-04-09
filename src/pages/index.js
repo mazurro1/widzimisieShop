@@ -3,9 +3,8 @@ import AboutUs from "../components/Home/AboutUs"
 import MeetUs from "../components/Home/MeetUs"
 import OurSuppliers from "../components/Home/OurSuppliers"
 import Services from "../components/Home/Services"
-import Gallery from "../components/Home/Gallery"
 import Layout from "../components/layout"
-import CustomBackgroundImage from "../common/CustomBackgroundImageParalaks"
+import CustomBackgroundImageParalaks from "../common/CustomBackgroundImageParalaks"
 import { graphql } from "gatsby"
 
 const IndexPage = props => {
@@ -17,11 +16,12 @@ const IndexPage = props => {
       home
     >
       <AboutUs />
-      <CustomBackgroundImage img={props.data.contentfulHeader.image.fluid} />
+      <CustomBackgroundImageParalaks
+        img={props.data.contentfulHeader.backgroundImg.fluid}
+      />
       <MeetUs />
       <OurSuppliers />
       <Services />
-      <Gallery />
     </Layout>
   )
 }
@@ -32,7 +32,12 @@ export const query = graphql`
       text1
       text2
       image {
-        fluid(maxWidth: 1920) {
+        fluid(maxWidth: 1920, quality: 60) {
+          ...GatsbyContentfulFluid_tracedSVG
+        }
+      }
+      backgroundImg: image {
+        fluid(maxWidth: 1500, quality: 40) {
           ...GatsbyContentfulFluid_tracedSVG
         }
       }

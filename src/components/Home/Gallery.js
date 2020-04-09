@@ -91,7 +91,7 @@ const GalleryClass = styled.div`
         top: 0;
         height: 30px;
         width: 5px;
-        background-color: white;
+        background-color: black;
         transform: rotate(-45deg) translate(4px, -4px);
         border-radius: 10px;
         transition-property: background-color, transform;
@@ -103,7 +103,7 @@ const GalleryClass = styled.div`
         bottom: 0;
         height: 30px;
         width: 5px;
-        background-color: white;
+        background-color: black;
         transform: rotate(45deg) translate(4px, 4px);
         border-radius: 10px;
         transition-property: background-color, transform;
@@ -157,7 +157,7 @@ const GalleryClass = styled.div`
         top: 0;
         height: 30px;
         width: 5px;
-        background-color: white;
+        background-color: black;
         transform: rotate(-45deg) translate(4px, -4px);
         border-radius: 10px;
         transition-property: background-color, transform;
@@ -169,7 +169,7 @@ const GalleryClass = styled.div`
         bottom: 0;
         height: 30px;
         width: 5px;
-        background-color: white;
+        background-color: black;
         transform: rotate(45deg) translate(4px, 4px);
         border-radius: 10px;
         transition-property: background-color, transform;
@@ -228,7 +228,7 @@ const GalleryClass = styled.div`
   } */
 `
 const SectionColor = styled(Section)`
-  background-color: ${Colors.basicDark};
+  /* background-color: ${Colors.basicDark}; */
 `
 
 const MyGallery = () => {
@@ -279,15 +279,13 @@ const MyGallery = () => {
     </div>
   ))
   const underTitleContent = !underTitle || (
-    <p className="text-center text-white">{underTitle}</p>
+    <p className="text-center">{underTitle}</p>
   )
-  const paragraphContent = !paragraph || (
-    <p className="text-white">{paragraph}</p>
-  )
+  const paragraphContent = !paragraph || <p>{paragraph}</p>
   return (
     <SectionColor>
       <div className="container">
-        <Title dark>{title}</Title>
+        <Title>{title}</Title>
         {underTitleContent}
         <div className="row">
           <div className="col-12 col-md-10 mx-auto">{paragraphContent}</div>

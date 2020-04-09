@@ -1,5 +1,27 @@
 import React from "react"
 import styled from "styled-components"
+import Button from "@material-ui/core/Button"
+import { useStaticQuery, graphql } from "gatsby"
+import CustomBackgroundImageSuppliers from "../..//common/CustomBackgroundImageSuppliers"
+
+const newData = graphql`
+  {
+    image1: file(name: { eq: "gatsby-astronaut" }) {
+      childImageSharp {
+        fixed(width: 440, height: 200) {
+          ...GatsbyImageSharpFixed_tracedSVG
+        }
+      }
+    }
+    image2: file(name: { eq: "gatsby-astronaut" }) {
+      childImageSharp {
+        fixed(width: 440, height: 200) {
+          ...GatsbyImageSharpFixed_tracedSVG
+        }
+      }
+    }
+  }
+`
 
 const PositionAbsolute = styled.div`
   position: absolute;
@@ -7,16 +29,50 @@ const PositionAbsolute = styled.div`
   left: 0;
   right: 0;
 `
+const ElementStyle = styled.div`
+  position: relative;
+  text-align: center;
+  button {
+    width: 80%;
+    min-height: 200px;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+  }
+`
+const TextOnImage = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+  padding: 5px;
+  color: white;
+  text-align: center;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+`
+
 const SelectedTypeofGlasses = ({ type, handleChangeTypeOfGlasses }) => {
+  const {
+    image1: {
+      childImageSharp: { fixed: image1Selected },
+    },
+    image2: {
+      childImageSharp: { fixed: image2Selected },
+    },
+  } = useStaticQuery(newData)
   const mapType = type.map((item, index) => {
     return (
-      <div
-        className="col-6 mx-auto"
-        key={index}
-        onClick={() => handleChangeTypeOfGlasses(item)}
-      >
-        {item}
-      </div>
+      <ElementStyle className="col-md-6 col-10 mx-auto" key={index}>
+        <Button onClick={() => handleChangeTypeOfGlasses(item)}>
+          <CustomBackgroundImageSuppliers
+            img={index === 0 ? image1Selected : image2Selected}
+          >
+            <TextOnImage>{item}</TextOnImage>
+          </CustomBackgroundImageSuppliers>
+        </Button>
+      </ElementStyle>
     )
   })
 

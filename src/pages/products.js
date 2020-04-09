@@ -4,38 +4,19 @@ import { graphql } from "gatsby"
 import SelectedTypeofGlasses from "../components/Products/SelectedTypeofGlasses"
 import SelectedTypeofSex from "../components/Products/SelectedTypeofSex"
 import ProductList from "../components/Products/ProductList"
-import styled from "styled-components"
 import { CSSTransition } from "react-transition-group"
 import { StepperComponent } from "../common"
-
-const getSteps = () => {
-  return [
-    "Wybierz typ",
-    "Wybierz rodzaj",
-    "Wybierz oprawki",
-    "Wybierz szkła",
-    "Dodatkowe opcje",
-    "Podsumowanie",
-  ]
-}
-
-const getCategories = (items, propName) => {
-  let tempItems = items.map(item => {
-    return item[propName][0]
-  })
-  let tempCategories = new Set(tempItems)
-  let categories = Array.from(tempCategories)
-  return categories
-}
-
-const PositionRelative = styled.div`
-  position: relative;
-  min-height: calc(50vh - 31px);
-`
-
-const PositionSelectedItem = styled.div`
-  position: relative;
-`
+import { MdRefresh, MdKeyboardArrowLeft } from "react-icons/md"
+import Tooltip from "@material-ui/core/Tooltip"
+import {
+  getSteps,
+  StyleButton,
+  getCategories,
+  WrapperIcoButton,
+  PositionRelative,
+  PositionSelectedItem,
+  getCategoriesString,
+} from "../components/Products/productsConsts"
 
 const Products = props => {
   const [activeStep, setActiveStep] = React.useState(0)
@@ -93,16 +74,11 @@ const Products = props => {
     setActiveStep(prevActiveStep => prevActiveStep + 1)
   }
 
-  const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1)
-  }
-
-  const handleReset = () => {
+  const handleRestGenerator = () => {
     setActiveStep(0)
-  }
-
-  const handleRestGenerator = activeStep => {
-    handleReset()
+    setShowButtonsSex(false)
+    setShowProducts(false)
+    setShowButtonsGlasses(true)
   }
 
   const handleGlassesExit = () => {
@@ -168,12 +144,15 @@ const Products = props => {
       </CSSTransition>
       <CSSTransition
         in={showProducts}
-        timeout={300}
+        timeout={0}
         classNames="alert"
         unmountOnExit
         onExiting={handleProductExit}
       >
-        <ProductList products={state.filterProducts} />
+        <ProductList
+          products={state.filterProducts}
+          getCategoriesString={getCategoriesString}
+        />
       </CSSTransition>
     </>
   )
@@ -181,25 +160,33 @@ const Products = props => {
   return (
     <Layout history={props.location}>
       <PositionRelative>
-        <div className="d-none d-md-block">
-          <StepperComponent activeStep={activeStep} steps={steps} />
-          <div className="container">
-            <div className="row">
-              <div className="col-6">
-                <button
-                  onClick={handleGoBackGenerator}
-                  disabled={activeStep <= 0}
+        <div className="container">
+          <div className="d-none d-md-block">
+            <StepperComponent activeStep={activeStep} steps={steps} />
+            <div className="container">
+              <div className="row">
+                <WrapperIcoButton
+                  className="col-12 mx-auto"
+                  disabledButton={activeStep <= 0}
                 >
-                  Cofnij
-                </button>
-                <button onClick={() => handleRestGenerator(activeStep)}>
-                  Reset
-                </button>
+                  <Tooltip title="Cofnij" placement="top">
+                    <StyleButton onClick={handleGoBackGenerator}>
+                      <MdKeyboardArrowLeft />
+                    </StyleButton>
+                  </Tooltip>
+                  <Tooltip title="Resetuj" placement="top">
+                    <StyleButton onClick={handleRestGenerator}>
+                      <MdRefresh />
+                    </StyleButton>
+                  </Tooltip>
+                </WrapperIcoButton>
               </div>
             </div>
           </div>
         </div>
-        <PositionSelectedItem>{validProps}</PositionSelectedItem>
+        <PositionSelectedItem className="mt-4">
+          {validProps}
+        </PositionSelectedItem>
       </PositionRelative>
     </Layout>
   )
@@ -217,7 +204,7 @@ export const query = graphql`
         price
         productImage {
           fixed {
-            src
+            ...GatsbyContentfulFixed_tracedSVG
           }
         }
         form {
@@ -231,7 +218,7 @@ export const query = graphql`
         }
         producerImage {
           fluid {
-            src
+            ...GatsbyContentfulFluid_tracedSVG
           }
         }
       }

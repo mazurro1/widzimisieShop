@@ -10,13 +10,14 @@ const H1Style = styled.h1`
   font-weight: 300;
   text-align: center;
   color: ${Colors.textBasic};
-  background-color: ${Colors.second};
+  background-color: ${props => (props.bgDark ? Colors.basic : Colors.second)};
   border-radius: 3px;
   transition-property: background-color;
   transition-duration: 0.3s;
   transition-timing-function: ease;
   &:hover {
-    background-color: ${Colors.secondDark};
+    background-color: ${props =>
+      props.bgDark ? Colors.basicDark : Colors.secondDark};
   }
 `
 
@@ -29,10 +30,10 @@ const WhiteLine = styled.div`
   margin-bottom: 20px;
 `
 
-export const Title = ({ children, width = 300, dark }) => {
+export const Title = ({ children, width = 300, dark, bgDark }) => {
   return (
     <>
-      <H1Style width={width} dark={dark}>
+      <H1Style width={width} dark={dark} bgDark={bgDark}>
         {children}
       </H1Style>
       <WhiteLine dark={dark} />

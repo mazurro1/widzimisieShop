@@ -4,7 +4,7 @@ import { Colors } from "./consts"
 
 export const AniLinkCustom = ({ children, to }) => {
   return (
-    <AniLink cover to={to} bg={Colors.basicDark}>
+    <AniLink paintDrip to={to} hex={Colors.basicDark}>
       {children}
     </AniLink>
   )

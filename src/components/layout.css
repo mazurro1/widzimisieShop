@@ -228,6 +228,10 @@ body {
   -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
   font-feature-settings: "kern", "liga", "clig", "calt";
 }
+div:active,
+div:focus {
+  outline: none;
+}
 img {
   max-width: 100%;
   margin-left: 0;

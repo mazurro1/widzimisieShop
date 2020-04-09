@@ -36,6 +36,12 @@ export const Routes = [
   },
   {
     id: 3,
+    name: "Galeria",
+    link: "/gallery",
+    icon: "FaImages",
+  },
+  {
+    id: 4,
     name: "Kontakt",
     link: "/contact",
     icon: "MdPhoneIphone",
