@@ -88,11 +88,6 @@ export const query = graphql`
       typ {
         typ
       }
-      producerImage {
-        fluid {
-          ...GatsbyContentfulFluid_tracedSVG
-        }
-      }
     }
   }
 `
