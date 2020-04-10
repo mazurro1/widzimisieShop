@@ -89,7 +89,7 @@ const Layout = ({
           </Header>
         </header>
       )}
-      <div className="mb-5">{children}</div>
+      {children}
       <div>
         <MessengerCustomerChat
           pageId="109616830550928"

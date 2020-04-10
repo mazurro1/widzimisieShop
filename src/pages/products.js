@@ -181,7 +181,7 @@ const Products = props => {
       </CSSTransition>
       <CSSTransition
         in={showSelectGlasses}
-        timeout={0}
+        timeout={300}
         classNames="alert"
         unmountOnExit
         onExiting={handleSelectGlassesExit}

@@ -218,14 +218,6 @@ const Navigation = ({ history }) => {
 
   return (
     <>
-      <DivFullScreen
-        style={{
-          transform: menuActive.menu ? "translate(0,0)" : "translate(-100%,0)",
-        }}
-      >
-        <DivMobileBackground onClick={handleClickMenu}></DivMobileBackground>
-        <DivMobileMenu>{menuItemMobile}</DivMobileMenu>
-      </DivFullScreen>
       <NavStyle>
         <UpperDiv>
           <div className="container">
@@ -245,6 +237,14 @@ const Navigation = ({ history }) => {
           </DivMobile>
         </HeaderStyled>
       </NavStyle>
+      <DivFullScreen
+        style={{
+          transform: menuActive.menu ? "translate(0,0)" : "translate(-100%,0)",
+        }}
+      >
+        <DivMobileBackground onClick={handleClickMenu}></DivMobileBackground>
+        <DivMobileMenu>{menuItemMobile}</DivMobileMenu>
+      </DivFullScreen>
     </>
   )
 }
