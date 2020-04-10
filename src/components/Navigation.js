@@ -81,7 +81,8 @@ const NavStyle = styled.nav`
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 1000;
+  transform: none;
 `
 
 const DivMobile = styled.div`
@@ -216,7 +217,7 @@ const Navigation = ({ history }) => {
   })
 
   return (
-    <NavStyle>
+    <>
       <DivFullScreen
         style={{
           transform: menuActive.menu ? "translate(0,0)" : "translate(-100%,0)",
@@ -225,24 +226,26 @@ const Navigation = ({ history }) => {
         <DivMobileBackground onClick={handleClickMenu}></DivMobileBackground>
         <DivMobileMenu>{menuItemMobile}</DivMobileMenu>
       </DivFullScreen>
-      <UpperDiv>
-        <div className="container">
-          <div className="text-md-right text-center">
-            <PhoneIcon />
-            796 000 777
+      <NavStyle>
+        <UpperDiv>
+          <div className="container">
+            <div className="text-md-right text-center">
+              <PhoneIcon />
+              796 000 777
+            </div>
           </div>
-        </div>
-      </UpperDiv>
-      <HeaderStyled scrollPosition={0}>
-        <ul className="m-0 text-center d-none d-md-block">{links}</ul>
-        <DivMobile className="d-md-none">
-          <MenuMobile
-            handleClickMenu={handleClickMenu}
-            menuActive={menuActive.menu}
-          />
-        </DivMobile>
-      </HeaderStyled>
-    </NavStyle>
+        </UpperDiv>
+        <HeaderStyled scrollPosition={0}>
+          <ul className="m-0 text-center d-none d-md-block">{links}</ul>
+          <DivMobile className="d-md-none">
+            <MenuMobile
+              handleClickMenu={handleClickMenu}
+              menuActive={menuActive.menu}
+            />
+          </DivMobile>
+        </HeaderStyled>
+      </NavStyle>
+    </>
   )
 }
 

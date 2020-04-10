@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import ProductListProducer from "./ProductListProducer"
 import Select from "react-select"
-import styled from "styled-components"
 import { Colors } from "../../common"
 
-const ProductList = ({ products, getCategoriesString }) => {
+const ProductList = ({
+  products,
+  getCategoriesString,
+  handleAddProduct,
+  location,
+}) => {
   const [selectValue, setSelectValue] = useState("")
   const [producerFilter, setProducerFilter] = useState([])
   const producerCategories = getCategoriesString(products, "producer")
@@ -26,11 +30,15 @@ const ProductList = ({ products, getCategoriesString }) => {
       arrayProducersItems.push(producerItems)
     })
   }
-  console.log(arrayProducersItems)
+
   const producersMap = arrayProducersItems.map((item, index) => {
     return (
       <div key={index} className="mb-5">
-        <ProductListProducer producerItems={item.producerItems} />
+        <ProductListProducer
+          producerItems={item.producerItems}
+          handleAddProduct={handleAddProduct}
+          location={location}
+        />
       </div>
     )
   })
@@ -57,26 +65,32 @@ const ProductList = ({ products, getCategoriesString }) => {
 
   return (
     <>
-      <div className="container mb-4">
-        <div className="row">
-          <div className="col-md-4 col-12">
-            <Select
-              defaultValue={mapedSelectedValue[0]}
-              onChange={handleChange}
-              options={mapedSelectedValue}
-              theme={theme => ({
-                ...theme,
-                colors: {
-                  ...theme.colors,
-                  primary25: "#bdbdbd",
-                  primary: Colors.second,
-                },
-              })}
-            />
+      {producerCategories.length > 1 ? (
+        <div className="container mb-4">
+          <div className="row">
+            <div className="col-md-4 col-12">
+              <Select
+                defaultValue={mapedSelectedValue[0]}
+                onChange={handleChange}
+                options={mapedSelectedValue}
+                theme={theme => ({
+                  ...theme,
+                  colors: {
+                    ...theme.colors,
+                    primary25: "#bdbdbd",
+                    primary: Colors.second,
+                  },
+                })}
+              />
+            </div>
           </div>
         </div>
-      </div>
-      {producersMap}
+      ) : null}
+      {arrayProducersItems.length > 0 ? (
+        producersMap
+      ) : (
+        <h1 className="text-center mt-4">Brak produktów</h1>
+      )}
     </>
   )
 }

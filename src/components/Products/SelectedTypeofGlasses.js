@@ -64,7 +64,7 @@ const SelectedTypeofGlasses = ({ type, handleChangeTypeOfGlasses }) => {
   } = useStaticQuery(newData)
   const mapType = type.map((item, index) => {
     return (
-      <ElementStyle className="col-md-6 col-10 mx-auto" key={index}>
+      <ElementStyle className="col-md-6 col-12 mx-auto" key={index}>
         <Button onClick={() => handleChangeTypeOfGlasses(item)}>
           <CustomBackgroundImageSuppliers
             img={index === 0 ? image1Selected : image2Selected}

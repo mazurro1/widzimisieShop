@@ -6,8 +6,9 @@ import SEO from "../components/seo"
 const NotFoundPage = props => (
   <Layout history={props.location}>
     <SEO title="404: Not found" />
-    <h1>NOT FOUND</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
+    <div className="container mt-5">
+      <h1 className="text-center">Coś poszło nie tak 😐</h1>
+    </div>
   </Layout>
 )
 

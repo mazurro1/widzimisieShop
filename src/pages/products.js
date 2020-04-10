@@ -3,6 +3,7 @@ import Layout from "../components/layout"
 import { graphql } from "gatsby"
 import SelectedTypeofGlasses from "../components/Products/SelectedTypeofGlasses"
 import SelectedTypeofSex from "../components/Products/SelectedTypeofSex"
+import SelectGlasses from "../components/Products/SelectGlasses"
 import ProductList from "../components/Products/ProductList"
 import { CSSTransition } from "react-transition-group"
 import { StepperComponent } from "../common"
@@ -21,7 +22,6 @@ import {
 const Products = props => {
   const [activeStep, setActiveStep] = React.useState(0)
   const steps = getSteps()
-
   const [state, setState] = useState({
     typeOfGlasses: [],
     typeOfSex: [],
@@ -33,6 +33,8 @@ const Products = props => {
   const [showButtonsGlasses, setShowButtonsGlasses] = useState(true)
   const [showButtonsSex, setShowButtonsSex] = useState(false)
   const [showProducts, setShowProducts] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState({})
+  const [showSelectGlasses, setShowSelectGlasses] = useState(false)
 
   useEffect(() => {
     const products = props.data.products.nodes
@@ -78,7 +80,11 @@ const Products = props => {
     setActiveStep(0)
     setShowButtonsSex(false)
     setShowProducts(false)
+    setShowSelectGlasses(false)
     setShowButtonsGlasses(true)
+    setSelectedProduct({})
+    setValSelectedTypeOfGlasses("")
+    setValSelectedTypeOfSex("")
   }
 
   const handleGlassesExit = () => {
@@ -98,7 +104,14 @@ const Products = props => {
   const handleProductExit = () => {
     if (activeStep === 2) {
       handleNext()
-      //   setShowProducts(true)
+      setShowSelectGlasses(true)
+    }
+  }
+
+  const handleSelectGlassesExit = () => {
+    if (activeStep === 3) {
+      handleNext()
+      // setShowSelectGlasses(true)
     }
   }
 
@@ -113,9 +126,19 @@ const Products = props => {
       setShowButtonsSex(true)
       setShowProducts(false)
     } else if (activeStep === 3) {
+      setSelectedProduct({})
       setShowProducts(true)
+      setShowSelectGlasses(false)
+    } else if (activeStep === 4) {
+      setShowSelectGlasses(true)
     }
   }
+
+  const handleAddProduct = selectedProduct => {
+    setSelectedProduct(selectedProduct)
+    setShowProducts(false)
+  }
+
   const validProps = !props.data || (
     <>
       <CSSTransition
@@ -152,35 +175,45 @@ const Products = props => {
         <ProductList
           products={state.filterProducts}
           getCategoriesString={getCategoriesString}
+          handleAddProduct={handleAddProduct}
+          location={props.location.origin}
         />
+      </CSSTransition>
+      <CSSTransition
+        in={showSelectGlasses}
+        timeout={0}
+        classNames="alert"
+        unmountOnExit
+        onExiting={handleSelectGlassesExit}
+      >
+        <SelectGlasses />
       </CSSTransition>
     </>
   )
-
   return (
     <Layout history={props.location}>
       <PositionRelative>
         <div className="container">
           <div className="d-none d-md-block">
             <StepperComponent activeStep={activeStep} steps={steps} />
-            <div className="container">
-              <div className="row">
-                <WrapperIcoButton
-                  className="col-12 mx-auto"
-                  disabledButton={activeStep <= 0}
-                >
-                  <Tooltip title="Cofnij" placement="top">
-                    <StyleButton onClick={handleGoBackGenerator}>
-                      <MdKeyboardArrowLeft />
-                    </StyleButton>
-                  </Tooltip>
-                  <Tooltip title="Resetuj" placement="top">
-                    <StyleButton onClick={handleRestGenerator}>
-                      <MdRefresh />
-                    </StyleButton>
-                  </Tooltip>
-                </WrapperIcoButton>
-              </div>
+          </div>
+          <div className="container">
+            <div className="row">
+              <WrapperIcoButton
+                className="col-12 mx-auto"
+                disabledButton={activeStep <= 0}
+              >
+                <Tooltip title="Cofnij" placement="top">
+                  <StyleButton onClick={handleGoBackGenerator}>
+                    <MdKeyboardArrowLeft />
+                  </StyleButton>
+                </Tooltip>
+                <Tooltip title="Resetuj" placement="top">
+                  <StyleButton onClick={handleRestGenerator}>
+                    <MdRefresh />
+                  </StyleButton>
+                </Tooltip>
+              </WrapperIcoButton>
             </div>
           </div>
         </div>
@@ -203,8 +236,8 @@ export const query = graphql`
         sex
         price
         productImage {
-          fixed {
-            ...GatsbyContentfulFixed_tracedSVG
+          fluid(maxWidth: 300, maxHeight: 250) {
+            ...GatsbyContentfulFluid_tracedSVG
           }
         }
         form {

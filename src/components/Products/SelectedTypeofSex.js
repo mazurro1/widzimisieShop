@@ -74,7 +74,7 @@ const SelectedTypeofSex = ({ type, handleChangeTypeOfSex }) => {
   } = useStaticQuery(newData)
   const mapType = type.map((item, index) => {
     return (
-      <ElementStyle className="col-md-6 col-10 mx-auto" key={index}>
+      <ElementStyle className="col-md-4 col-12 mx-auto" key={index}>
         <Button onClick={() => handleChangeTypeOfSex(item)}>
           <CustomBackgroundImageSuppliers
             img={

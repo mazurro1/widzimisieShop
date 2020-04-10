@@ -43,12 +43,17 @@ const TextStyledOneLine = styled.div`
   font-style: normal;
 `
 
+const NoImageStyle = styled.div`
+  margin-top: 140px;
+`
+
 const Layout = ({
   children,
   history = "",
   image,
   home = false,
   headerText,
+  noImage = false,
 }) => {
   const data = useStaticQuery(getData)
   const imageToHeader = image ? image : data.file.childImageSharp.fluid
@@ -75,12 +80,16 @@ const Layout = ({
   return (
     <>
       <Navigation history={history} />
-      <header>
-        <Header image={imageToHeader} home={home}>
-          {headerTextTyped}
-        </Header>
-      </header>
-      {children}
+      {noImage ? (
+        <NoImageStyle />
+      ) : (
+        <header>
+          <Header image={imageToHeader} home={home}>
+            {headerTextTyped}
+          </Header>
+        </header>
+      )}
+      <div className="mb-5">{children}</div>
       <div>
         <MessengerCustomerChat
           pageId="109616830550928"

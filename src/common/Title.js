@@ -9,15 +9,15 @@ const H1Style = styled.h1`
   margin: 0 auto;
   font-weight: 300;
   text-align: center;
-  color: ${Colors.textBasic};
-  background-color: ${props => (props.bgDark ? Colors.basic : Colors.second)};
+  color: ${props => (props.bgDark ? Colors.basicDark : Colors.textBasic)};
+  font-weight: ${props => (props.bgDark ? "bold" : "normal")};
+  background-color: ${props => (props.bgDark ? "transparent" : Colors.second)};
   border-radius: 3px;
   transition-property: background-color;
   transition-duration: 0.3s;
   transition-timing-function: ease;
   &:hover {
-    background-color: ${props =>
-      props.bgDark ? Colors.basicDark : Colors.secondDark};
+    background-color: ${props => (props.bgDark ? "" : Colors.secondDark)};
   }
 `
 
