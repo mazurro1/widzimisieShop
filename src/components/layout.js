@@ -79,7 +79,6 @@ const Layout = ({
   )
   return (
     <>
-      <Navigation history={history} />
       {noImage ? (
         <NoImageStyle />
       ) : (
@@ -96,7 +95,6 @@ const Layout = ({
           appId="224093935318863"
         />
       </div>
-      <Footer />
     </>
   )
 }

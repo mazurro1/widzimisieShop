@@ -8,6 +8,7 @@ const FooterStyle = styled.footer`
   background-color: ${Colors.basicDark};
   color: ${Colors.textBasic};
   padding: 5px 0;
+  z-index: 200;
 `
 
 const Footer = () => {

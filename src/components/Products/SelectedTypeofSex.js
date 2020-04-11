@@ -94,7 +94,7 @@ const SelectedTypeofSex = ({ type, handleChangeTypeOfSex }) => {
 
   return (
     <PositionAbsolute>
-      <div className="container">
+      <div className="container mb-5">
         <div className="row">{mapType}</div>
       </div>
     </PositionAbsolute>

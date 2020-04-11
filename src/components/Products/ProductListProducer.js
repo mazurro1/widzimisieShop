@@ -163,13 +163,24 @@ const ProductListProducer = ({ producerItems, handleAddProduct, location }) => {
       </ProductItem>
     )
   })
+  const elementsOnPage = () => {
+    if (window.innerWidth > 1200) {
+      return producerItems.length >= 4 ? 4 : producerItems.length
+    } else if (window.innerWidth < 1199 && window.innerWidth > 992) {
+      return producerItems.length >= 3 ? 3 : producerItems.length
+    } else if (window.innerWidth < 991 && window.innerWidth > 768) {
+      return producerItems.length >= 2 ? 2 : producerItems.length
+    } else if (window.innerWidth < 767) {
+      return 1
+    }
+  }
   const carusellSettings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: producerItems.length >= 4 ? 4 : producerItems.length,
-    lazyLoad: true,
-    slidesToScroll: producerItems.length >= 4 ? 4 : producerItems.length,
+    slidesToShow: elementsOnPage(),
+    lazyLoad: false,
+    slidesToScroll: elementsOnPage(),
     autoplay: true,
     autoplaySpeed: 10000,
     pauseOnHover: true,

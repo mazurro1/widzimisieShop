@@ -78,7 +78,7 @@ const SelectedTypeofGlasses = ({ type, handleChangeTypeOfGlasses }) => {
 
   return (
     <PositionAbsolute>
-      <div className="container">
+      <div className="container mb-5">
         <div className="row">{mapType}</div>
       </div>
     </PositionAbsolute>

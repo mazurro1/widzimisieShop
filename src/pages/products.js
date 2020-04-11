@@ -5,6 +5,8 @@ import SelectedTypeofGlasses from "../components/Products/SelectedTypeofGlasses"
 import SelectedTypeofSex from "../components/Products/SelectedTypeofSex"
 import SelectGlasses from "../components/Products/SelectGlasses"
 import ProductList from "../components/Products/ProductList"
+import ExtraOptions from "../components/Products/ExtraOptions"
+import ProductSummary from "../components/Products/ProductSummary"
 import { CSSTransition } from "react-transition-group"
 import { StepperComponent } from "../common"
 import { MdRefresh, MdKeyboardArrowLeft } from "react-icons/md"
@@ -35,6 +37,10 @@ const Products = props => {
   const [showProducts, setShowProducts] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState({})
   const [showSelectGlasses, setShowSelectGlasses] = useState(false)
+  const [selectGlassValue, setSelectGlassValue] = useState({})
+  const [showExtraOptions, setShowExtraOptions] = useState(false)
+  const [extraOptionsValue, setExtraOptionsValue] = useState({})
+  const [showSummary, setShowSummary] = useState(false)
 
   useEffect(() => {
     const products = props.data.products.nodes
@@ -85,6 +91,10 @@ const Products = props => {
     setSelectedProduct({})
     setValSelectedTypeOfGlasses("")
     setValSelectedTypeOfSex("")
+    setShowExtraOptions(false)
+    setExtraOptionsValue({})
+    setShowSummary(false)
+    setSelectGlassValue({})
   }
 
   const handleGlassesExit = () => {
@@ -111,7 +121,20 @@ const Products = props => {
   const handleSelectGlassesExit = () => {
     if (activeStep === 3) {
       handleNext()
-      // setShowSelectGlasses(true)
+      setShowExtraOptions(true)
+    }
+  }
+
+  const handleExtraOptionsExit = () => {
+    if (activeStep === 4) {
+      handleNext()
+      setShowSummary(true)
+    }
+  }
+
+  const handleSummaryExit = () => {
+    if (activeStep === 5) {
+      handleNext()
     }
   }
 
@@ -131,12 +154,30 @@ const Products = props => {
       setShowSelectGlasses(false)
     } else if (activeStep === 4) {
       setShowSelectGlasses(true)
+      setSelectGlassValue({})
+      setShowExtraOptions(false)
+    } else if (activeStep === 5) {
+      setShowExtraOptions(true)
+      setExtraOptionsValue({})
+      setShowSummary(false)
+    } else if (activeStep === 6) {
+      setShowSummary(true)
     }
   }
 
   const handleAddProduct = selectedProduct => {
     setSelectedProduct(selectedProduct)
     setShowProducts(false)
+  }
+
+  const handleSelectGlassClick = item => {
+    setSelectGlassValue(item)
+    setShowSelectGlasses(false)
+  }
+
+  const handleExtraOptionClick = item => {
+    setExtraOptionsValue(item)
+    setShowExtraOptions(false)
   }
 
   const validProps = !props.data || (
@@ -186,7 +227,31 @@ const Products = props => {
         unmountOnExit
         onExiting={handleSelectGlassesExit}
       >
-        <SelectGlasses />
+        <SelectGlasses handleSelectGlassClick={handleSelectGlassClick} />
+      </CSSTransition>
+      <CSSTransition
+        in={showExtraOptions}
+        timeout={300}
+        classNames="alert"
+        unmountOnExit
+        onExiting={handleExtraOptionsExit}
+      >
+        <ExtraOptions handleExtraOptionClick={handleExtraOptionClick} />
+      </CSSTransition>
+      <CSSTransition
+        in={showSummary}
+        timeout={300}
+        classNames="alert"
+        unmountOnExit
+        onExiting={handleSummaryExit}
+      >
+        <ProductSummary
+          extraOptionsValue={extraOptionsValue}
+          selectGlassValue={selectGlassValue}
+          selectedProduct={selectedProduct}
+          selectedTypeOfSex={selectedTypeOfSex}
+          valselectedTypeOfGlasses={valselectedTypeOfGlasses}
+        />
       </CSSTransition>
     </>
   )
@@ -217,7 +282,7 @@ const Products = props => {
             </div>
           </div>
         </div>
-        <PositionSelectedItem className="mt-4">
+        <PositionSelectedItem className="mt-md-4">
           {validProps}
         </PositionSelectedItem>
       </PositionRelative>

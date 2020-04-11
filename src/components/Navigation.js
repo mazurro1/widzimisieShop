@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button"
 import MenuMobile from "./MenuMobile"
 import { MdShoppingCart, MdPhoneIphone } from "react-icons/md"
 import { IoMdHome } from "react-icons/io"
-import { FaCalendarAlt, FaImages } from "react-icons/fa"
+import { FaCalendarAlt } from "react-icons/fa"
 
 const UpperDiv = styled.div`
   position: relative;
@@ -199,7 +199,7 @@ const Navigation = ({ history }) => {
     }
     return (
       <AniLinkCustom key={item.id} to={item.link}>
-        <ButtonWidthDiv>
+        <ButtonWidthDiv onClick={handleClickMenu}>
           {isPathname ? (
             <ListItemActive>
               {iconButton()}

@@ -41,33 +41,33 @@ const PriceDiv = styled.div`
   color: white;
 `
 
-const SelectGlasses = ({ handleSelectGlassClick }) => {
-  const selectGlasses = [
+const ExtraOptions = ({ handleExtraOptionClick }) => {
+  const extraOptions = [
     {
-      title: "Standard",
+      title: "Extra przejrzyste",
       content: "Opis",
       price: 200,
     },
     {
-      title: "20% cieńsze",
+      title: "Do pracy przy komputerze",
       content: "Opis",
       price: 231,
     },
     {
-      title: "25% cieńsze",
+      title: "Łatwe w czyszczeniu",
       content: "Opis",
       price: 2567,
     },
     {
-      title: "30% cieńsze",
+      title: "Słoneczne",
       content: "Opis",
       price: 31,
     },
   ]
-  const mapType = selectGlasses.map((item, index) => {
+  const mapType = extraOptions.map((item, index) => {
     return (
       <ElementStyle className="col-md-6 col-12 mx-auto mb-4" key={index}>
-        <Button onClick={() => handleSelectGlassClick(item)}>
+        <Button onClick={() => handleExtraOptionClick(item)}>
           <h3 className="mt-2">{item.title}</h3>
           <p className="text-lowercase">{item.content}</p>
           <PriceDiv>{item.price} zł</PriceDiv>
@@ -84,4 +84,4 @@ const SelectGlasses = ({ handleSelectGlassClick }) => {
     </PositionAbsolute>
   )
 }
-export default SelectGlasses
+export default ExtraOptions
