@@ -37,7 +37,7 @@ const ProductItem = styled.div`
 const FlipBox = styled.div`
   .flip-box {
     background-color: transparent;
-    max-width: 300px;
+    max-width: 258px;
     height: 175px;
     perspective: 1000px;
     margin: 0 auto;
