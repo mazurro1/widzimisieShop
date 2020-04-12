@@ -37,8 +37,8 @@ const ProductItem = styled.div`
 const FlipBox = styled.div`
   .flip-box {
     background-color: transparent;
-    max-width: 258px;
-    height: 250px;
+    max-width: 300px;
+    height: 175px;
     perspective: 1000px;
     margin: 0 auto;
   }
@@ -79,6 +79,7 @@ const FlipBox = styled.div`
 
 const ImageStyle = styled(Img)`
   border-bottom: 2px solid white;
+  height: 140px;
 `
 
 const PriceStyle = styled.div`
@@ -124,6 +125,19 @@ const ProductListProducer = ({
   producerImageSelect,
 }) => {
   const { producer } = producerItems[0]
+
+  const elementsOnPage = () => {
+    if (window.innerWidth > 1200) {
+      return producerItems.length >= 4 ? 4 : producerItems.length
+    } else if (window.innerWidth < 1199 && window.innerWidth > 992) {
+      return producerItems.length >= 3 ? 3 : producerItems.length
+    } else if (window.innerWidth < 991 && window.innerWidth > 768) {
+      return producerItems.length >= 2 ? 2 : producerItems.length
+    } else if (window.innerWidth < 767) {
+      return 1
+    }
+  }
+
   const mapProducts = producerItems.map((item, index) => {
     return (
       <ProductItem key={index}>
@@ -160,17 +174,7 @@ const ProductListProducer = ({
       </ProductItem>
     )
   })
-  const elementsOnPage = () => {
-    if (window.innerWidth > 1200) {
-      return producerItems.length >= 4 ? 4 : producerItems.length
-    } else if (window.innerWidth < 1199 && window.innerWidth > 992) {
-      return producerItems.length >= 3 ? 3 : producerItems.length
-    } else if (window.innerWidth < 991 && window.innerWidth > 768) {
-      return producerItems.length >= 2 ? 2 : producerItems.length
-    } else if (window.innerWidth < 767) {
-      return 1
-    }
-  }
+
   const carusellSettings = {
     dots: true,
     infinite: true,

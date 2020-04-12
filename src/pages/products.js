@@ -303,7 +303,7 @@ export const query = graphql`
         sex
         price
         productImage {
-          fluid(maxWidth: 300, maxHeight: 250) {
+          fluid {
             ...GatsbyContentfulFluid_tracedSVG
           }
         }
