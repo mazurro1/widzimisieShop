@@ -30,6 +30,7 @@ const Products = props => {
     products: [],
     filterProducts: [],
   })
+
   const [valselectedTypeOfGlasses, setValSelectedTypeOfGlasses] = useState("")
   const [selectedTypeOfSex, setValSelectedTypeOfSex] = useState("")
   const [showButtonsGlasses, setShowButtonsGlasses] = useState(true)
@@ -218,6 +219,7 @@ const Products = props => {
           getCategoriesString={getCategoriesString}
           handleAddProduct={handleAddProduct}
           location={props.location.origin}
+          producers={props.data.producers}
         />
       </CSSTransition>
       <CSSTransition
@@ -305,20 +307,6 @@ export const query = graphql`
             ...GatsbyContentfulFluid_tracedSVG
           }
         }
-        form {
-          form
-        }
-        material {
-          material
-        }
-        typ {
-          typ
-        }
-        producerImage {
-          fluid {
-            ...GatsbyContentfulFluid_tracedSVG
-          }
-        }
       }
     }
     typeOfGlasses: allContentfulProduct {
@@ -329,6 +317,17 @@ export const query = graphql`
     typeOfSex: allContentfulProduct {
       nodes {
         sex
+      }
+    }
+
+    producers: allContentfulProducersImageInShop {
+      nodes {
+        producer
+        ad {
+          fluid {
+            ...GatsbyContentfulFluid_tracedSVG
+          }
+        }
       }
     }
   }

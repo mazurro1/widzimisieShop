@@ -7,7 +7,6 @@ import CustomBackgroundImageProducer from "../../common/CustomBackgroundImagePro
 import { Title, Colors } from "../../common"
 import Img from "gatsby-image"
 import Button from "@material-ui/core/Button"
-import { Link, navigate } from "gatsby"
 
 const SlickSliderCustom = styled(Slider)`
   .slick-prev {
@@ -118,15 +117,13 @@ const BackStyle = styled.div`
   transform: translate(-50%, -50%);
 `
 
-const ProductListProducer = ({ producerItems, handleAddProduct, location }) => {
-  const {
-    producer,
-    model,
-    colors,
-    price,
-    productImage,
-    producerImage,
-  } = producerItems[0]
+const ProductListProducer = ({
+  producerItems,
+  handleAddProduct,
+  location,
+  producerImageSelect,
+}) => {
+  const { producer } = producerItems[0]
   const mapProducts = producerItems.map((item, index) => {
     return (
       <ProductItem key={index}>
@@ -193,9 +190,11 @@ const ProductListProducer = ({ producerItems, handleAddProduct, location }) => {
           {mapProducts}
         </SlickSliderCustom>
       </div>
-      <CustomBackgroundImageProducer img={producerImage.fluid}>
-        {producer}
-      </CustomBackgroundImageProducer>
+      {producerImageSelect ? (
+        <CustomBackgroundImageProducer img={producerImageSelect.ad.fluid}>
+          {producer}
+        </CustomBackgroundImageProducer>
+      ) : null}
     </>
   )
 }

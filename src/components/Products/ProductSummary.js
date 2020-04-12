@@ -264,7 +264,7 @@ const ProductSummary = ({
               <PositionDisplayLabel>
                 <DisplayLabels>{DisabledInputs}</DisplayLabels>
               </PositionDisplayLabel>
-              <ButtonStyle className="text-center">
+              <ButtonStyle className="text-center mt-4 mt-md-0">
                 <Tooltip
                   title="Wpisz numer aby wysłać zamówienie"
                   placement="top"
