@@ -258,7 +258,10 @@ const Products = props => {
     </>
   )
   return (
-    <Layout history={props.location}>
+    <Layout
+      history={props.location}
+      image={props.data.contentfulOurProductsImages.headerImage.fluid}
+    >
       <PositionRelative>
         <div className="container">
           <div className="d-none d-md-block">
@@ -327,6 +330,13 @@ export const query = graphql`
           fluid {
             ...GatsbyContentfulFluid_tracedSVG
           }
+        }
+      }
+    }
+    contentfulOurProductsImages {
+      headerImage {
+        fluid {
+          ...GatsbyContentfulFluid_tracedSVG
         }
       }
     }

@@ -11,7 +11,7 @@ const DivContainer = styled.div`
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas: "BigImage BigImage SmallImage1 SmallImage2" "BigImage BigImage SmallImage3 SmallImage4" "SmallImage5 SmallImage6 SmallImage7 SmallImage8";
 
-  @media all and (max-width: 991px) {
+  @media all and (max-width: 1199px) {
     & {
       grid-template-columns: 1fr 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr;
@@ -19,7 +19,7 @@ const DivContainer = styled.div`
     }
   }
 
-  @media all and (max-width: 767px) {
+  @media all and (max-width: 991px) {
     & {
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
@@ -70,11 +70,14 @@ const DivContainer = styled.div`
 const TextPosition = styled.div`
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(0, -50%);
   text-align: center;
-  font-weight: 700;
-  font-size: 1.1rem;
+  font-weight: 500;
+  font-size: 1.2rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  color: white;
+  padding: 10px 0;
 `
 const getData = graphql`
   {
@@ -105,48 +108,48 @@ const getData = graphql`
       url8
       url9
       image1 {
-        fixed(width: 545, height: 420) {
-          ...GatsbyContentfulFixed_tracedSVG
+        fluid(maxWidth: 900) {
+          ...GatsbyContentfulFluid_tracedSVG
         }
       }
       image2 {
-        fixed(width: 263, height: 200) {
-          ...GatsbyContentfulFixed_tracedSVG
+        fluid(maxWidth: 350) {
+          ...GatsbyContentfulFluid_tracedSVG
         }
       }
       image3 {
-        fixed(width: 263, height: 200) {
-          ...GatsbyContentfulFixed_tracedSVG
+        fluid(maxWidth: 350) {
+          ...GatsbyContentfulFluid_tracedSVG
         }
       }
       image4 {
-        fixed(width: 263, height: 200) {
-          ...GatsbyContentfulFixed_tracedSVG
+        fluid(maxWidth: 350) {
+          ...GatsbyContentfulFluid_tracedSVG
         }
       }
       image5 {
-        fixed(width: 263, height: 200) {
-          ...GatsbyContentfulFixed_tracedSVG
+        fluid(maxWidth: 350) {
+          ...GatsbyContentfulFluid_tracedSVG
         }
       }
       image6 {
-        fixed(width: 263, height: 200) {
-          ...GatsbyContentfulFixed_tracedSVG
+        fluid(maxWidth: 350) {
+          ...GatsbyContentfulFluid_tracedSVG
         }
       }
       image7 {
-        fixed(width: 263, height: 200) {
-          ...GatsbyContentfulFixed_tracedSVG
+        fluid(maxWidth: 350) {
+          ...GatsbyContentfulFluid_tracedSVG
         }
       }
       image8 {
-        fixed(width: 263, height: 200) {
-          ...GatsbyContentfulFixed_tracedSVG
+        fluid(maxWidth: 350) {
+          ...GatsbyContentfulFluid_tracedSVG
         }
       }
       image9 {
-        fixed(width: 263, height: 200) {
-          ...GatsbyContentfulFixed_tracedSVG
+        fluid(maxWidth: 350) {
+          ...GatsbyContentfulFluid_tracedSVG
         }
       }
     }
@@ -271,7 +274,7 @@ const OurSuppliers = () => {
     const elem = (
       <CustomBackgroundImageSuppliers
         big={item.big}
-        img={item.image.fixed}
+        img={item.image.fluid}
         onClick={() => handleClickItemList(item.url)}
         key={item.id}
       >

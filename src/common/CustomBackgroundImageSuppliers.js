@@ -9,11 +9,19 @@ const CustomBackgroundImageSuppliers = ({
   children,
   big,
   onClick,
+  fixed = false,
 }) => {
+  const propFluid = !fixed
+    ? {
+        fluid: img,
+      }
+    : {
+        fixed: img,
+      }
   return (
     <BackgroundImage
       className={className}
-      fixed={img}
+      {...propFluid}
       big={big}
       onClick={onClick}
     >
@@ -25,7 +33,8 @@ export default styled(CustomBackgroundImageSuppliers)`
   position: relative;
   min-height: ${props => (props.big ? "400px" : "200px")};
   grid-area: ${props => (props.big ? "BigImage" : "")};
-  max-width: 100%;
+  /* margin: 0 auto; */
+  width: 100%;
   opacity: 1 !important;
   display: flex;
   justify-content: center;

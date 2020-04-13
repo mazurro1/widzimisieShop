@@ -6,17 +6,15 @@ import CustomBackgroundImageSuppliers from "../..//common/CustomBackgroundImageS
 
 const newData = graphql`
   {
-    image1: file(name: { eq: "gatsby-astronaut" }) {
-      childImageSharp {
+    contentfulOurProductsImages {
+      image1: sunscreenImage {
         fixed(width: 440, height: 200) {
-          ...GatsbyImageSharpFixed_tracedSVG
+          ...GatsbyContentfulFixed_tracedSVG
         }
       }
-    }
-    image2: file(name: { eq: "gatsby-astronaut" }) {
-      childImageSharp {
+      image2: correctionImage {
         fixed(width: 440, height: 200) {
-          ...GatsbyImageSharpFixed_tracedSVG
+          ...GatsbyContentfulFixed_tracedSVG
         }
       }
     }
@@ -55,11 +53,9 @@ const TextOnImage = styled.div`
 
 const SelectedTypeofGlasses = ({ type, handleChangeTypeOfGlasses }) => {
   const {
-    image1: {
-      childImageSharp: { fixed: image1Selected },
-    },
-    image2: {
-      childImageSharp: { fixed: image2Selected },
+    contentfulOurProductsImages: {
+      image1: { fixed: image1Selected },
+      image2: { fixed: image2Selected },
     },
   } = useStaticQuery(newData)
   const mapType = type.map((item, index) => {
@@ -67,6 +63,7 @@ const SelectedTypeofGlasses = ({ type, handleChangeTypeOfGlasses }) => {
       <ElementStyle className="col-md-6 col-12 mx-auto" key={index}>
         <Button onClick={() => handleChangeTypeOfGlasses(item)}>
           <CustomBackgroundImageSuppliers
+            fixed
             img={index === 0 ? image1Selected : image2Selected}
           >
             <TextOnImage>{item}</TextOnImage>

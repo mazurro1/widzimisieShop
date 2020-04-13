@@ -6,24 +6,25 @@ import CustomBackgroundImageSuppliers from "../..//common/CustomBackgroundImageS
 
 const newData = graphql`
   {
-    image1: file(name: { eq: "gatsby-astronaut" }) {
-      childImageSharp {
+    contentfulOurProductsImages {
+      maleImage {
         fixed(width: 440, height: 200) {
-          ...GatsbyImageSharpFixed_tracedSVG
+          ...GatsbyContentfulFixed_tracedSVG
         }
       }
-    }
-    image2: file(name: { eq: "gatsby-astronaut" }) {
-      childImageSharp {
+      femaleImage {
         fixed(width: 440, height: 200) {
-          ...GatsbyImageSharpFixed_tracedSVG
+          ...GatsbyContentfulFixed_tracedSVG
         }
       }
-    }
-    image3: file(name: { eq: "gatsby-astronaut" }) {
-      childImageSharp {
+      childImage {
         fixed(width: 440, height: 200) {
-          ...GatsbyImageSharpFixed_tracedSVG
+          ...GatsbyContentfulFixed_tracedSVG
+        }
+      }
+      unisexImage {
+        fixed(width: 440, height: 200) {
+          ...GatsbyContentfulFixed_tracedSVG
         }
       }
     }
@@ -62,29 +63,26 @@ const TextOnImage = styled.div`
 
 const SelectedTypeofSex = ({ type, handleChangeTypeOfSex }) => {
   const {
-    image1: {
-      childImageSharp: { fixed: image1Selected },
-    },
-    image2: {
-      childImageSharp: { fixed: image2Selected },
-    },
-    image3: {
-      childImageSharp: { fixed: image3Selected },
+    contentfulOurProductsImages: {
+      maleImage,
+      femaleImage,
+      childImage,
+      unisexImage,
     },
   } = useStaticQuery(newData)
   const mapType = type.map((item, index) => {
+    const selectImage =
+      item === "Męskie"
+        ? maleImage.fixed
+        : item === "Żeńskie"
+        ? femaleImage.fixed
+        : item === "Dziecięce"
+        ? childImage.fixed
+        : unisexImage.fixed
     return (
       <ElementStyle className="col-md-4 col-12 mx-auto" key={index}>
         <Button onClick={() => handleChangeTypeOfSex(item)}>
-          <CustomBackgroundImageSuppliers
-            img={
-              index === 0
-                ? image1Selected
-                : index === 1
-                ? image2Selected
-                : image3Selected
-            }
-          >
+          <CustomBackgroundImageSuppliers fixed img={selectImage}>
             <TextOnImage>{item}</TextOnImage>
           </CustomBackgroundImageSuppliers>
         </Button>

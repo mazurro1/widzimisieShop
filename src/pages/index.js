@@ -32,12 +32,12 @@ export const query = graphql`
       text1
       text2
       image {
-        fluid(maxWidth: 1920, quality: 60) {
+        fluid(maxWidth: 1920, quality: 90) {
           ...GatsbyContentfulFluid_tracedSVG
         }
       }
-      backgroundImg: image {
-        fluid(maxWidth: 1500, quality: 40) {
+      backgroundImg: imageParalaks {
+        fluid(maxWidth: 1920, quality: 90) {
           ...GatsbyContentfulFluid_tracedSVG
         }
       }
