@@ -1,5 +1,5 @@
 import React from "react"
-import { Title, Section, Colors } from "../../common"
+import { Title, Section, Colors, AniLinkCustom } from "../../common"
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 import CustomBackgroundImageSuppliers from "../../common/CustomBackgroundImageSuppliers"
@@ -79,6 +79,21 @@ const TextPosition = styled.div`
   color: white;
   padding: 10px 0;
 `
+
+const ToLinkUper = styled.div`
+  position: absolute;
+  top: 0%;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  a {
+    position: absolute;
+    top: 0%;
+    height: 100%;
+    width: 100%;
+  }
+`
+
 const getData = graphql`
   {
     contentfulPages(path: { eq: "ourSuppliers" }) {
@@ -270,15 +285,18 @@ const OurSuppliers = () => {
     },
   ]
 
-  const mapElements = elements.map(item => {
+  const mapElements = elements.map((item, index) => {
     const elem = (
       <CustomBackgroundImageSuppliers
         big={item.big}
         img={item.image.fluid}
-        onClick={() => handleClickItemList(item.url)}
-        key={item.id}
+        key={index}
+        // onClick={() => handleClickItemList(item.url)}
       >
         <TextPosition>{item.text}</TextPosition>
+        <ToLinkUper>
+          <AniLinkCustom to={`/sites/${index + 1}`}></AniLinkCustom>
+        </ToLinkUper>
       </CustomBackgroundImageSuppliers>
     )
     return elem

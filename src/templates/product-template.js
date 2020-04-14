@@ -89,7 +89,6 @@ const ProductTemplate = ({
     },
   },
 }) => {
-  console.log(typeOfGlasses)
   const newFormArr = form.includes("__") ? form.split("__") : ["", "", form]
   const newMaterialArr = material.includes("__")
     ? material.split("__")
