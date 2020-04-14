@@ -2,8 +2,6 @@ import React from "react"
 import styled from "styled-components"
 import Button from "@material-ui/core/Button"
 import { Colors } from "../../common"
-import { useStaticQuery, graphql } from "gatsby"
-import CustomBackgroundImageSuppliers from "../..//common/CustomBackgroundImageSuppliers"
 
 const PositionAbsolute = styled.div`
   position: absolute;

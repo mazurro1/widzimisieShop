@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import { Colors, Routes, AniLinkCustom } from "../common"
 import Button from "@material-ui/core/Button"
 import MenuMobile from "./MenuMobile"
 import { MdShoppingCart, MdPhoneIphone } from "react-icons/md"
 import { IoMdHome } from "react-icons/io"
-import { FaCalendarAlt } from "react-icons/fa"
 
 const UpperDiv = styled.div`
   position: relative;
@@ -186,9 +185,6 @@ const Navigation = ({ history }) => {
 
         case "MdShoppingCart":
           return <MdShoppingCart />
-
-        case "FaCalendarAlt":
-          return <FaCalendarAlt />
 
         case "MdPhoneIphone":
           return <MdPhoneIphone />

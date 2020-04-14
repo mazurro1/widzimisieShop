@@ -209,9 +209,7 @@ const OurSuppliers = () => {
     },
     contentfulPages: { paragraph, title, underTitle },
   } = useStaticQuery(getData)
-  const handleClickItemList = link => {
-    window.open(link, "_blank")
-  }
+
   const underTitleContent = !underTitle ? (
     <p className="text-center text-white">{underTitle}</p>
   ) : null

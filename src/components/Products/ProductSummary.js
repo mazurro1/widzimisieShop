@@ -2,8 +2,6 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import Button from "@material-ui/core/Button"
 import { Colors } from "../../common"
-import { useStaticQuery, graphql } from "gatsby"
-import CustomBackgroundImageSuppliers from "../..//common/CustomBackgroundImageSuppliers"
 import Tooltip from "@material-ui/core/Tooltip"
 
 const PositionAbsolute = styled.div`
@@ -96,16 +94,6 @@ const TextNumber = styled.div`
   font-weight: bold;
   color: ${Colors.second};
 `
-
-const DisabledInput = styled.input`
-  :disabled {
-    background-color: white;
-    border: none;
-    font-size: 1.2rem;
-    margin-left: 10px;
-  }
-`
-
 const DisplayLabels = styled.div`
   position: absolute;
   left: -1000%;

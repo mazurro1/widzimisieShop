@@ -30,18 +30,12 @@ export const Routes = [
   },
   {
     id: 2,
-    name: "Umów wizyte",
-    link: "/visit",
-    icon: "FaCalendarAlt",
-  },
-  {
-    id: 3,
     name: "Galeria",
     link: "/gallery",
     icon: "FaImages",
   },
   {
-    id: 4,
+    id: 3,
     name: "Kontakt",
     link: "/contact",
     icon: "MdPhoneIphone",
