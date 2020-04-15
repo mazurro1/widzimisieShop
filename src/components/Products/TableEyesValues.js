@@ -90,23 +90,22 @@ const TableEyesValues = ({ setSelectionPrice, setOtherExtraPrice }) => {
 
   useEffect(() => {
     if (
+      (inputsLeftValue.add <= 4 && inputsLeftValue.add >= 1) ||
+      (inputsRightValue.add <= 4 && inputsRightValue.add >= 1)
+    ) {
+      console.log("xd1")
+      setSelectionPrice("priceThird")
+    } else if (
       !(inputsLeftValue.sfera > -6 && inputsLeftValue.sfera < 6) ||
       !(inputsRightValue.sfera > -6 && inputsRightValue.sfera < 6) ||
       !(inputsLeftValue.cylinder > -3 && inputsLeftValue.cylinder < 3) ||
       !(inputsRightValue.cylinder > -3 && inputsRightValue.cylinder < 3)
     ) {
-      if (
-        (inputsLeftValue.add <= 4 && inputsLeftValue.add >= 1) ||
-        (inputsRightValue.add <= 4 && inputsRightValue.add >= 1)
-      ) {
-        setSelectionPrice("priceThird")
+      setSelectionPrice("priceSecond")
+      if (inputsLeftValue.pryzmat > 0 || inputsRightValue.pryzmat > 0) {
+        setOtherExtraPrice(60)
       } else {
-        setSelectionPrice("priceSecond")
-        if (inputsLeftValue.pryzmat > 0 || inputsRightValue.pryzmat > 0) {
-          setOtherExtraPrice(60)
-        } else {
-          setOtherExtraPrice(0)
-        }
+        setOtherExtraPrice(0)
       }
     } else {
       setSelectionPrice("priceBasic")
