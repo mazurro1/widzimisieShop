@@ -6,11 +6,10 @@ import { Colors } from "../../common"
 
 const getData = graphql`
   {
-    contentfulPages(path: { eq: "meetUs" }) {
+    contentfulPageMeetUs {
       title
-      underTitle
       paragraph {
-        contentParagraph: paragraph
+        paragraph
       }
     }
   }
@@ -22,23 +21,19 @@ const SectionColor = styled(Section)`
 
 const MeetUs = () => {
   const {
-    contentfulPages: { title, underTitle, paragraph },
+    contentfulPageMeetUs: { title, paragraph },
   } = useStaticQuery(getData)
-  const underTitleContent = !underTitle ? (
-    <p className="text-center text-white">{underTitle}</p>
-  ) : null
-  const paragraphContent = !paragraph || (
-    <p className="text-white">{paragraph.contentParagraph}</p>
-  )
+
   return (
     <SectionColor>
       <div className="container">
         <Title width="500" dark>
           {title}
         </Title>
-        {underTitleContent}
         <div className="row">
-          <div className="col-12 col-md-10 mx-auto">{paragraphContent}</div>
+          <div className="col-12 col-md-10 mx-auto">
+            <p className="text-white">{paragraph.paragraph}</p>
+          </div>
         </div>
       </div>
     </SectionColor>

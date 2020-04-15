@@ -27,7 +27,7 @@ const sitesTemplate = props => {
 
 export const query = graphql`
   query {
-    urls: contentfulImagesOurSuppliers {
+    urls: contentfulPageOurSuppliers {
       url1
       url2
       url3

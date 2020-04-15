@@ -17,7 +17,7 @@ const IndexPage = props => {
     >
       <AboutUs />
       <CustomBackgroundImageParalaks
-        img={props.data.contentfulHeader.backgroundImg.fluid}
+        img={props.data.backgroundImgParalaks.imageParalaks.fluid}
       />
       <MeetUs />
       <OurSuppliers />
@@ -36,7 +36,9 @@ export const query = graphql`
           ...GatsbyContentfulFluid_tracedSVG
         }
       }
-      backgroundImg: imageParalaks {
+    }
+    backgroundImgParalaks: contentfulPageAboutUs {
+      imageParalaks {
         fluid(maxWidth: 1920, quality: 90) {
           ...GatsbyContentfulFluid_tracedSVG
         }

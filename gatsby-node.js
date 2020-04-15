@@ -11,7 +11,7 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
-      sites: contentfulImagesOurSuppliers {
+      sites: contentfulPageOurSuppliers {
         text1
         text2
         text3

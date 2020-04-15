@@ -68,32 +68,22 @@ const TextH3 = styled.h3`
 
 const getData = graphql`
   {
-    contentfulPages(path: { eq: "services" }) {
+    contentfulPageServices {
       title
       underTitle
-      paragraph {
-        contentParagraph: paragraph
-      }
     }
-    contentfulImagesTextProfessionalServices {
-      title
-      title2
-      underTitle
-      underTitl2
-      paragraph {
-        paragraph
-      }
-      paragraph2 {
-        paragraph2
-      }
-      image1 {
-        fluid(maxWidth: 1000) {
-          ...GatsbyContentfulFluid_tracedSVG
+
+    allContentfulPageServicesContent {
+      nodes {
+        image {
+          fluid(maxWidth: 1000) {
+            ...GatsbyContentfulFluid_tracedSVG
+          }
         }
-      }
-      image2 {
-        fluid(maxWidth: 1000) {
-          ...GatsbyContentfulFluid_tracedSVG
+        title
+        underTitle
+        paragraph {
+          paragraph
         }
       }
     }
@@ -102,65 +92,55 @@ const getData = graphql`
 
 const AboutUs = () => {
   const {
-    contentfulImagesTextProfessionalServices: {
-      title,
-      title2,
-      underTitle,
-      underTitl2,
-      paragraph,
-      paragraph2,
-      image1,
-      image2,
-    },
-    contentfulPages: {
-      paragraph: paragraphUp,
-      title: titleUp,
-      underTitle: underTitleUp,
-    },
+    contentfulPageServices: { title: titleUp, underTitle: underTitleUp },
+    allContentfulPageServicesContent: { nodes: contentItemsServices },
   } = useStaticQuery(getData)
-  const underTitleContent = !underTitleUp ? (
-    <p className="text-center">{underTitleUp}</p>
-  ) : null
-  const paragraphContent = !paragraphUp || <p>{paragraphUp.contentParagraph}</p>
-  const paragraphContentUnder1 = !paragraph || <p>{paragraph.paragraph}</p>
-  const paragraphContentUnder2 = !paragraph2 || <p>{paragraph2.paragraph2}</p>
-  const titleContentUnder1 = !title || <TextH2>{title}</TextH2>
-  const titleContentUnder2 = !title2 || <TextH2>{title2}</TextH2>
-  const underTitleContentUnder1 = !underTitle || <TextH3>{underTitle}</TextH3>
-  const underTitleContentUnder2 = !underTitl2 || <TextH3>{underTitl2}</TextH3>
+
+  const mapContentServices = contentItemsServices.map((item, index) => {
+    const renderItemClass =
+      index % 2 === 0 ? (
+        <React.Fragment key={index}>
+          <CustomBackgroundImageServices
+            img={item.image.fluid}
+            className="Area1 d-md-block d-none"
+          />
+          <TextDiv className="Area2">
+            <TextH2>{item.title}</TextH2>
+            <TextH3>{item.underTitle}</TextH3>
+            <p>{item.paragraph.paragraph}</p>
+          </TextDiv>
+        </React.Fragment>
+      ) : (
+        <React.Fragment key={index}>
+          <CustomBackgroundImageServices
+            key={index}
+            img={item.image.fluid}
+            className="Area4 d-md-block d-none"
+          />
+          <TextDiv className="Area3">
+            <TextH2>{item.title}</TextH2>
+            <TextH3>{item.underTitle}</TextH3>
+            <p>{item.paragraph.paragraph}</p>
+          </TextDiv>
+        </React.Fragment>
+      )
+    return renderItemClass
+  })
+
   return (
     <Section>
       <DivColor>
         <div className="container">
           <Title width="400">{titleUp}</Title>
-          {underTitleContent}
+          <p className="text-center">{underTitleUp}</p>
           <div className="row">
-            <div className="col-12 col-md-10 mx-auto">{paragraphContent}</div>
+            <div className="col-12 col-md-10 mx-auto"></div>
           </div>
         </div>
       </DivColor>
       <div>
         <div className="jumbotron-fluid">
-          <GridContainer>
-            <CustomBackgroundImageServices
-              img={image1.fluid}
-              className="Area1 d-md-block d-none"
-            />
-            <TextDiv className="Area2">
-              {titleContentUnder1}
-              {underTitleContentUnder1}
-              {paragraphContentUnder1}
-            </TextDiv>
-            <TextDiv className="Area3">
-              {titleContentUnder2}
-              {underTitleContentUnder2}
-              {paragraphContentUnder2}
-            </TextDiv>
-            <CustomBackgroundImageServices
-              img={image2.fluid}
-              className="Area4 d-md-block d-none"
-            />
-          </GridContainer>
+          <GridContainer>{mapContentServices}</GridContainer>
         </div>
       </div>
     </Section>

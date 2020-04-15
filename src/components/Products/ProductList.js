@@ -8,7 +8,6 @@ const ProductList = ({
   getCategoriesString,
   handleAddProduct,
   location,
-  producers,
 }) => {
   const [selectValue, setSelectValue] = useState("")
   const [producerFilter, setProducerFilter] = useState([])
@@ -33,16 +32,12 @@ const ProductList = ({
   }
 
   const producersMap = arrayProducersItems.map((item, index) => {
-    const producerImage = producers.nodes.filter(
-      itemProducer => itemProducer.producer === item.producer
-    )
     return (
       <div key={index} className="mb-4">
         <ProductListProducer
           producerItems={item.producerItems}
           handleAddProduct={handleAddProduct}
           location={location}
-          producerImageSelect={producerImage[0]}
         />
       </div>
     )

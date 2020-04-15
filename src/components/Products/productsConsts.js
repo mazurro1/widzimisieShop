@@ -56,7 +56,7 @@ export const WrapperIcoButton = styled.div`
 
 export const PositionRelative = styled.div`
   position: relative;
-  min-height: calc(50vh);
+  min-height: calc(60vh - 31px);
 `
 
 export const PositionSelectedItem = styled.div`

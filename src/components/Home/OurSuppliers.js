@@ -96,14 +96,11 @@ const ToLinkUper = styled.div`
 
 const getData = graphql`
   {
-    contentfulPages(path: { eq: "ourSuppliers" }) {
+    contentfulPageOurSuppliers {
       title
-      underTitle
       paragraph {
-        contentParagraph: paragraph
+        paragraph
       }
-    }
-    contentfulImagesOurSuppliers {
       text1
       text2
       text3
@@ -123,7 +120,7 @@ const getData = graphql`
       url8
       url9
       image1 {
-        fluid(maxWidth: 900) {
+        fluid(maxWidth: 350) {
           ...GatsbyContentfulFluid_tracedSVG
         }
       }
@@ -178,7 +175,9 @@ const SectionColor = styled(Section)`
 
 const OurSuppliers = () => {
   const {
-    contentfulImagesOurSuppliers: {
+    contentfulPageOurSuppliers: {
+      title,
+      paragraph,
       text1,
       text2,
       text3,
@@ -207,15 +206,7 @@ const OurSuppliers = () => {
       image8,
       image9,
     },
-    contentfulPages: { paragraph, title, underTitle },
   } = useStaticQuery(getData)
-
-  const underTitleContent = !underTitle ? (
-    <p className="text-center text-white">{underTitle}</p>
-  ) : null
-  const paragraphContent = !paragraph || (
-    <p className="text-white">{paragraph.contentParagraph}</p>
-  )
 
   const elements = [
     {
@@ -289,7 +280,6 @@ const OurSuppliers = () => {
         big={item.big}
         img={item.image.fluid}
         key={index}
-        // onClick={() => handleClickItemList(item.url)}
       >
         <TextPosition>{item.text}</TextPosition>
         <ToLinkUper>
@@ -304,9 +294,10 @@ const OurSuppliers = () => {
     <SectionColor>
       <div className="container">
         <Title dark>{title}</Title>
-        {underTitleContent}
         <div className="row">
-          <div className="col-12 col-md-10 mx-auto">{paragraphContent}</div>
+          <div className="col-12 col-md-10 mx-auto">
+            <p className="text-white">{paragraph.paragraph}</p>
+          </div>
         </div>
         <DivContainer>{mapElements}</DivContainer>
       </div>

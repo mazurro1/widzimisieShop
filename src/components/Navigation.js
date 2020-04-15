@@ -13,6 +13,7 @@ const UpperDiv = styled.div`
   font-size: 0.9rem;
   color: ${Colors.textBasic};
   font-weight: 500;
+  min-height: 31px;
 `
 
 const HeaderStyled = styled.div`
@@ -88,6 +89,7 @@ const DivMobile = styled.div`
   position: relative;
   padding: 6px 0;
   text-align: right;
+  min-height: 57px;
 `
 
 const DivFullScreen = styled.div`

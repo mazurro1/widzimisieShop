@@ -226,6 +226,17 @@ html {
   background: #676767;
   border-radius: 20px;
 }
+
+table::-webkit-scrollbar {
+  width: 5px !important;
+  height: 10px;
+  background: #2e2e2e;
+}
+table::-webkit-scrollbar-thumb {
+  background: #676767;
+  border-radius: 20px;
+}
+
 body {
   position: relative;
   font-family: "Montserrat", sans-serif !important;

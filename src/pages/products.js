@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import Layout from "../components/layout"
 import { graphql } from "gatsby"
 import SelectedTypeofGlasses from "../components/Products/SelectedTypeofGlasses"
 import SelectedTypeofSex from "../components/Products/SelectedTypeofSex"
@@ -20,6 +19,13 @@ import {
   PositionSelectedItem,
   getCategoriesString,
 } from "../components/Products/productsConsts"
+import styled from "styled-components"
+
+import TableEyesValues from "../components/Products/TableEyesValues"
+
+const PositionProducts = styled.div`
+  margin-top: 88px;
+`
 
 const Products = props => {
   const [activeStep, setActiveStep] = React.useState(0)
@@ -42,6 +48,8 @@ const Products = props => {
   const [showExtraOptions, setShowExtraOptions] = useState(false)
   const [extraOptionsValue, setExtraOptionsValue] = useState({})
   const [showSummary, setShowSummary] = useState(false)
+  const [selectionPrice, setSelectionPrice] = useState("priceBasic")
+  const [otherExtraPirce, setOtherExtraPrice] = useState(0)
 
   useEffect(() => {
     const products = props.data.products.nodes
@@ -219,7 +227,6 @@ const Products = props => {
           getCategoriesString={getCategoriesString}
           handleAddProduct={handleAddProduct}
           location={props.location.origin}
-          producers={props.data.producers}
         />
       </CSSTransition>
       <CSSTransition
@@ -238,7 +245,10 @@ const Products = props => {
         unmountOnExit
         onExiting={handleExtraOptionsExit}
       >
-        <ExtraOptions handleExtraOptionClick={handleExtraOptionClick} />
+        <ExtraOptions
+          handleExtraOptionClick={handleExtraOptionClick}
+          selectionPrice={selectionPrice}
+        />
       </CSSTransition>
       <CSSTransition
         in={showSummary}
@@ -253,21 +263,24 @@ const Products = props => {
           selectedProduct={selectedProduct}
           selectedTypeOfSex={selectedTypeOfSex}
           valselectedTypeOfGlasses={valselectedTypeOfGlasses}
+          selectionPrice={selectionPrice}
+          otherExtraPirce={otherExtraPirce}
         />
       </CSSTransition>
     </>
   )
   return (
-    <Layout
-      history={props.location}
-      image={props.data.contentfulOurProductsImages.headerImage.fluid}
-    >
+    <PositionProducts>
+      <TableEyesValues
+        setSelectionPrice={setSelectionPrice}
+        setOtherExtraPrice={setOtherExtraPrice}
+      />
       <PositionRelative>
         <div className="container">
           <div className="d-none d-md-block">
             <StepperComponent activeStep={activeStep} steps={steps} />
           </div>
-          <div className="container">
+          <div className="container mt-md-1 mt-5">
             <div className="row">
               <WrapperIcoButton
                 className="col-12 mx-auto"
@@ -291,7 +304,7 @@ const Products = props => {
           {validProps}
         </PositionSelectedItem>
       </PositionRelative>
-    </Layout>
+    </PositionProducts>
   )
 }
 
@@ -323,16 +336,6 @@ export const query = graphql`
       }
     }
 
-    producers: allContentfulProducersImageInShop {
-      nodes {
-        producer
-        ad {
-          fluid {
-            ...GatsbyContentfulFluid_tracedSVG
-          }
-        }
-      }
-    }
     contentfulOurProductsImages {
       headerImage {
         fluid {

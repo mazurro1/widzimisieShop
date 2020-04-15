@@ -24,7 +24,7 @@ export const Routes = [
   },
   {
     id: 1,
-    name: "Nasze produkty",
+    name: "Wyceń okulary",
     link: "/products",
     icon: "MdShoppingCart",
   },

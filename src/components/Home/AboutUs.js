@@ -4,11 +4,10 @@ import { useStaticQuery, graphql } from "gatsby"
 
 const getData = graphql`
   {
-    contentfulPages(path: { eq: "aboutUs" }) {
+    contentfulPageAboutUs {
       title
-      underTitle
       paragraph {
-        contentParagraph: paragraph
+        paragraph
       }
     }
   }
@@ -16,19 +15,16 @@ const getData = graphql`
 
 const AboutUs = () => {
   const {
-    contentfulPages: { paragraph, title, underTitle },
+    contentfulPageAboutUs: { paragraph, title },
   } = useStaticQuery(getData)
-  const underTitleContent = !underTitle ? (
-    <p className="text-center">{underTitle}</p>
-  ) : null
-  const paragraphContent = !paragraph || <p>{paragraph.contentParagraph}</p>
   return (
     <Section>
       <div className="container">
         <Title>{title}</Title>
-        {underTitleContent}
         <div className="row">
-          <div className="col-12 col-md-10 mx-auto">{paragraphContent}</div>
+          <div className="col-12 col-md-10 mx-auto">
+            <p>{paragraph.paragraph}</p>
+          </div>
         </div>
       </div>
     </Section>

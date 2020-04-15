@@ -3,7 +3,6 @@ import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import styled from "styled-components"
-import CustomBackgroundImageProducer from "../../common/CustomBackgroundImageProducer"
 import { Title, Colors } from "../../common"
 import Img from "gatsby-image"
 import Button from "@material-ui/core/Button"
@@ -118,12 +117,7 @@ const BackStyle = styled.div`
   transform: translate(-50%, -50%);
 `
 
-const ProductListProducer = ({
-  producerItems,
-  handleAddProduct,
-  location,
-  producerImageSelect,
-}) => {
+const ProductListProducer = ({ producerItems, handleAddProduct, location }) => {
   const { producer } = producerItems[0]
 
   const elementsOnPage = () => {
@@ -187,19 +181,10 @@ const ProductListProducer = ({
     pauseOnHover: true,
   }
   return (
-    <>
-      <div className="container mb-5">
-        <Title bgDark>{producer}</Title>
-        <SlickSliderCustom {...carusellSettings}>
-          {mapProducts}
-        </SlickSliderCustom>
-      </div>
-      {producerImageSelect ? (
-        <CustomBackgroundImageProducer img={producerImageSelect.ad.fluid}>
-          {producer}
-        </CustomBackgroundImageProducer>
-      ) : null}
-    </>
+    <div className="container mb-5">
+      <Title bgDark>{producer}</Title>
+      <SlickSliderCustom {...carusellSettings}>{mapProducts}</SlickSliderCustom>
+    </div>
   )
 }
 export default ProductListProducer

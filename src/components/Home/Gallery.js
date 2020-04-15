@@ -8,14 +8,9 @@ import Img from "gatsby-image"
 
 const getData = graphql`
   {
-    contentfulPages(path: { eq: "gallery" }) {
+    contentfulPageGallery {
       title
       underTitle
-      paragraph {
-        paragraph
-      }
-    }
-    contentfulImagesGallery {
       images {
         fixed(height: 300) {
           ...GatsbyContentfulFixed_tracedSVG
@@ -233,8 +228,7 @@ const SectionColor = styled(Section)`
 
 const MyGallery = () => {
   const {
-    contentfulImagesGallery,
-    contentfulPages: { title, underTitle, paragraph },
+    contentfulPageGallery: { title, underTitle, images },
   } = useStaticQuery(getData)
   const params = {
     effect: "coverflow",
@@ -273,22 +267,19 @@ const MyGallery = () => {
       </button>
     ),
   }
-  const allImages = contentfulImagesGallery.images.map((item, index) => (
+  const allImages = images.map((item, index) => (
     <div key={index}>
       <Img fixed={item.fixed} alt={`Gallery image ${index}`} />
     </div>
   ))
-  const underTitleContent = !underTitle || (
-    <p className="text-center">{underTitle}</p>
-  )
-  const paragraphContent = !paragraph || <p>{paragraph}</p>
+
   return (
     <SectionColor>
       <div className="container">
         <Title>{title}</Title>
-        {underTitleContent}
+        <p className="text-center">{underTitle}</p>
         <div className="row">
-          <div className="col-12 col-md-10 mx-auto">{paragraphContent}</div>
+          <div className="col-12 col-md-10 mx-auto"></div>
         </div>
         <GalleryClass>
           <Swiper {...params}>{allImages}</Swiper>
