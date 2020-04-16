@@ -279,7 +279,7 @@ const ProductSummary = ({
             <span>{validationExtraOptionsValue.title}</span>
           </BoldDiv>
           <SummaryDiv className="col-12">
-            <h2>Cena:</h2>
+            <h2>Cena ostateczna:</h2>
             <span>{finallyPrice} zł</span>
           </SummaryDiv>
           <div className="col-12">

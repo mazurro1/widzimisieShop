@@ -44,22 +44,22 @@ const SelectGlasses = ({ handleSelectGlassClick }) => {
     {
       title: "Standard",
       content: "Opis",
-      price: 200,
+      price: 0,
     },
     {
-      title: "20% cieńsze",
+      title: "Do 15% cieńsze",
       content: "Opis",
-      price: 231,
+      price: 99,
     },
     {
-      title: "25% cieńsze",
+      title: "Do 25% cieńsze",
       content: "Opis",
-      price: 2567,
+      price: 199,
     },
     {
-      title: "30% cieńsze",
+      title: "Do 35% cieńsze",
       content: "Opis",
-      price: 31,
+      price: 259,
     },
   ]
   const mapType = selectGlasses.map((item, index) => {

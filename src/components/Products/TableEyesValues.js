@@ -3,7 +3,8 @@ import styled from "styled-components"
 import { Colors } from "../../common"
 
 const InputStyle = styled.input`
-  width: 100px;
+  width: 69.5px;
+  margin: 0 auto;
   background-color: #eee;
   border-radius: 5px;
   border: none;
@@ -41,11 +42,22 @@ const StyleTable = styled.div`
     display: block;
     overflow-x: auto;
     white-space: nowrap;
+    border-right: 1px solid #dee2e6;
+    border-left: 1px solid #dee2e6;
 
     @media (min-width: 1280px) {
       display: table;
     }
     
+  }
+
+  td:last-child{
+    padding-right: 0.75rem;
+  }
+
+  thead{
+    
+    border: 1px solid;
   }
 
   table tbody thead {
@@ -115,7 +127,7 @@ const TableEyesValues = ({ setSelectionPrice, setOtherExtraPrice }) => {
         setOtherExtraPrice(0)
       }
     }
-  }, [inputsLeftValue, inputsRightValue, setSelectionPrice])
+  }, [inputsLeftValue, inputsRightValue, setSelectionPrice, setOtherExtraPrice])
 
   const handleOnChangeInputsLeft = (value, name) => {
     if (name === "add") {
@@ -330,7 +342,7 @@ const TableEyesValues = ({ setSelectionPrice, setOtherExtraPrice }) => {
   })
 
   return (
-    <StyleTable className="">
+    <StyleTable className="container">
       <table className="table m-0">
         <thead className="thead-dark">
           <tr>
@@ -364,11 +376,9 @@ const TableEyesValues = ({ setSelectionPrice, setOtherExtraPrice }) => {
           </tr>
         </tbody>
       </table>
-      <div className="container">
-        <RequredFieldText>
-          <span>*</span> - wymagane pola
-        </RequredFieldText>
-      </div>
+      <RequredFieldText>
+        <span>*</span> - wymagane pola
+      </RequredFieldText>
     </StyleTable>
   )
 }
