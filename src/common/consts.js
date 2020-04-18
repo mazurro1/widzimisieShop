@@ -24,18 +24,24 @@ export const Routes = [
   },
   {
     id: 1,
+    name: "Sklep online",
+    link: "/shop",
+    icon: "MdShoppingCart",
+  },
+  {
+    id: 2,
     name: "Wyceń okulary",
     link: "/products",
     icon: "MdShoppingCart",
   },
   {
-    id: 2,
+    id: 3,
     name: "Galeria",
     link: "/gallery",
     icon: "FaImages",
   },
   {
-    id: 3,
+    id: 4,
     name: "Kontakt",
     link: "/contact",
     icon: "MdPhoneIphone",

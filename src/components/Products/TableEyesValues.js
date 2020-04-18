@@ -105,7 +105,6 @@ const TableEyesValues = ({ setSelectionPrice, setOtherExtraPrice }) => {
       (inputsLeftValue.add <= 4 && inputsLeftValue.add >= 1) ||
       (inputsRightValue.add <= 4 && inputsRightValue.add >= 1)
     ) {
-      console.log("xd1")
       setSelectionPrice("priceThird")
     } else if (
       !(inputsLeftValue.sfera > -6 && inputsLeftValue.sfera < 6) ||

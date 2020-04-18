@@ -115,7 +115,6 @@ const ProductSummary = ({
   otherExtraPirce,
 }) => {
   const [phoneNumber, setPhoneNumber] = useState("")
-  console.log(selectionPrice)
   const [
     selectedOptionProgresive,
     setSelectedOptionProgresive,

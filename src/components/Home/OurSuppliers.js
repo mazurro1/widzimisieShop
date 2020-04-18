@@ -1,7 +1,7 @@
 import React from "react"
 import { Title, Section, Colors, AniLinkCustom } from "../../common"
 import styled from "styled-components"
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql, Link } from "gatsby"
 import CustomBackgroundImageSuppliers from "../../common/CustomBackgroundImageSuppliers"
 
 const DivContainer = styled.div`
@@ -187,15 +187,12 @@ const OurSuppliers = () => {
       text7,
       text8,
       text9,
-      url1,
       url2,
       url3,
       url4,
       url5,
       url6,
-      url7,
       url8,
-      url9,
       image1,
       image2,
       image3,
@@ -212,7 +209,10 @@ const OurSuppliers = () => {
     {
       id: 1,
       text: text1,
-      url: url1,
+      url: false,
+      dataToSite: {
+        typeOfGlasses: "Korekcyjne",
+      },
       image: image1,
       big: true,
     },
@@ -220,6 +220,7 @@ const OurSuppliers = () => {
       id: 2,
       text: text2,
       url: url2,
+      dataToSite: {},
       image: image2,
       big: false,
     },
@@ -227,6 +228,7 @@ const OurSuppliers = () => {
       id: 3,
       text: text3,
       url: url3,
+      dataToSite: {},
       image: image3,
       big: false,
     },
@@ -234,6 +236,7 @@ const OurSuppliers = () => {
       id: 4,
       text: text4,
       url: url4,
+      dataToSite: {},
       image: image4,
       big: false,
     },
@@ -241,20 +244,28 @@ const OurSuppliers = () => {
       id: 5,
       text: text5,
       url: url5,
+      dataToSite: {},
       image: image5,
       big: false,
     },
     {
       id: 6,
-      text: text6,
-      url: url6,
-      image: image6,
+      text: text9,
+      url: false,
+      dataToSite: {
+        typeOfGlasses: "Przeciwsłoneczne",
+      },
+      image: image9,
       big: false,
     },
+
     {
       id: 7,
       text: text7,
-      url: url7,
+      url: false,
+      dataToSite: {
+        sex: "Dziecięce",
+      },
       image: image7,
       big: false,
     },
@@ -262,14 +273,16 @@ const OurSuppliers = () => {
       id: 8,
       text: text8,
       url: url8,
+      dataToSite: {},
       image: image8,
       big: false,
     },
     {
       id: 9,
-      text: text9,
-      url: url9,
-      image: image9,
+      text: text6,
+      url: url6,
+      dataToSite: {},
+      image: image6,
       big: false,
     },
   ]
@@ -283,7 +296,11 @@ const OurSuppliers = () => {
       >
         <TextPosition>{item.text}</TextPosition>
         <ToLinkUper>
-          <AniLinkCustom to={`/sites/${index + 1}`}></AniLinkCustom>
+          {item.url ? (
+            <AniLinkCustom to={`/sites/${index + 1}`}></AniLinkCustom>
+          ) : (
+            <Link to="/shop" state={item.dataToSite}></Link>
+          )}
         </ToLinkUper>
       </CustomBackgroundImageSuppliers>
     )

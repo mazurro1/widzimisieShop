@@ -117,7 +117,12 @@ const BackStyle = styled.div`
   transform: translate(-50%, -50%);
 `
 
-const ProductListProducer = ({ producerItems, handleAddProduct, location }) => {
+const ProductListProducer = ({
+  producerItems,
+  handleAddProduct,
+  location,
+  selectItem = true,
+}) => {
   const { producer } = producerItems[0]
 
   const elementsOnPage = () => {
@@ -155,11 +160,13 @@ const ProductListProducer = ({ producerItems, handleAddProduct, location }) => {
                       <Button>Opis produktu</Button>
                     </a>
                   </ButtonStyle>
-                  <ButtonStyle>
-                    <Button onClick={() => handleAddProduct(item)}>
-                      Wybierz
-                    </Button>
-                  </ButtonStyle>
+                  {selectItem && (
+                    <ButtonStyle>
+                      <Button onClick={() => handleAddProduct(item)}>
+                        Wybierz
+                      </Button>
+                    </ButtonStyle>
+                  )}
                 </BackStyle>
               </div>
             </div>

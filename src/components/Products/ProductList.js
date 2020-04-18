@@ -42,7 +42,6 @@ const ProductList = ({
       </div>
     )
   })
-
   const handleChange = selectedOption => {
     if (selectedOption.value === "Wszyscy") {
       setSelectValue("")
