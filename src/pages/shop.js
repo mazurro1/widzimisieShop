@@ -86,6 +86,7 @@ const Shop = props => {
     ) : (
       <h1 className="text-center mt-4">Brak produktów</h1>
     )
+  const defaultDataToFilter = props.location.state ? props.location.state : {}
   return (
     <Layout history={props.location}>
       <SectionStyle className="container pt-5">
@@ -99,7 +100,7 @@ const Shop = props => {
               nameFilterOption="sex"
               nameDefaultOption="Dla każdego"
               filter={getCategories}
-              dataToFilter={props.location.state}
+              dataToFilter={defaultDataToFilter}
             />
           </div>
           <div className="col-md-4 col-12 mt-2 mt-md-0">
