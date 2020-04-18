@@ -25,7 +25,7 @@ const ShopSelect = ({
       })
     })
 
-    const mapToFilterItemsEffect = mapedsexOptions.map(item => {
+    const mapToFilterItemsEffect = mapedsexOptionsEffect.map(item => {
       const value = Object.values(item)
       return value[1]
     })
@@ -39,7 +39,6 @@ const ShopSelect = ({
   }, [
     filter,
     dataToFilter,
-    mapedsexOptions,
     nameDefaultOption,
     nameFilterOption,
     setSelected,
