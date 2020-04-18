@@ -111,7 +111,7 @@ const Shop = props => {
               nameFilterOption="typeOfGlasses"
               nameDefaultOption="Wszystkie typy okularów"
               filter={getCategories}
-              dataToFilter={props.location.state}
+              dataToFilter={defaultDataToFilter}
             />
           </div>
           <div className="col-md-4 col-12 mt-2 mt-md-0">
@@ -122,7 +122,7 @@ const Shop = props => {
               nameFilterOption="producer"
               nameDefaultOption="Wszyscy producenci"
               filter={getCategoriesString}
-              dataToFilter={props.location.state}
+              dataToFilter={defaultDataToFilter}
             />
           </div>
         </div>

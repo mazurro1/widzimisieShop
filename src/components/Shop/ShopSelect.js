@@ -71,6 +71,7 @@ const ShopSelect = ({
     const value = Object.values(item)
     return value[1]
   })
+
   const indexOfSelected = dataToFilter[nameFilterOption]
     ? mapToFilterItems.indexOf(dataToFilter[nameFilterOption])
     : -1
