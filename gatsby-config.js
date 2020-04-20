@@ -16,7 +16,12 @@ module.exports = {
     `gatsby-plugin-styled-components`,
     `gatsby-theme-material-ui`,
     `gatsby-plugin-transition-link`,
-    `gatsby-plugin-scroll-reveal`,
+    {
+      resolve: `gatsby-plugin-scroll-reveal`,
+      options: {
+        once: false, // Defines if animation needs to be launched once
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

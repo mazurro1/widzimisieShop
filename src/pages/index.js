@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import AboutUs from "../components/Home/AboutUs"
 import MeetUs from "../components/Home/MeetUs"
 import OurSuppliers from "../components/Home/OurSuppliers"
@@ -6,8 +6,12 @@ import Services from "../components/Home/Services"
 import Layout from "../components/layout"
 import CustomBackgroundImageParalaks from "../common/CustomBackgroundImageParalaks"
 import { graphql } from "gatsby"
+import sal from "sal.js"
 
 const IndexPage = props => {
+  useEffect(() => {
+    sal()
+  }, [])
   return (
     <Layout
       history={props.location}
