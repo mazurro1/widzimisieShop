@@ -6,6 +6,7 @@
   "author": "Hubert Mazur",
   "dependencies": {
     "@material-ui/core": "^4.9.9",
+    "@n8tb1t/use-scroll-position": "^1.0.43",
     "axios": "^0.19.2",
     "babel-plugin-styled-components": "^1.10.7",
     "dotenv": "^8.2.0",
@@ -17,6 +18,7 @@
     "gatsby-plugin-playground": "^1.0.6",
     "gatsby-plugin-react-helmet": "^3.2.1",
     "gatsby-plugin-remote-images": "^2.1.0",
+    "gatsby-plugin-scroll-reveal": "0.0.6",
     "gatsby-plugin-sharp": "^2.5.4",
     "gatsby-plugin-styled-components": "^3.2.1",
     "gatsby-plugin-transition-link": "^1.18.0",
@@ -36,6 +38,7 @@
     "react-slick": "^0.25.2",
     "react-transition-group": "^4.3.0",
     "react-typed": "^1.2.0",
+    "sal.js": "^0.7.4",
     "slick-carousel": "^1.8.1",
     "styled-components": "^4.4.1",
     "swiper": "^5.3.6"

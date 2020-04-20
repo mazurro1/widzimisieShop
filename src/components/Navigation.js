@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button"
 import MenuMobile from "./MenuMobile"
 import { MdShoppingCart, MdPhoneIphone } from "react-icons/md"
 import { IoMdHome } from "react-icons/io"
+import { useScrollPosition } from "@n8tb1t/use-scroll-position"
 
 const UpperDiv = styled.div`
   position: relative;
@@ -18,12 +19,16 @@ const UpperDiv = styled.div`
 
 const HeaderStyled = styled.div`
   background-color: ${props =>
-    props.scrollPosition > 100 ? Colors.navColor : "rgba(255, 255, 255, 0.9)"};
+    props.scrollPositionNavigation
+      ? Colors.navColor
+      : "rgba(255, 255, 255, 0.4)"};
   transition-property: background-color;
   transition-duration: 0.3s;
   transition-timing-function: ease;
-  color: ${Colors.navText};
-  box-shadow: 0px 0px 15px 1px #000;
+  ${props =>
+    !props.scrollPositionNavigation
+      ? "box-shadow: 0px 0px 5px 1px #000"
+      : "box-shadow: 0px 0px 15px 1px #000"}
 `
 const PhoneIcon = styled(MdPhoneIphone)`
   font-size: 1.3rem;
@@ -137,21 +142,15 @@ const ButtonWidthDiv = styled.div`
 `
 
 const Navigation = ({ history }) => {
-  // const [scrollPosition, setSrollPosition] = useState(0)
-  // const handleScroll = () => {
-  //   const position = window.pageYOffset
-  //   setSrollPosition(position)
-  // }
+  const [scrollPositionNavigation, setSrollPositionNavigation] = useState(false)
 
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll, { passive: true })
-  // }, [])
-
-  // useEffect(() => {
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll)
-  //   }
-  // }, [])
+  useScrollPosition(({ prevPos, currPos }) => {
+    if (currPos.y < -200) {
+      setSrollPositionNavigation(true)
+    } else {
+      setSrollPositionNavigation(false)
+    }
+  })
 
   const [menuActive, setMenuActive] = useState({
     menu: false,
@@ -167,7 +166,7 @@ const Navigation = ({ history }) => {
 
     return (
       <AniLinkCustom key={item.id} to={item.link}>
-        <ListItemStyled>
+        <ListItemStyled scrollPositionNavigation={scrollPositionNavigation}>
           {isPathname ? (
             <ListItemActive>{item.name}</ListItemActive>
           ) : (
@@ -225,7 +224,7 @@ const Navigation = ({ history }) => {
             </div>
           </div>
         </UpperDiv>
-        <HeaderStyled scrollPosition={0}>
+        <HeaderStyled scrollPositionNavigation={scrollPositionNavigation}>
           <ul className="m-0 text-center d-none d-md-block">{links}</ul>
           <DivMobile className="d-md-none">
             <MenuMobile

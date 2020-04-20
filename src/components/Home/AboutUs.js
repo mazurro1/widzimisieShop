@@ -17,8 +17,9 @@ const AboutUs = () => {
   const {
     contentfulPageAboutUs: { paragraph, title },
   } = useStaticQuery(getData)
+
   return (
-    <Section>
+    <Section data-sal="slide-right" data-sal-duration="1000">
       <div className="container">
         <Title>{title}</Title>
         <div className="row">

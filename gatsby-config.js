@@ -16,6 +16,7 @@ module.exports = {
     `gatsby-plugin-styled-components`,
     `gatsby-theme-material-ui`,
     `gatsby-plugin-transition-link`,
+    `gatsby-plugin-scroll-reveal`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
