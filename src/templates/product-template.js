@@ -165,7 +165,7 @@ export const query = graphql`
       price
       productImage {
         fluid {
-          ...GatsbyContentfulFluid_tracedSVG
+          ...GatsbyContentfulFluid
         }
       }
       form {

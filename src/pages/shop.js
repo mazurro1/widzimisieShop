@@ -144,7 +144,7 @@ export const query = graphql`
         price
         productImage {
           fluid {
-            ...GatsbyContentfulFluid_tracedSVG
+            ...GatsbyContentfulFluid
           }
         }
       }
@@ -163,7 +163,7 @@ export const query = graphql`
     contentfulOurProductsImages {
       headerImage {
         fluid {
-          ...GatsbyContentfulFluid_tracedSVG
+          ...GatsbyContentfulFluid
         }
       }
     }

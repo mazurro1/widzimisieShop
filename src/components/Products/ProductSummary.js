@@ -1,9 +1,21 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import Button from "@material-ui/core/Button"
 import { Colors } from "../../common"
 import Tooltip from "@material-ui/core/Tooltip"
-import SelectProgresiv from "../../components/Products/SelectProgresiv"
+
+const ButtonChangeProgresiv = styled.button`
+  border: none;
+  padding: 5px 10px;
+  background-color: ${Colors.second};
+  border-radius: 5px;
+  color: white;
+  margin-bottom: 50px;
+
+  &:hover {
+    background-color: ${Colors.secondDark};
+  }
+`
 
 const PositionAbsolute = styled.div`
   position: absolute;
@@ -113,16 +125,13 @@ const ProductSummary = ({
   extraOptionsValue,
   selectionPrice,
   otherExtraPirce,
+  setSelectedOptionProgresive,
+  selectedOptionProgresive,
+  selectedOptionGlass,
+  setDialogOpen,
+  setGoBackToExtraOption,
 }) => {
   const [phoneNumber, setPhoneNumber] = useState("")
-  const [
-    selectedOptionProgresive,
-    setSelectedOptionProgresive,
-  ] = React.useState({
-    value: 2,
-    label: "Gwarancją adaptacji marki Rodenstock podstawowe",
-    price: 600,
-  })
 
   const handleChangePhoneNumber = e => {
     if (Number.isInteger(Number(e.target.value))) {
@@ -138,6 +147,12 @@ const ProductSummary = ({
     priceBasic: 0,
     priceSecond: 0,
   }
+
+  useEffect(() => {
+    if (extraOptionsValue.id === 7 && selectionPrice === "priceBasic") {
+      setGoBackToExtraOption(true)
+    }
+  }, [extraOptionsValue, selectionPrice])
 
   const validationExtraOptionsValue =
     extraOptionsValue.id === 7 && selectionPrice === "priceBasic"
@@ -216,6 +231,12 @@ const ProductSummary = ({
             name="Szkła progresywne"
             value={selectedOptionProgresive.label}
             onChange={handleSendEmail}
+            disabled={
+              selectionPrice === "priceThird" &&
+              selectedOptionGlass.label === "Progresywne"
+                ? false
+                : true
+            }
           />
         </label>
         <label>
@@ -237,20 +258,18 @@ const ProductSummary = ({
       </>
     ) : null
 
-  const progresivSelect =
-    selectionPrice === "priceThird" ? (
-      <div className="mt-4 pt-4 pb-2">
-        <SelectProgresiv
-          selectedOptionProgresive={selectedOptionProgresive}
-          setSelectedOptionProgresive={setSelectedOptionProgresive}
-        />
-      </div>
-    ) : null
-
   return (
     <PositionAbsolute>
-      {progresivSelect}
       <div className="container mt-5 mb-5">
+        {selectionPrice === "priceThird" ? (
+          <ButtonChangeProgresiv
+            onClick={() => {
+              setDialogOpen(true)
+            }}
+          >
+            Zmień soczewki progresywne
+          </ButtonChangeProgresiv>
+        ) : null}
         <h1 className="text-center">Podsumowanie</h1>
         <div className="row">
           <BoldDiv className="col-12">
@@ -277,6 +296,13 @@ const ProductSummary = ({
             <h3>Dodatkowe opcje:</h3>
             <span>{validationExtraOptionsValue.title}</span>
           </BoldDiv>
+          {selectionPrice === "priceThird" &&
+          selectedOptionGlass.label === "Progresywne" ? (
+            <BoldDiv className="col-12">
+              <h3>Soczewki progresywne:</h3>
+              <span>{selectedOptionProgresive.label}</span>
+            </BoldDiv>
+          ) : null}
           <SummaryDiv className="col-12">
             <h2>Cena ostateczna:</h2>
             <span>{finallyPrice} zł</span>

@@ -108,6 +108,7 @@ const SelectProgresiv = ({
         options={selectProgresivItems}
         defaultValue={selectProgresivItems[1]}
         isSearchable={false}
+        value={selectedOptionProgresive}
         components={{ Option: CustomOption }}
         theme={theme => ({
           ...theme,

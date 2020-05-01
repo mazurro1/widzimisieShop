@@ -19,15 +19,17 @@ const UpperDiv = styled.div`
 
 const HeaderStyled = styled.div`
   background-color: ${props =>
-    props.scrollPositionNavigation
-      ? Colors.navColor
-      : "rgba(255, 255, 255, 0.4)"};
+    props.isIndex
+      ? props.scrollPositionNavigation
+        ? Colors.navColor
+        : "rgba(255, 255, 255, 0.3)"
+      : "white"};
   transition-property: background-color;
   transition-duration: 0.3s;
   transition-timing-function: ease;
   ${props =>
     !props.scrollPositionNavigation
-      ? "box-shadow: 0px 0px 5px 1px #000"
+      ? "box-shadow: 0px 0px 15px 1px #000"
       : "box-shadow: 0px 0px 15px 1px #000"}
 `
 const PhoneIcon = styled(MdPhoneIphone)`
@@ -35,15 +37,20 @@ const PhoneIcon = styled(MdPhoneIphone)`
   padding-bottom: 3px;
 `
 
+const ButtonStyle = styled.button`
+  background-color: transparent;
+`
+
 const ListItemStyled = styled.li`
   display: inline-block;
   margin: 0;
   button {
     font-family: "Montserrat", sans-serif !important;
-    font-weight: 500;
+    font-weight: 600;
     padding: 15px 10px 15px 10px;
     border-radius: 0px;
-    background-color: "";
+    border: none;
+    background-color: "transparent";
     transition-property: background-color, color;
     transition-duration: 0.3s;
     transition-timing-function: ease;
@@ -58,19 +65,28 @@ const ListItemStyled = styled.li`
   }
 `
 
-const ListItemActive = styled(Button)`
+const ListItemActive = styled.button`
   padding: 15px 10px 15px 10px;
   color: ${Colors.navTextActive};
   border-radius: 0px;
   transition-property: background-color, color;
   transition-duration: 0.3s;
   transition-timing-function: ease;
+  border: none;
+  button {
+    color: ${Colors.navTextActive};
+  }
   @media (max-width: 768px) {
     background-color: ${Colors.second};
     text-align: left;
   }
   @media (min-width: 769px) {
-    background-color: ${Colors.basicLight};
+    background-color: ${props =>
+      props.isIndex
+        ? props.scrollPositionNavigation
+          ? Colors.second
+          : Colors.basic
+        : Colors.second};
   }
   &:hover {
     background-color: ${Colors.secondLight};
@@ -88,6 +104,12 @@ const NavStyle = styled.nav`
   right: 0;
   z-index: 1000;
   transform: none;
+  background-color: ${props =>
+    props.scrollPositionNavigation && !props.isIndex ? "white" : "transparent"};
+
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 `
 
 const DivMobile = styled.div`
@@ -145,7 +167,7 @@ const Navigation = ({ history }) => {
   const [scrollPositionNavigation, setSrollPositionNavigation] = useState(false)
 
   useScrollPosition(({ prevPos, currPos }) => {
-    if (currPos.y < -200) {
+    if (currPos.y < 0) {
       setSrollPositionNavigation(true)
     } else {
       setSrollPositionNavigation(false)
@@ -168,9 +190,14 @@ const Navigation = ({ history }) => {
       <AniLinkCustom key={item.id} to={item.link}>
         <ListItemStyled scrollPositionNavigation={scrollPositionNavigation}>
           {isPathname ? (
-            <ListItemActive>{item.name}</ListItemActive>
+            <ListItemActive
+              scrollPositionNavigation={scrollPositionNavigation}
+              isIndex={isIndex}
+            >
+              {item.name}
+            </ListItemActive>
           ) : (
-            <Button>{item.name}</Button>
+            <ButtonStyle>{item.name}</ButtonStyle>
           )}
         </ListItemStyled>
       </AniLinkCustom>
@@ -212,10 +239,13 @@ const Navigation = ({ history }) => {
       </AniLinkCustom>
     )
   })
-
+  const isIndex = history.pathname === "/"
   return (
     <>
-      <NavStyle>
+      <NavStyle
+        scrollPositionNavigation={scrollPositionNavigation}
+        isIndex={isIndex}
+      >
         <UpperDiv>
           <div className="container">
             <div className="text-md-right text-center">
@@ -224,7 +254,10 @@ const Navigation = ({ history }) => {
             </div>
           </div>
         </UpperDiv>
-        <HeaderStyled scrollPositionNavigation={scrollPositionNavigation}>
+        <HeaderStyled
+          scrollPositionNavigation={scrollPositionNavigation}
+          isIndex={isIndex}
+        >
           <ul className="m-0 text-center d-none d-md-block">{links}</ul>
           <DivMobile className="d-md-none">
             <MenuMobile

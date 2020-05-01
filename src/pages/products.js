@@ -20,7 +20,7 @@ import {
   getCategoriesString,
 } from "../components/Products/productsConsts"
 import styled from "styled-components"
-
+import ProductDialog from "../components/Products/ProductDialog"
 import TableEyesValues from "../components/Products/TableEyesValues"
 
 const PositionProducts = styled.div`
@@ -50,6 +50,48 @@ const Products = props => {
   const [showSummary, setShowSummary] = useState(false)
   const [selectionPrice, setSelectionPrice] = useState("priceBasic")
   const [otherExtraPirce, setOtherExtraPrice] = useState(0)
+  const [dialogOpen, setDialogOpen] = useState(false)
+  const [goBackToExtraOption, setGoBackToExtraOption] = useState(false)
+  const [selectedOptionGlass, setSelectedOptionGlass] = useState({
+    value: 2,
+    label: "Progresywne",
+  })
+
+  const [selectedOptionProgresive, setSelectedOptionProgresive] = useState({
+    value: 2,
+    label: "Gwarancją adaptacji marki Rodenstock podstawowe",
+    price: 600,
+  })
+  const [inputsLeftValue, setInputsLeftValue] = useState({
+    sfera: 0,
+    cylinder: 0,
+    os: 0,
+    add: "",
+    pd: 0,
+    wysokosc: "",
+    pryzmat: "",
+    baza: "",
+  })
+
+  const [inputsRightValue, setInputsRightValue] = useState({
+    sfera: 0,
+    cylinder: 0,
+    os: 0,
+    add: "",
+    pd: 0,
+    wysokosc: "",
+    pryzmat: "",
+    baza: "",
+  })
+  console.log(selectionPrice)
+
+  useEffect(() => {
+    if (selectionPrice === "priceThird") {
+      setDialogOpen(true)
+    } else {
+      setDialogOpen(false)
+    }
+  }, [selectionPrice])
 
   useEffect(() => {
     const products = props.data.products.nodes
@@ -66,6 +108,34 @@ const Products = props => {
       filterProducts: products,
     }))
   }, [props.data])
+
+  useEffect(() => {
+    if (
+      (inputsLeftValue.add <= 4 && inputsLeftValue.add >= 1) ||
+      (inputsRightValue.add <= 4 && inputsRightValue.add >= 1)
+    ) {
+      setSelectionPrice("priceThird")
+    } else if (
+      !(inputsLeftValue.sfera > -6 && inputsLeftValue.sfera < 6) ||
+      !(inputsRightValue.sfera > -6 && inputsRightValue.sfera < 6) ||
+      !(inputsLeftValue.cylinder > -3 && inputsLeftValue.cylinder < 3) ||
+      !(inputsRightValue.cylinder > -3 && inputsRightValue.cylinder < 3)
+    ) {
+      setSelectionPrice("priceSecond")
+      if (inputsLeftValue.pryzmat > 0 || inputsRightValue.pryzmat > 0) {
+        setOtherExtraPrice(60)
+      } else {
+        setOtherExtraPrice(0)
+      }
+    } else {
+      setSelectionPrice("priceBasic")
+      if (inputsLeftValue.pryzmat > 0 || inputsRightValue.pryzmat > 0) {
+        setOtherExtraPrice(100)
+      } else {
+        setOtherExtraPrice(0)
+      }
+    }
+  }, [inputsLeftValue, inputsRightValue, setSelectionPrice, setOtherExtraPrice])
 
   const handleChangeTypeOfGlasses = itemIncoming => {
     setValSelectedTypeOfGlasses(itemIncoming)
@@ -174,6 +244,13 @@ const Products = props => {
     }
   }
 
+  useEffect(() => {
+    if (goBackToExtraOption) {
+      handleGoBackGenerator()
+      setGoBackToExtraOption(false)
+    }
+  }, [goBackToExtraOption])
+
   const handleAddProduct = selectedProduct => {
     setSelectedProduct(selectedProduct)
     setShowProducts(false)
@@ -265,6 +342,11 @@ const Products = props => {
           valselectedTypeOfGlasses={valselectedTypeOfGlasses}
           selectionPrice={selectionPrice}
           otherExtraPirce={otherExtraPirce}
+          selectedOptionProgresive={selectedOptionProgresive}
+          setSelectedOptionProgresive={setSelectedOptionProgresive}
+          selectedOptionGlass={selectedOptionGlass}
+          setDialogOpen={setDialogOpen}
+          setGoBackToExtraOption={setGoBackToExtraOption}
         />
       </CSSTransition>
     </>
@@ -274,6 +356,10 @@ const Products = props => {
       <TableEyesValues
         setSelectionPrice={setSelectionPrice}
         setOtherExtraPrice={setOtherExtraPrice}
+        inputsLeftValue={inputsLeftValue}
+        setInputsLeftValue={setInputsLeftValue}
+        inputsRightValue={inputsRightValue}
+        setInputsRightValue={setInputsRightValue}
       />
       <PositionRelative>
         <div className="container">
@@ -304,6 +390,18 @@ const Products = props => {
           {validProps}
         </PositionSelectedItem>
       </PositionRelative>
+      <ProductDialog
+        dialogOpen={dialogOpen}
+        setDialogOpen={setDialogOpen}
+        selectedOptionProgresive={selectedOptionProgresive}
+        setSelectedOptionProgresive={setSelectedOptionProgresive}
+        selectedOptionGlass={selectedOptionGlass}
+        setSelectedOptionGlass={setSelectedOptionGlass}
+        inputsRightValue={inputsRightValue}
+        setInputsRightValue={setInputsRightValue}
+        inputsLeftValue={inputsLeftValue}
+        setInputsLeftValue={setInputsLeftValue}
+      />
     </PositionProducts>
   )
 }
@@ -320,7 +418,7 @@ export const query = graphql`
         price
         productImage {
           fluid {
-            ...GatsbyContentfulFluid_tracedSVG
+            ...GatsbyContentfulFluid
           }
         }
       }
@@ -339,7 +437,7 @@ export const query = graphql`
     contentfulOurProductsImages {
       headerImage {
         fluid {
-          ...GatsbyContentfulFluid_tracedSVG
+          ...GatsbyContentfulFluid
         }
       }
     }

@@ -10,7 +10,10 @@ import sal from "sal.js"
 
 const IndexPage = props => {
   useEffect(() => {
-    sal()
+    sal({
+      threshold: 0.1,
+      once: true,
+    })
   }, [])
   return (
     <Layout
@@ -37,14 +40,14 @@ export const query = graphql`
       text2
       image {
         fluid(maxWidth: 1920, quality: 90) {
-          ...GatsbyContentfulFluid_tracedSVG
+          ...GatsbyContentfulFluid
         }
       }
     }
     backgroundImgParalaks: contentfulPageAboutUs {
       imageParalaks {
         fluid(maxWidth: 1920, quality: 90) {
-          ...GatsbyContentfulFluid_tracedSVG
+          ...GatsbyContentfulFluid
         }
       }
     }

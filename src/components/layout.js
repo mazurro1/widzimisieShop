@@ -14,7 +14,7 @@ const getData = graphql`
     file(name: { eq: "792-scaled" }) {
       childImageSharp {
         fluid {
-          ...GatsbyImageSharpFluid_tracedSVG
+          ...GatsbyImageSharpFluid
         }
       }
     }

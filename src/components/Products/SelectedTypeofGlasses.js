@@ -9,12 +9,12 @@ const newData = graphql`
     contentfulOurProductsImages {
       image1: sunscreenImage {
         fixed(width: 440, height: 200) {
-          ...GatsbyContentfulFixed_tracedSVG
+          ...GatsbyContentfulFixed
         }
       }
       image2: correctionImage {
         fixed(width: 440, height: 200) {
-          ...GatsbyContentfulFixed_tracedSVG
+          ...GatsbyContentfulFixed
         }
       }
     }

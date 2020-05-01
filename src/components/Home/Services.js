@@ -77,7 +77,7 @@ const getData = graphql`
       nodes {
         image {
           fluid(maxWidth: 1000) {
-            ...GatsbyContentfulFluid_tracedSVG
+            ...GatsbyContentfulFluid
           }
         }
         title

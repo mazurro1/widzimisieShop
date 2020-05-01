@@ -77,57 +77,14 @@ const StyleTable = styled.div`
   }
 `
 
-const TableEyesValues = ({ setSelectionPrice, setOtherExtraPrice }) => {
-  const [inputsLeftValue, setInputsLeftValue] = useState({
-    sfera: 0,
-    cylinder: 0,
-    os: 0,
-    add: "",
-    pd: 0,
-    wysokosc: "",
-    pryzmat: "",
-    baza: "",
-  })
-
-  const [inputsRightValue, setInputsRightValue] = useState({
-    sfera: 0,
-    cylinder: 0,
-    os: 0,
-    add: "",
-    pd: 0,
-    wysokosc: "",
-    pryzmat: "",
-    baza: "",
-  })
-
-  useEffect(() => {
-    if (
-      (inputsLeftValue.add <= 4 && inputsLeftValue.add >= 1) ||
-      (inputsRightValue.add <= 4 && inputsRightValue.add >= 1)
-    ) {
-      setSelectionPrice("priceThird")
-    } else if (
-      !(inputsLeftValue.sfera > -6 && inputsLeftValue.sfera < 6) ||
-      !(inputsRightValue.sfera > -6 && inputsRightValue.sfera < 6) ||
-      !(inputsLeftValue.cylinder > -3 && inputsLeftValue.cylinder < 3) ||
-      !(inputsRightValue.cylinder > -3 && inputsRightValue.cylinder < 3)
-    ) {
-      setSelectionPrice("priceSecond")
-      if (inputsLeftValue.pryzmat > 0 || inputsRightValue.pryzmat > 0) {
-        setOtherExtraPrice(60)
-      } else {
-        setOtherExtraPrice(0)
-      }
-    } else {
-      setSelectionPrice("priceBasic")
-      if (inputsLeftValue.pryzmat > 0 || inputsRightValue.pryzmat > 0) {
-        setOtherExtraPrice(100)
-      } else {
-        setOtherExtraPrice(0)
-      }
-    }
-  }, [inputsLeftValue, inputsRightValue, setSelectionPrice, setOtherExtraPrice])
-
+const TableEyesValues = ({
+  setSelectionPrice,
+  setOtherExtraPrice,
+  inputsLeftValue,
+  setInputsLeftValue,
+  inputsRightValue,
+  setInputsRightValue,
+}) => {
   const handleOnChangeInputsLeft = (value, name) => {
     if (name === "add") {
       if (value <= 4) {

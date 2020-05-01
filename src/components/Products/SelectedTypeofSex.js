@@ -9,22 +9,22 @@ const newData = graphql`
     contentfulOurProductsImages {
       maleImage {
         fixed(width: 440, height: 200) {
-          ...GatsbyContentfulFixed_tracedSVG
+          ...GatsbyContentfulFixed
         }
       }
       femaleImage {
         fixed(width: 440, height: 200) {
-          ...GatsbyContentfulFixed_tracedSVG
+          ...GatsbyContentfulFixed
         }
       }
       childImage {
         fixed(width: 440, height: 200) {
-          ...GatsbyContentfulFixed_tracedSVG
+          ...GatsbyContentfulFixed
         }
       }
       unisexImage {
         fixed(width: 440, height: 200) {
-          ...GatsbyContentfulFixed_tracedSVG
+          ...GatsbyContentfulFixed
         }
       }
     }

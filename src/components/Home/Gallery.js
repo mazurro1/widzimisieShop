@@ -13,7 +13,7 @@ const getData = graphql`
       underTitle
       images {
         fixed(height: 300) {
-          ...GatsbyContentfulFixed_tracedSVG
+          ...GatsbyContentfulFixed
         }
       }
     }
