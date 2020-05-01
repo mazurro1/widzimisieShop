@@ -1,11 +1,61 @@
 import React from "react"
 import styled from "styled-components"
-import { Title } from "../common"
+import { Title, Colors } from "../common"
+import { FaMobileAlt, FaMailBulk, FaFacebookSquare } from "react-icons/fa"
 
 const StyledIframe = styled.iframe`
   width: 100%;
   height: calc(50vh - 88px);
   margin-top: 88px;
+`
+
+const Field = styled.div`
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  border: none;
+  background-color: white;
+  margin-bottom: 20px;
+  /* max-width: 300px; */
+  cursor: auto !important;
+  .text {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: ${Colors.second};
+    /* text-align: left; */
+  }
+  .field {
+    position: relative;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    border: 2px solid #e0e0e0;
+    background-color: white;
+    margin: 0 auto;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .icon {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    font-size: 1.3rem;
+  }
+`
+
+const FacebookIcon = styled.div`
+  color: #3b5998;
+  text-align: center;
+  font-size: 2rem;
+  transition-property: transform;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+  &:hover {
+    transform: scale(1.7);
+  }
 `
 
 const Contact = props => (
@@ -20,6 +70,41 @@ const Contact = props => (
     ></StyledIframe>
     <div className="container">
       <Title>Kontakt</Title>
+      <div className="row">
+        <div className="col-12 mb-2">
+          <a href="https://www.facebook.com" target="__blank">
+            <FacebookIcon>
+              <FaFacebookSquare />
+            </FacebookIcon>
+          </a>
+        </div>
+        <div className="col-md-6 col-12">
+          <div className="text-center">
+            <Field>
+              <div className="text">Numer telefonu:</div>
+              <div className="field">
+                <div className="icon">
+                  <FaMobileAlt />
+                </div>
+                515-873-900
+              </div>
+            </Field>
+          </div>
+        </div>
+        <div className="col-md-6 col-12">
+          <div className="text-center">
+            <Field>
+              <div className="text">Email:</div>
+              <div className="field">
+                <div className="icon">
+                  <FaMailBulk />
+                </div>
+                mazul96.hm@gmail.com
+              </div>
+            </Field>
+          </div>
+        </div>
+      </div>
     </div>
   </>
 )
