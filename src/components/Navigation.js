@@ -173,6 +173,7 @@ const Navigation = ({ history }) => {
       setSrollPositionNavigation(false)
     }
   })
+  const isIndex = history.pathname === "/"
 
   const [menuActive, setMenuActive] = useState({
     menu: false,
@@ -239,7 +240,6 @@ const Navigation = ({ history }) => {
       </AniLinkCustom>
     )
   })
-  const isIndex = history.pathname === "/"
   return (
     <>
       <NavStyle
