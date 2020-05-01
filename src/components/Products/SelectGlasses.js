@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button"
 import { Colors } from "../../common"
 
 const PositionAbsolute = styled.div`
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;

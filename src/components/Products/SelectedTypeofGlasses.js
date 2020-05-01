@@ -22,7 +22,7 @@ const newData = graphql`
 `
 
 const PositionAbsolute = styled.div`
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;

@@ -164,15 +164,16 @@ const ButtonWidthDiv = styled.div`
 `
 
 const Navigation = ({ history }) => {
-  const [scrollPositionNavigation, setSrollPositionNavigation] = useState(false)
+  // const [scrollPositionNavigation, setSrollPositionNavigation] = useState(false)
+  const [scrollPositionNavigation, setSrollPositionNavigation] = useState(true)
 
-  useScrollPosition(({ prevPos, currPos }) => {
-    if (currPos.y < 0) {
-      setSrollPositionNavigation(true)
-    } else {
-      setSrollPositionNavigation(false)
-    }
-  })
+  // useScrollPosition(({ prevPos, currPos }) => {
+  //   if (currPos.y < 0) {
+  //     setSrollPositionNavigation(true)
+  //   } else {
+  //     setSrollPositionNavigation(false)
+  //   }
+  // })
   const isIndex = history.pathname === "/"
 
   const [menuActive, setMenuActive] = useState({

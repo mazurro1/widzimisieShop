@@ -6,7 +6,7 @@ import { Colors } from "../../common"
 import SelectGlassesModal from "./SelectGlassesModal"
 
 const BigDialog = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   height: 100vh;

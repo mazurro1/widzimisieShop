@@ -25,6 +25,7 @@ import TableEyesValues from "../components/Products/TableEyesValues"
 
 const PositionProducts = styled.div`
   margin-top: 88px;
+  overflow: hidden;
 `
 
 const Products = props => {
@@ -273,7 +274,7 @@ const Products = props => {
         timeout={300}
         classNames="alert"
         unmountOnExit
-        onExiting={handleGlassesExit}
+        onExited={handleGlassesExit}
       >
         <SelectedTypeofGlasses
           type={state.typeOfGlasses}
@@ -285,7 +286,7 @@ const Products = props => {
         timeout={300}
         classNames="alert"
         unmountOnExit
-        onExiting={handleSexExit}
+        onExited={handleSexExit}
       >
         <SelectedTypeofSex
           type={state.typeOfSex}
@@ -297,7 +298,7 @@ const Products = props => {
         timeout={0}
         classNames="alert"
         unmountOnExit
-        onExiting={handleProductExit}
+        onExited={handleProductExit}
       >
         <ProductList
           products={state.filterProducts}
@@ -311,7 +312,7 @@ const Products = props => {
         timeout={300}
         classNames="alert"
         unmountOnExit
-        onExiting={handleSelectGlassesExit}
+        onExited={handleSelectGlassesExit}
       >
         <SelectGlasses handleSelectGlassClick={handleSelectGlassClick} />
       </CSSTransition>
@@ -320,7 +321,7 @@ const Products = props => {
         timeout={300}
         classNames="alert"
         unmountOnExit
-        onExiting={handleExtraOptionsExit}
+        onExited={handleExtraOptionsExit}
       >
         <ExtraOptions
           handleExtraOptionClick={handleExtraOptionClick}
@@ -332,7 +333,7 @@ const Products = props => {
         timeout={300}
         classNames="alert"
         unmountOnExit
-        onExiting={handleSummaryExit}
+        onExited={handleSummaryExit}
       >
         <ProductSummary
           extraOptionsValue={extraOptionsValue}
