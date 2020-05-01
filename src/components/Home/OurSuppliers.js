@@ -309,11 +309,7 @@ const OurSuppliers = () => {
 
   return (
     <SectionColor>
-      <div
-        className="container d-none d-md-block"
-        data-sal="zoom-out"
-        data-sal-duration="1000"
-      >
+      <div className="container d-none d-md-block">
         <Title dark>{title}</Title>
         <div className="row">
           <div className="col-12 col-md-10 mx-auto">

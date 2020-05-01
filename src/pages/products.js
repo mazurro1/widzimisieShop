@@ -52,6 +52,7 @@ const Products = props => {
   const [otherExtraPirce, setOtherExtraPrice] = useState(0)
   const [dialogOpen, setDialogOpen] = useState(false)
   const [goBackToExtraOption, setGoBackToExtraOption] = useState(false)
+  const [age, setAge] = useState("")
   const [selectedOptionGlass, setSelectedOptionGlass] = useState({
     value: 2,
     label: "Progresywne",
@@ -83,7 +84,6 @@ const Products = props => {
     pryzmat: "",
     baza: "",
   })
-  console.log(selectionPrice)
 
   useEffect(() => {
     if (selectionPrice === "priceThird") {
@@ -347,6 +347,8 @@ const Products = props => {
           selectedOptionGlass={selectedOptionGlass}
           setDialogOpen={setDialogOpen}
           setGoBackToExtraOption={setGoBackToExtraOption}
+          activeStep={activeStep}
+          age={age}
         />
       </CSSTransition>
     </>
@@ -401,6 +403,8 @@ const Products = props => {
         setInputsRightValue={setInputsRightValue}
         inputsLeftValue={inputsLeftValue}
         setInputsLeftValue={setInputsLeftValue}
+        age={age}
+        setAge={setAge}
       />
     </PositionProducts>
   )

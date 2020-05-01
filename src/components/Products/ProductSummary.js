@@ -125,11 +125,12 @@ const ProductSummary = ({
   extraOptionsValue,
   selectionPrice,
   otherExtraPirce,
-  setSelectedOptionProgresive,
   selectedOptionProgresive,
   selectedOptionGlass,
   setDialogOpen,
   setGoBackToExtraOption,
+  activeStep,
+  age,
 }) => {
   const [phoneNumber, setPhoneNumber] = useState("")
 
@@ -153,6 +154,17 @@ const ProductSummary = ({
       setGoBackToExtraOption(true)
     }
   }, [extraOptionsValue, selectionPrice])
+
+  // useEffect(() => {
+  //   if (
+  //     activeStep === 5 &&
+  //     selectionPrice === "priceThird" &&
+  //     Number(age) > 40 &&
+  //     selectedOptionGlass.label === "Progresywne"
+  //   ) {
+  //     setGoBackToExtraOption(true)
+  //   }
+  // }, [selectionPrice, age, activeStep, selectedOptionGlass])
 
   const validationExtraOptionsValue =
     extraOptionsValue.id === 7 && selectionPrice === "priceBasic"

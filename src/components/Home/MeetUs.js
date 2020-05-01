@@ -26,7 +26,7 @@ const MeetUs = () => {
 
   return (
     <SectionColor>
-      <div className="container" data-sal="slide-left" data-sal-duration="1000">
+      <div className="container">
         <Title width="500" dark>
           {title}
         </Title>

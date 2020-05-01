@@ -22,13 +22,21 @@ const IndexPage = props => {
       image={props.data.contentfulHeader.image.fluid}
       home
     >
-      <AboutUs />
+      <div data-sal="slide-right" data-sal-duration="1000">
+        <AboutUs />
+      </div>
       <CustomBackgroundImageParalaks
         img={props.data.backgroundImgParalaks.imageParalaks.fluid}
       />
-      <MeetUs />
-      <OurSuppliers />
-      <Services />
+      <div data-sal="slide-left" data-sal-duration="1000">
+        <MeetUs />
+      </div>
+      <div data-sal="zoom-out" data-sal-duration="1000">
+        <OurSuppliers />
+      </div>
+      <div data-sal="zoom-in" data-sal-duration="1000">
+        <Services />
+      </div>
     </Layout>
   )
 }

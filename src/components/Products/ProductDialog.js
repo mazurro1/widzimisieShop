@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import SelectProgresiv from "./SelectProgresiv"
 import { CSSTransition } from "react-transition-group"
@@ -111,11 +111,15 @@ export default function ProductDialog({
   setInputsRightValue,
   inputsLeftValue,
   setInputsLeftValue,
+  age,
+  setAge,
 }) {
-  const [age, setAge] = useState("")
-
   const handleAdd = () => {
     setDialogOpen(false)
+    setInputsRightValue(prevState => ({
+      ...prevState,
+      add: "",
+    }))
   }
 
   const handleClose = () => {
@@ -141,7 +145,6 @@ export default function ProductDialog({
   }
 
   const handleAgeBlud = e => {
-    console.log(e.target.value)
     if (e.target.value > 120) {
       setAge(120)
     }

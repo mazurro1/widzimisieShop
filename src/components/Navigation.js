@@ -185,7 +185,8 @@ const Navigation = ({ history }) => {
     }))
   }
   const links = Routes.map(item => {
-    const isPathname = history.pathname === item.link
+    const isPathname =
+      history.pathname === item.link || history.pathname === `${item.link}/`
 
     return (
       <AniLinkCustom key={item.id} to={item.link}>

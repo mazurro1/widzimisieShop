@@ -18,9 +18,6 @@ module.exports = {
     `gatsby-plugin-transition-link`,
     {
       resolve: `gatsby-plugin-scroll-reveal`,
-      options: {
-        once: false, // Defines if animation needs to be launched once
-      },
     },
     {
       resolve: `gatsby-source-filesystem`,

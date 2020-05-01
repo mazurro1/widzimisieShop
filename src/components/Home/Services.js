@@ -128,7 +128,7 @@ const AboutUs = () => {
   })
 
   return (
-    <Section data-sal="zoom-in" data-sal-duration="1000">
+    <Section>
       <DivColor>
         <div className="container">
           <Title width="400">{titleUp}</Title>

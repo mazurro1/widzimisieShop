@@ -19,7 +19,7 @@ const AboutUs = () => {
   } = useStaticQuery(getData)
 
   return (
-    <Section data-sal="slide-right" data-sal-duration="1000">
+    <Section>
       <div className="container">
         <Title>{title}</Title>
         <div className="row">
