@@ -169,7 +169,7 @@ const getData = graphql`
 `
 
 const SectionColor = styled(Section)`
-  background-color: ${Colors.basicLight};
+  /* background-color: ${Colors.basicLight}; */
   opacity: 0.99;
 `
 
@@ -313,7 +313,7 @@ const OurSuppliers = () => {
         <Title dark>{title}</Title>
         <div className="row">
           <div className="col-12 col-md-10 mx-auto">
-            <p className="text-white">{paragraph.paragraph}</p>
+            <p>{paragraph.paragraph}</p>
           </div>
         </div>
         <DivContainer>{mapElements}</DivContainer>
@@ -322,7 +322,7 @@ const OurSuppliers = () => {
         <Title dark>{title}</Title>
         <div className="row">
           <div className="col-12 col-md-10 mx-auto">
-            <p className="text-white">{paragraph.paragraph}</p>
+            <p>{paragraph.paragraph}</p>
           </div>
         </div>
         <DivContainer>{mapElements}</DivContainer>

@@ -45,7 +45,7 @@ const StyleTable = styled.div`
     border-right: 1px solid #dee2e6;
     border-left: 1px solid #dee2e6;
 
-    @media (min-width: 1280px) {
+    @media (min-width: 900px) {
       display: table;
     }
     
@@ -164,20 +164,20 @@ const TableEyesValues = ({
       name: "add",
       required: false,
     },
-    {
-      value: inputsLeftValue.pd,
-      onChange: handleOnChangeInputsLeft,
-      onBlur: handleOnBlurLeft,
-      name: "pd",
-      required: true,
-    },
-    {
-      value: inputsLeftValue.wysokosc,
-      onChange: handleOnChangeInputsLeft,
-      onBlur: handleOnBlurLeft,
-      name: "wysokosc",
-      required: false,
-    },
+    // {
+    //   value: inputsLeftValue.pd,
+    //   onChange: handleOnChangeInputsLeft,
+    //   onBlur: handleOnBlurLeft,
+    //   name: "pd",
+    //   required: true,
+    // },
+    // {
+    //   value: inputsLeftValue.wysokosc,
+    //   onChange: handleOnChangeInputsLeft,
+    //   onBlur: handleOnBlurLeft,
+    //   name: "wysokosc",
+    //   required: false,
+    // },
     {
       value: inputsLeftValue.pryzmat,
       onChange: handleOnChangeInputsLeft,
@@ -223,20 +223,20 @@ const TableEyesValues = ({
       name: "add",
       required: false,
     },
-    {
-      value: inputsRightValue.pd,
-      onChange: handleOnChangeInputsRight,
-      onBlur: handleOnBlurRight,
-      name: "pd",
-      required: true,
-    },
-    {
-      value: inputsRightValue.wysokosc,
-      onChange: handleOnChangeInputsRight,
-      onBlur: handleOnBlurRight,
-      name: "wysokosc",
-      required: false,
-    },
+    // {
+    //   value: inputsRightValue.pd,
+    //   onChange: handleOnChangeInputsRight,
+    //   onBlur: handleOnBlurRight,
+    //   name: "pd",
+    //   required: true,
+    // },
+    // {
+    //   value: inputsRightValue.wysokosc,
+    //   onChange: handleOnChangeInputsRight,
+    //   onBlur: handleOnBlurRight,
+    //   name: "wysokosc",
+    //   required: false,
+    // },
     {
       value: inputsRightValue.pryzmat,
       onChange: handleOnChangeInputsRight,
@@ -313,10 +313,10 @@ const TableEyesValues = ({
               Oś<span>*</span>
             </th>
             <th scope="col">Add</th>
-            <th scope="col">
+            {/* <th scope="col">
               PD(rozstaw żrenic)<span>*</span>
             </th>
-            <th scope="col">H(wysokość mont)</th>
+            <th scope="col">H(wysokość mont)</th> */}
             <th scope="col">Pryzmat</th>
             <th scope="col">Baza</th>
           </tr>

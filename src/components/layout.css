@@ -704,3 +704,27 @@ pre tt:after {
   opacity: 0;
   transition: opacity 300ms;
 }
+
+
+.opacityUp-enter {
+  opacity: 0;
+}
+.opacityUp-enter-active {
+  opacity: 1;
+  transition-property: opacity, transform;
+  transition-duration: 0.3s;
+  /* transition-delay: 0.3s; */
+  transition-timing-function: ease;
+}
+.opacityUp-exit {
+  opacity: 1;
+}
+.opacityUp-exit-active {
+  opacity: 0;
+  transform: scale(2);
+  
+  transition-property: opacity, transform;
+  transition-duration: 0.3s;
+  /* transition-delay: 0.3s; */
+  transition-timing-function: ease;
+}

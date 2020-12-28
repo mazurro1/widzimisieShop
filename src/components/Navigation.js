@@ -5,6 +5,8 @@ import Button from "@material-ui/core/Button"
 import MenuMobile from "./MenuMobile"
 import { MdShoppingCart, MdPhoneIphone } from "react-icons/md"
 import { IoMdHome } from "react-icons/io"
+import { useStaticQuery, graphql } from "gatsby"
+import Img from "gatsby-image"
 import { useScrollPosition } from "@n8tb1t/use-scroll-position"
 
 const UpperDiv = styled.div`
@@ -104,10 +106,12 @@ const NavStyle = styled.nav`
   right: 0;
   z-index: 1000;
   transform: none;
-  background-color: ${props =>
-    props.scrollPositionNavigation && !props.isIndex ? "white" : "transparent"};
+  background-color: white;
 
-  transition-property: background-color;
+  opacity: ${props =>
+    props.scrollPositionNavigation  ? "1" : "0.9"};
+
+  transition-property: background-color, opacity;
   transition-duration: 0.3s;
   transition-timing-function: ease;
 `
@@ -163,9 +167,30 @@ const ButtonWidthDiv = styled.div`
   }
 `
 
+
+const getData = graphql`
+  {
+    contentfulPageContact {
+      logo {
+        fixed(width: 250, height: 50) {
+          ...GatsbyContentfulFixed
+        }
+      }
+    }
+  }
+`
+
+
+
 const Navigation = ({ history }) => {
   // const [scrollPositionNavigation, setSrollPositionNavigation] = useState(false)
   const [scrollPositionNavigation, setSrollPositionNavigation] = useState(true)
+
+    const {
+      contentfulPageContact: {
+        logo: logo,
+      },
+    } = useStaticQuery(getData)
 
   // useScrollPosition(({ prevPos, currPos }) => {
   //   if (currPos.y < 0) {
@@ -190,20 +215,20 @@ const Navigation = ({ history }) => {
       history.pathname === item.link || history.pathname === `${item.link}/`
 
     return (
-      <AniLinkCustom key={item.id} to={item.link}>
-        <ListItemStyled scrollPositionNavigation={scrollPositionNavigation}>
-          {isPathname ? (
-            <ListItemActive
-              scrollPositionNavigation={scrollPositionNavigation}
-              isIndex={isIndex}
-            >
-              {item.name}
-            </ListItemActive>
-          ) : (
-            <ButtonStyle>{item.name}</ButtonStyle>
-          )}
-        </ListItemStyled>
-      </AniLinkCustom>
+        <AniLinkCustom key={item.id} to={item.link}>
+          <ListItemStyled scrollPositionNavigation={scrollPositionNavigation}>
+            {isPathname ? (
+              <ListItemActive
+                scrollPositionNavigation={scrollPositionNavigation}
+                isIndex={isIndex}
+              >
+                {item.name}
+              </ListItemActive>
+            ) : (
+              <ButtonStyle>{item.name}</ButtonStyle>
+            )}
+          </ListItemStyled>
+        </AniLinkCustom>
     )
   })
 
@@ -260,7 +285,14 @@ const Navigation = ({ history }) => {
           scrollPositionNavigation={scrollPositionNavigation}
           isIndex={isIndex}
         >
-          <ul className="m-0 text-center d-none d-md-block">{links}</ul>
+          <ul className="m-0 text-center d-none d-md-block">
+            <div>
+              <AniLinkCustom to="/" key="image">
+                <Img fixed={logo.fixed} />
+              </AniLinkCustom>
+            </div>
+            {links}
+          </ul>
           <DivMobile className="d-md-none">
             <MenuMobile
               handleClickMenu={handleClickMenu}

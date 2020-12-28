@@ -82,7 +82,7 @@ const Layout = ({
       ) : (
         <header>
           <Header image={imageToHeader} home={home}>
-            {headerTextTyped}
+            {/* {headerTextTyped} */}
           </Header>
         </header>
       )}

@@ -1,19 +1,19 @@
 export const Colors = {
-  basic: "#424242",
-  basicDark: "#2e2e2e",
-  basicLight: "#676767",
-  navColor: "#fff",
-  navText: "#212121",
-  navTextActive: "#fff",
-  second: "#ff5722",
-  secondDark: "#b23c17",
-  secondLight: "#ff784e",
-  background: "#fff",
-  textBasic: "#fff",
-  textBackground: "#212121",
-  secondRgb: "255, 87, 34",
-  headerText: "#fff",
-}
+         basic: "#424242",
+         basicDark: "#2e2e2e",
+         basicLight: "#676767",
+         navColor: "#fff",
+         navText: "#212121",
+         navTextActive: "#fff",
+         second: "#3f51b5",
+         secondDark: "#2c387e",
+         secondLight: "#6573c3",
+         background: "#fff",
+         textBasic: "#fff",
+         textBackground: "#212121",
+         secondRgb: "255, 87, 34",
+         headerText: "#fff",
+       }
 
 export const Routes = [
   {

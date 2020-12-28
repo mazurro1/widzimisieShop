@@ -5,44 +5,50 @@ import { useStaticQuery, graphql } from "gatsby"
 import CustomBackgroundImageServices from "../../common/CustomBackgroundImageServices"
 import { Colors } from "../../common"
 
+const StyledCustomBackgroundImageServices = styled(CustomBackgroundImageServices)`
+  min-height: 320px;
+`
+
+const FlexBoxContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+`
+
+const ItemFlexBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+`
+
+const ItemItemFlexBox = styled.div`
+  width: 50%;
+  min-height: 300px;
+  @media all and (max-width: 768px) {
+    & {
+      width: 100%;
+    }
+  }
+`
+
+const ItemItemFlexBoxImage = styled.div`
+  width: 50%;
+  min-height: 300px;
+  @media all and (max-width: 768px) {
+    & {
+      display: none;
+    }
+  }
+`
+
 const DivColor = styled.div`
   /* background-color: #27211e; */
   padding: 10px 0;
-`
-
-const GridContainer = styled.div`
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas: "Area1 Area2" "Area3 Area4";
-
-  @media all and (max-width: 768px) {
-    & {
-      grid-template-columns: 1fr;
-      grid-template-rows: 1fr 1fr 1fr 1fr;
-      grid-template-areas: "Area1" "Area2" "Area4" "Area3";
-    }
-  }
-  @media all and (min-width: 769px) {
-    & {
-      display: grid;
-    }
-  }
-
-  .Area1 {
-    grid-area: Area1;
-  }
-
-  .Area2 {
-    grid-area: Area2;
-  }
-
-  .Area3 {
-    grid-area: Area3;
-  }
-
-  .Area4 {
-    grid-area: Area4;
-  }
 `
 
 const TextDiv = styled.div`
@@ -56,13 +62,6 @@ const TextH2 = styled.h2`
   color: ${Colors.secondDark};
   margin: 30px 0;
   font-size: 1.2rem;
-  font-weight: 400;
-`
-
-const TextH3 = styled.h3`
-  color: rgb(39, 33, 30);
-  margin: 30px 0;
-  font-size: 1rem;
   font-weight: 400;
 `
 
@@ -81,7 +80,6 @@ const getData = graphql`
           }
         }
         title
-        underTitle
         paragraph {
           paragraph
         }
@@ -97,32 +95,35 @@ const AboutUs = () => {
   } = useStaticQuery(getData)
 
   const mapContentServices = contentItemsServices.map((item, index) => {
+    
     const renderItemClass =
       index % 2 === 0 ? (
-        <React.Fragment key={index}>
-          <CustomBackgroundImageServices
-            img={item.image.fluid}
-            className="Area1 d-md-block d-none"
-          />
-          <TextDiv className="Area2">
-            <TextH2>{item.title}</TextH2>
-            <TextH3>{item.underTitle}</TextH3>
-            <p>{item.paragraph.paragraph}</p>
-          </TextDiv>
-        </React.Fragment>
+        <ItemFlexBox key={index}>
+          <ItemItemFlexBox>
+            <TextDiv>
+              <TextH2>{item.title}</TextH2>
+              <p>{item.paragraph.paragraph}</p>
+            </TextDiv>
+          </ItemItemFlexBox>
+          <ItemItemFlexBoxImage>
+            <StyledCustomBackgroundImageServices img={item.image.fluid} />
+          </ItemItemFlexBoxImage>
+        </ItemFlexBox>
       ) : (
-        <React.Fragment key={index}>
-          <CustomBackgroundImageServices
-            key={index}
-            img={item.image.fluid}
-            className="Area4 d-md-block d-none"
-          />
-          <TextDiv className="Area3">
-            <TextH2>{item.title}</TextH2>
-            <TextH3>{item.underTitle}</TextH3>
-            <p>{item.paragraph.paragraph}</p>
-          </TextDiv>
-        </React.Fragment>
+        <ItemFlexBox key={index}>
+          <ItemItemFlexBoxImage>
+            <StyledCustomBackgroundImageServices
+              key={index}
+              img={item.image.fluid}
+            />
+          </ItemItemFlexBoxImage>
+          <ItemItemFlexBox>
+            <TextDiv>
+              <TextH2>{item.title}</TextH2>
+              <p>{item.paragraph.paragraph}</p>
+            </TextDiv>
+          </ItemItemFlexBox>
+        </ItemFlexBox>
       )
     return renderItemClass
   })
@@ -140,7 +141,8 @@ const AboutUs = () => {
       </DivColor>
       <div>
         <div className="jumbotron-fluid">
-          <GridContainer>{mapContentServices}</GridContainer>
+          {/* <GridContainer>{mapContentServices}</GridContainer> */}
+          <FlexBoxContainer>{mapContentServices}</FlexBoxContainer>
         </div>
       </div>
     </Section>

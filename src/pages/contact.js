@@ -1,7 +1,13 @@
 import React from "react"
 import styled from "styled-components"
 import { Title, Colors } from "../common"
-import { FaMobileAlt, FaMailBulk, FaFacebookSquare } from "react-icons/fa"
+import {
+  FaMobileAlt,
+  FaMailBulk,
+  FaFacebookSquare,
+  FaInstagram,
+} from "react-icons/fa"
+import { useStaticQuery, graphql } from "gatsby"
 
 const StyledIframe = styled.iframe`
   width: 100%;
@@ -58,7 +64,52 @@ const FacebookIcon = styled.div`
   }
 `
 
-const Contact = props => (
+const InstagramIcon = styled.div`
+  color: #f50057;
+  text-align: center;
+  font-size: 2rem;
+  transition-property: transform;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+  &:hover {
+    transform: scale(1.7);
+  }
+`
+
+const ContainerLinks = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 100px;
+`
+
+const LinkItem = styled.div`
+  width: 100px;
+`
+
+const getData = graphql`
+  {
+    contentfulPageContact {
+      eMail
+      phoneNumber
+      facebookLink
+      instagramLink
+    }
+  }
+`
+
+const Contact = props => {
+  const {
+    contentfulPageContact: {
+      eMail: eMail,
+      phoneNumber: phoneNumber,
+      facebookLink: facebookLink,
+      instagramLink: instagramLink,
+    },
+  } = useStaticQuery(getData)
+return (
   <>
     <StyledIframe
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2517.79401891171!2d20.6331563157467!3d50.872012979535675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471827939ae594c9%3A0x26b94738cb9e3e68!2sSalon%20Optyczny%20-%20Twoje%20Widzimisi%C4%99%20-%20Optyk%20Kielce%20-%20okulary%20progresywne%2C%20przeciws%C5%82oneczne!5e0!3m2!1spl!2spl!4v1586897017137!5m2!1spl!2spl"
@@ -70,14 +121,23 @@ const Contact = props => (
     ></StyledIframe>
     <div className="container">
       <Title>Kontakt</Title>
-      <div className="row">
-        <div className="col-12 mb-2">
-          <a href="https://www.facebook.com" target="__blank">
+      <ContainerLinks>
+        <LinkItem>
+          <a href={facebookLink} target="__blank">
             <FacebookIcon>
               <FaFacebookSquare />
             </FacebookIcon>
           </a>
-        </div>
+        </LinkItem>
+        <LinkItem>
+          <a href={instagramLink} target="__blank">
+            <InstagramIcon>
+              <FaInstagram />
+            </InstagramIcon>
+          </a>
+        </LinkItem>
+      </ContainerLinks>
+      <div className="row">
         <div className="col-md-6 col-12">
           <div className="text-center">
             <Field>
@@ -86,7 +146,7 @@ const Contact = props => (
                 <div className="icon">
                   <FaMobileAlt />
                 </div>
-                515-873-900
+                {phoneNumber}
               </div>
             </Field>
           </div>
@@ -99,7 +159,7 @@ const Contact = props => (
                 <div className="icon">
                   <FaMailBulk />
                 </div>
-                mazul96.hm@gmail.com
+                {eMail}
               </div>
             </Field>
           </div>
@@ -108,5 +168,6 @@ const Contact = props => (
     </div>
   </>
 )
+}
 
 export default Contact

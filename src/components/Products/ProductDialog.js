@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import styled from "styled-components"
 import SelectProgresiv from "./SelectProgresiv"
 import { CSSTransition } from "react-transition-group"

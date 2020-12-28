@@ -16,7 +16,7 @@ const getData = graphql`
 `
 
 const SectionColor = styled(Section)`
-  background-color: ${Colors.basicDark};
+  /* background-color: ${Colors.basicDark}; */
 `
 
 const MeetUs = () => {
@@ -32,7 +32,7 @@ const MeetUs = () => {
         </Title>
         <div className="row">
           <div className="col-12 col-md-10 mx-auto">
-            <p className="text-white">{paragraph.paragraph}</p>
+            <p>{paragraph.paragraph}</p>
           </div>
         </div>
       </div>
