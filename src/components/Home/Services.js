@@ -3,7 +3,7 @@ import React from "react"
 import { Title, Section } from "../../common"
 import { useStaticQuery, graphql } from "gatsby"
 import CustomBackgroundImageServices from "../../common/CustomBackgroundImageServices"
-import { Colors } from "../../common"
+import { Colors } from "../../common/consts"
 
 const StyledCustomBackgroundImageServices = styled(CustomBackgroundImageServices)`
   min-height: 320px;

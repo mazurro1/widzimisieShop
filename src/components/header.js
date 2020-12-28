@@ -1,15 +1,32 @@
-import React, {useState} from "react"
+import React, { useState, useRef, useEffect } from "react"
 import CustomBackgroundImage from "../common/CustomBackgroundImage"
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa"
-import { CSSTransition } from "react-transition-group"
+import { Colors } from "../common/consts"
 
 
 const HeightHeader = styled.div`
   position: relative;
   height: 100vh;
   overflow: hidden;
+  
+`
+
+const BackgroundToArrow = styled.div`
+position: absolute;
+z-index: 20;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.30) 0%,
+    rgba(255, 255, 255, 0) 10%,
+    rgba(255, 255, 255, 0) 90%,
+    rgba(0, 0, 0, 0.30) 100%
+  );
 `
 
 const ArrowRightPosition = styled.div`
@@ -49,17 +66,49 @@ const ImageItemStyle = styled.div`
   bottom: 0;
   z-index: ${props => (props.active ? "5" : "10")};
   opacity: ${props => (props.active ? 1 : 0)};
-  transform: ${props => props.active ? "scale(1)" : "scale(2)"};
+  transform: ${props => (props.active ? "scale(1)" : "scale(2)")};
   transition-property: opacity, transform;
-  transition-duration: 0.5s;
+  transition-duration: 1s;
   transition-timing-function: ease;
 `
 
-const Header = ({ image, children, home }) => {
+const Dots = styled.div`
+  position: absolute;
+  z-index: 50;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(0, 0, 0, 0.3) 40%
+  );
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+`
+
+const DotItem = styled.div`
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background-color: ${props => (props.active ? Colors.second : "gray")};
+  margin: 5px;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+`
+
+const Header = ({ imageHeader = [], children, home }) => {
   const [selectedIndexImage, setSelectedIndexImage] = useState(0)
-  console.log(selectedIndexImage)
+  const timerToClearSomewhere = useRef(null)
+
   const handleClickArrow = (action) => {
-    const imagesLength = image.length - 1;
+    const imagesLength = imageHeader.length - 1
+    
     if(action === "plus"){
       const nextIndexImage =
         selectedIndexImage >= imagesLength ? 0 : selectedIndexImage + 1;
@@ -71,23 +120,42 @@ const Header = ({ image, children, home }) => {
     }
   }
 
-  const mapImages = image.map((item, index) => {
-    return (
-      <ImageItemStyle key={index} active={selectedIndexImage === index}>
-        {/* <CSSTransition
-          in={index === selectedIndexImage}
-          timeout={300}
-          classNames="opacityUp"
-          unmountOnExit
-          // onExiting={}
-        > */}
-          <Img fluid={item.fluid} />
-        {/* </CSSTransition> */}
-      </ImageItemStyle>
-    )
-  })
+  useEffect(() => {
+    timerToClearSomewhere.current = setInterval(() => {
+      const imagesLength = imageHeader.length - 1
+      const nextIndexImage =
+        selectedIndexImage >= imagesLength ? 0 : selectedIndexImage + 1
+      setSelectedIndexImage(nextIndexImage)
+    }, 10000)
+    return () => {
+      clearInterval(timerToClearSomewhere.current)
+    }
+  }, [selectedIndexImage])
+
+  let mapImages = null
+  let mapDots = null
+  if (!!imageHeader) {
+    mapImages = imageHeader.map((item, index) => {
+      return (
+        <ImageItemStyle key={index} active={selectedIndexImage === index}>
+          <Img fixed={item.fixed} />
+        </ImageItemStyle>
+      )
+    })
+    mapDots = imageHeader.map((item, index) => {
+      return (
+          <DotItem key={index} active={selectedIndexImage === index}></DotItem>
+      )
+    })
+  }
+
+//  timerToClearSomewhere.current = setTimeout(() => {
+//    handleClickArrow("plus")
+//  }, 10000)
+
   return (
     <HeightHeader>
+      <BackgroundToArrow />
       {mapImages}
       <ArrowRightPosition>
         <ArrowProps onClick={() => handleClickArrow("plus")}>
@@ -99,18 +167,8 @@ const Header = ({ image, children, home }) => {
           <FaArrowLeft />
         </ArrowProps>
       </ArrowLeftPosition>
+      <Dots>{mapDots}</Dots>
     </HeightHeader>
-    // <CustomBackgroundImage  img={image}>
-    //   {children}
-    // </CustomBackgroundImage>
   )
 }
 export default Header
-
-{/* <CSSTransition
-        in={showButtonsGlasses}
-        timeout={300}
-        classNames="alert"
-        unmountOnExit
-        onExited={handleGlassesExit}
-      > */}

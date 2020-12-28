@@ -81,7 +81,7 @@ const Layout = ({
         <NoImageStyle />
       ) : (
         <header>
-          <Header image={imageToHeader} home={home}>
+          <Header imageHeader={imageToHeader} home={home}>
             {/* {headerTextTyped} */}
           </Header>
         </header>

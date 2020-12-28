@@ -21,7 +21,7 @@ const IndexPage = props => {
       once: true,
     })
   }, [])
-  
+
   return (
     <Layout
       history={props.location}
@@ -57,8 +57,8 @@ export const query = graphql`
       text1
       text2
       images {
-        fluid(maxWidth: 1920, quality: 90) {
-          ...GatsbyContentfulFluid
+        fixed(width: 1920, height: 1080, quality: 90) {
+          ...GatsbyContentfulFixed
         }
       }
     }
