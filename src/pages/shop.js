@@ -88,7 +88,7 @@ const Shop = props => {
     )
   const defaultDataToFilter = props.location.state ? props.location.state : {}
   return (
-    <Layout history={props.location}>
+    <Layout history={props.location} noImage>
       <SectionStyle className="container pt-5">
         <Title>Sklep</Title>
         <div className="row">

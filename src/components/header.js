@@ -102,7 +102,7 @@ const DotItem = styled.div`
   transition-timing-function: ease;
 `
 
-const Header = ({ imageHeader = [], children, home }) => {
+const Header = ({ imageHeader = null, children, home }) => {
   const [selectedIndexImage, setSelectedIndexImage] = useState(0)
   const timerToClearSomewhere = useRef(null)
 
