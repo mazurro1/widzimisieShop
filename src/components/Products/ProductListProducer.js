@@ -78,7 +78,9 @@ const FlipBox = styled.div`
 
 const ImageStyle = styled(Img)`
   border-bottom: 2px solid white;
-  height: 140px;
+  height: 175px;
+  /* border: 1px solid ${Colors.basicDark}; */
+  box-shadow: 0 0 5px 0 rgba(0,0,0,0.2);
 `
 
 const PriceStyle = styled.div`
@@ -88,13 +90,18 @@ const PriceStyle = styled.div`
   background-color: #f44336;
   padding: 5px 10px;
   color: white;
+  border-radius: 50%;
+`
+
+const LogoProducerPositioin = styled.div`
+  text-align: center;
 `
 
 const ButtonStyle = styled.div`
   button {
     background-color: ${props =>
-      props.second ? Colors.basicLight : Colors.second} !important;
-    color: white;
+      props.second ? Colors.basicLight : Colors.secondDark} !important;
+    color: ${props => (props.second ? "white" : Colors.basicDark)};
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     transition-property: background-color, transform;
@@ -122,6 +129,7 @@ const ProductListProducer = ({
   handleAddProduct,
   location,
   selectItem = true,
+  logo,
 }) => {
   const { producer } = producerItems[0]
 
@@ -145,7 +153,7 @@ const ProductListProducer = ({
             <div className="flip-box-inner">
               <div className="flip-box-front">
                 <ImageStyle fluid={item.productImage.fluid} />
-                <TextStyle>{item.model}</TextStyle>
+                {/* <TextStyle>{item.model}</TextStyle> */}
                 <PriceStyle>{item.price} zł</PriceStyle>
               </div>
               <div className="flip-box-back">
@@ -157,7 +165,7 @@ const ProductListProducer = ({
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <Button>Opis produktu</Button>
+                      <Button>Dowiedz się więcej</Button>
                     </a>
                   </ButtonStyle>
                   {selectItem && (
@@ -187,9 +195,16 @@ const ProductListProducer = ({
     autoplaySpeed: 10000,
     pauseOnHover: true,
   }
+
   return (
     <div className="container mb-5">
-      <Title bgDark>{producer}</Title>
+      {!!logo ? (
+        <LogoProducerPositioin>
+          <Img fixed={logo.fixed} />
+        </LogoProducerPositioin>
+      ) : (
+        <Title bgDark>{producer}</Title>
+      )}
       <SlickSliderCustom {...carusellSettings}>{mapProducts}</SlickSliderCustom>
     </div>
   )

@@ -84,7 +84,7 @@ const TextNumberInInput = styled.div`
   border-bottom-left-radius: 2px;
   border-top-left-radius: 2px;
   padding: 12px;
-  color: ${Colors.second};
+  color: ${Colors.basicDark};
   font-weight: bold;
 `
 
@@ -96,6 +96,7 @@ const ButtonStyle = styled.div`
     color: white;
     background-color: ${Colors.second};
     padding: 10px 20px;
+    color: ${Colors.basicDark};
     &:hover {
       background-color: ${Colors.secondDark};
     }
@@ -103,9 +104,9 @@ const ButtonStyle = styled.div`
 `
 
 const TextNumber = styled.div`
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  color: ${Colors.second};
+  /* color: ${Colors.second}; */
 `
 const DisplayLabels = styled.div`
   position: absolute;

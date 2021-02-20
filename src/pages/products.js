@@ -24,7 +24,7 @@ import ProductDialog from "../components/Products/ProductDialog"
 import TableEyesValues from "../components/Products/TableEyesValues"
 
 const PositionProducts = styled.div`
-  margin-top: 88px;
+  margin-top: 145px;
   overflow: hidden;
 `
 
@@ -36,6 +36,10 @@ const Products = props => {
     typeOfSex: [],
     products: [],
     filterProducts: [],
+    allTypesGlasses: [],
+    allTypesExtraOptions: [],
+    allTypesExtraOptionsExtra: [],
+    allLogos: [],
   })
 
   const [valselectedTypeOfGlasses, setValSelectedTypeOfGlasses] = useState("")
@@ -98,8 +102,52 @@ const Products = props => {
     const products = props.data.products.nodes
     const typeOfGlasses = props.data.typeOfGlasses.nodes
     const typeOfSex = props.data.typeOfSex.nodes
+    const allLogos = props.data.allLogos.nodes
     let allSelectedTypeOfGlasses = getCategories(typeOfGlasses, "typeOfGlasses")
     let allSelectedTypeOfSex = getCategories(typeOfSex, "sex")
+    let allTypesGlasses = props.data.allTypesGlasses.nodes
+    allTypesGlasses = allTypesGlasses.map(item => {
+      return {
+        title: item.title,
+        price: item.price,
+        content: item.content.content,
+      }
+    })
+
+    allTypesGlasses.sort((a, b) => {
+      const firstItemToSort = a.price
+      const secondItemToSort = b.price
+      if (firstItemToSort < secondItemToSort) return -1
+      if (firstItemToSort > secondItemToSort) return 1
+      return 0
+    })
+
+    let allTypesExtraOptions = props.data.allTypesExtraOptions.nodes
+    allTypesExtraOptions = allTypesExtraOptions.map((item, index) => {
+      return {
+        id: index,
+        title: item.title,
+        content: item.content.content,
+        priceBasic: item.priceBasic,
+        priceSecond: item.priceSecond,
+        priceThird: item.priceThird,
+        extra: item.extra,
+      }
+    })
+
+    allTypesExtraOptions.sort((a, b) => {
+      const firstItemToSort = a.priceSecond
+      const secondItemToSort = b.priceSecond
+      if (firstItemToSort < secondItemToSort) return -1
+      if (firstItemToSort > secondItemToSort) return 1
+      return 0
+    })
+
+    const filterExtraOptions = allTypesExtraOptions.filter(item => !item.extra)
+
+    const filterExtraOptionsExtra = allTypesExtraOptions.filter(
+      item => !item.extra
+    )
 
     setState(prevState => ({
       ...prevState,
@@ -107,6 +155,10 @@ const Products = props => {
       typeOfSex: allSelectedTypeOfSex,
       products: products,
       filterProducts: products,
+      allTypesGlasses: allTypesGlasses,
+      allTypesExtraOptions: filterExtraOptions,
+      allTypesExtraOptionsExtra: filterExtraOptionsExtra,
+      allLogos: allLogos,
     }))
   }, [props.data])
 
@@ -305,6 +357,7 @@ const Products = props => {
           getCategoriesString={getCategoriesString}
           handleAddProduct={handleAddProduct}
           location={props.location.origin}
+          allLogos={state.allLogos}
         />
       </CSSTransition>
       <CSSTransition
@@ -314,7 +367,10 @@ const Products = props => {
         unmountOnExit
         onExited={handleSelectGlassesExit}
       >
-        <SelectGlasses handleSelectGlassClick={handleSelectGlassClick} />
+        <SelectGlasses
+          handleSelectGlassClick={handleSelectGlassClick}
+          allTypesGlasses={state.allTypesGlasses}
+        />
       </CSSTransition>
       <CSSTransition
         in={showExtraOptions}
@@ -326,6 +382,8 @@ const Products = props => {
         <ExtraOptions
           handleExtraOptionClick={handleExtraOptionClick}
           selectionPrice={selectionPrice}
+          allTypesExtraOptions={state.allTypesExtraOptions}
+          allTypesExtraOptionsExtra={state.allTypesExtraOptionsExtra}
         />
       </CSSTransition>
       <CSSTransition
@@ -443,6 +501,40 @@ export const query = graphql`
       headerImage {
         fluid {
           ...GatsbyContentfulFluid
+        }
+      }
+    }
+
+    allTypesGlasses: allContentfulProductGlasses {
+      nodes {
+        title
+        price
+        content {
+          content
+        }
+      }
+    }
+
+    allTypesExtraOptions: allContentfulProductExtraOptions {
+      nodes {
+        title
+        content {
+          content
+        }
+        priceBasic
+        priceSecond
+        priceThird
+        extra
+      }
+    }
+
+    allLogos: allContentfulLogos {
+      nodes {
+        name
+        logo {
+          fixed(height: 80) {
+            ...GatsbyContentfulFixed
+          }
         }
       }
     }

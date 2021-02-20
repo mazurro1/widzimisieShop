@@ -1,10 +1,10 @@
 import React from "react"
 import Layout from "../components/layout"
-import Gallery from "../components/Home/Gallery"
+import PromotionsAndNews from "../components/Home/PromotionsAndNews"
 
 const GalleryPage = props => (
   <Layout history={props.location} noImage>
-    <Gallery />
+    <PromotionsAndNews />
   </Layout>
 )
 

@@ -17,13 +17,12 @@ const InputStyle = styled.input`
 
 const RequredFieldText = styled.div`
   position: relative;
-  background-color: ${Colors.second};
+  background-color: ${Colors.basicDark};
   width: 200px;
   text-align: center;
   padding: 5px 10px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  /* font-weight: bold; */
   color: white;
 `
 

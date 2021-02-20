@@ -13,7 +13,7 @@ export const getSteps = () => {
 }
 
 export const StyleButton = styled(IconButton)`
-  background-color: ${Colors.second};
+  background-color: ${Colors.basicDark};
   transition-property: background-color, opacity;
   transition-duration: 0.5s;
   transition-timing-function: ease;
@@ -22,7 +22,7 @@ export const StyleButton = styled(IconButton)`
   opacity: 1;
   padding: 5px;
   &:hover {
-    background-color: ${Colors.secondLight};
+    background-color: ${Colors.secondDark};
   }
   &:disabled {
     opacity: 0;

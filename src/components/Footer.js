@@ -14,9 +14,10 @@ const FooterStyle = styled.footer`
 const Footer = () => {
   const date = new Date().getFullYear()
   return (
-    <FooterStyle>
-      &copy; {date} Widzimisie | Wszelkie prawa zastrzeżone.
-    </FooterStyle>
+    <></>
+    // <FooterStyle>
+    //   &copy; {date} Widzimisie | Wszelkie prawa zastrzeżone.
+    // </FooterStyle>
   )
 }
 export default Footer

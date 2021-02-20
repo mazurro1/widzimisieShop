@@ -37,32 +37,11 @@ const PriceDiv = styled.div`
   background-color: #f44336;
   padding: 5px 10px;
   color: white;
+  border-radius: 50%;
 `
 
-const SelectGlasses = ({ handleSelectGlassClick }) => {
-  const selectGlasses = [
-    {
-      title: "Standard",
-      content: "Opis",
-      price: 0,
-    },
-    {
-      title: "Do 15% cieńsze",
-      content: "Opis",
-      price: 99,
-    },
-    {
-      title: "Do 25% cieńsze",
-      content: "Opis",
-      price: 199,
-    },
-    {
-      title: "Do 35% cieńsze",
-      content: "Opis",
-      price: 259,
-    },
-  ]
-  const mapType = selectGlasses.map((item, index) => {
+const SelectGlasses = ({ handleSelectGlassClick, allTypesGlasses }) => {
+  const mapType = allTypesGlasses.map((item, index) => {
     return (
       <ElementStyle className="col-md-6 col-12 mx-auto mb-4" key={index}>
         <Button onClick={() => handleSelectGlassClick(item)}>

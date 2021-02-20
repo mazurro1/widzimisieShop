@@ -17,10 +17,10 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(1),
   },
   icon: {
-    color: `${Colors.second} !important`,
+    color: `${Colors.basicDark} !important`,
   },
   completed: {
-    color: `${Colors.second} !important`,
+    color: `${Colors.secondDark} !important`,
   },
 }))
 

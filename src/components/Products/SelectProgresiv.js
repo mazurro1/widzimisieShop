@@ -45,7 +45,7 @@ const StyledPriceOption = styled.span`
   background-color: ${props =>
     props.isSelected ? Colors.secondDark : "#f44336"};
   padding: 1px 10px;
-  color: white;
+  /* color: white; */
   min-width: 100px;
   text-align: center;
 `
@@ -61,7 +61,7 @@ const StyledPriceOptionUnder = styled.div`
     background-color: ${props =>
       props.isSelected ? Colors.secondDark : "#f44336"};
     width: 100px;
-    color: white;
+    /* color: white; */
     padding: 2px 10px;
   }
 `
@@ -115,7 +115,7 @@ const SelectProgresiv = ({
           colors: {
             ...theme.colors,
             primary25: "#bdbdbd",
-            primary: Colors.second,
+            primary: Colors.basicDark,
           },
         })}
       />

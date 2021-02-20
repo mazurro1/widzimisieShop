@@ -8,6 +8,7 @@ const ProductList = ({
   getCategoriesString,
   handleAddProduct,
   location,
+  allLogos,
 }) => {
   const [selectValue, setSelectValue] = useState("")
   const [producerFilter, setProducerFilter] = useState([])
@@ -31,13 +32,27 @@ const ProductList = ({
     })
   }
 
-  const producersMap = arrayProducersItems.map((item, index) => {
+  const mapProductsItemWithLogo = arrayProducersItems.map(item => {
+    const findLogo = allLogos.find(
+      logo =>
+        logo.name.trim().toLowerCase() === item.producer.trim().toLowerCase()
+    )
+
+    return {
+      producer: item.producer,
+      producerItems: item.producerItems,
+      logo: !!findLogo ? findLogo.logo : null,
+    }
+  })
+
+  const producersMap = mapProductsItemWithLogo.map((item, index) => {
     return (
       <div key={index} className="mb-4">
         <ProductListProducer
           producerItems={item.producerItems}
           handleAddProduct={handleAddProduct}
           location={location}
+          logo={item.logo}
         />
       </div>
     )
@@ -77,7 +92,7 @@ const ProductList = ({
                   colors: {
                     ...theme.colors,
                     primary25: "#bdbdbd",
-                    primary: Colors.second,
+                    primary: Colors.basicDark,
                   },
                 })}
               />

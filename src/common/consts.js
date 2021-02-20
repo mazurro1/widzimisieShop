@@ -1,19 +1,24 @@
 export const Colors = {
-         basic: "#424242",
-         basicDark: "#2e2e2e",
-         basicLight: "#676767",
-         navColor: "#fff",
-         navText: "#212121",
-         navTextActive: "#fff",
-         second: "#3f51b5",
-         secondDark: "#2c387e",
-         secondLight: "#6573c3",
-         background: "#fff",
-         textBasic: "#fff",
-         textBackground: "#212121",
-         secondRgb: "255, 87, 34",
-         headerText: "#fff",
-       }
+  basic: "#424242",
+  basicDark: "#2e2e2e",
+  basicLight: "#676767",
+  navColor: "#fff",
+  navText: "#212121",
+  //  navTextActive: "#fff",
+  navTextActive: "#212121",
+  //  second: "#3f51b5",
+  second: "#ffee58",
+  //  secondDark: "#2c387e",
+  secondDark: "#fdd835",
+  //  secondLight: "#6573c3",
+  secondLight: "#fff59d",
+  background: "#fff",
+  textBacis: "#212121",
+  // textBasic: "#fff",
+  textBackground: "#212121",
+  secondRgb: "255, 87, 34",
+  headerText: "#fff",
+}
 
 export const Routes = [
   {
@@ -36,8 +41,8 @@ export const Routes = [
   },
   {
     id: 3,
-    name: "Galeria",
-    link: "/gallery",
+    name: "Aktualności i Promocj",
+    link: "/promotions",
     icon: "FaImages",
   },
   {

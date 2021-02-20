@@ -1,9 +1,11 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import Img from "gatsby-image"
 import styled from "styled-components"
 import { Colors } from "../common"
+import { CSSTransition } from "react-transition-group"
+import { MdClose } from "react-icons/md"
 
 const StyledAreas = styled.div`
   background-color: #f4f4f4;
@@ -33,6 +35,13 @@ const PriceDiv = styled.div`
   padding: 5px 10px;
   color: white;
   font-size: 1.4rem;
+  border-radius: 50%;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 110px;
+  width: 110px; */
   @media (max-width: 768px) {
     top: 0;
     right: 15px;
@@ -49,7 +58,7 @@ const DivProdModel = styled.div`
 `
 
 const DivProd = styled.div`
-  color: ${Colors.second};
+  color: ${Colors.secondDark};
   font-weight: bold;
   display: inline-block;
   font-size: 1.7rem;
@@ -57,7 +66,7 @@ const DivProd = styled.div`
 `
 
 const DivMod = styled.div`
-  color: ${Colors.second};
+  color: ${Colors.secondDark};
   font-weight: bold;
   display: inline-block;
   font-size: 1.1rem;
@@ -68,9 +77,74 @@ const UperInfo = styled.div`
 `
 
 const BoldStyle = styled.div`
-  color: ${Colors.second};
+  color: ${Colors.secondDark};
   font-size: 1.4rem;
   margin-bottom: 5px;
+`
+
+const PositionImage = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 145px;
+`
+const SizeImageClicked = styled.div`
+  width: 80%;
+  height: 80%;
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  .imageWidth {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    max-height: 400px;
+  }
+
+  .closeButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition-property: transform;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+  /* img {
+    position: relative;
+    max-width: 600px;
+    max-height: 400px;
+  } */
+`
+
+const ClickImageProduct = styled.div`
+  cursor: pointer;
+  transition-property: transform;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+  &:hover {
+    transform: scale(1.05);
+  }
 `
 
 const ProductTemplate = ({
@@ -89,6 +163,12 @@ const ProductTemplate = ({
     },
   },
 }) => {
+  const [imageActive, setImageActive] = useState(false)
+
+  const handleClickImage = () => {
+    setImageActive(prevState => !prevState)
+  }
+
   const newFormArr = form.includes("__") ? form.split("__") : ["", "", form]
   const newMaterialArr = material.includes("__")
     ? material.split("__")
@@ -123,33 +203,52 @@ const ProductTemplate = ({
             </DivProdModel>
           </div>
           <div className="col-md-6 col-12 mx-auto mt-4">
-            <Img fluid={productImage.fluid} />
+            <ClickImageProduct onClick={handleClickImage}>
+              <Img fluid={productImage.fluid} />
+            </ClickImageProduct>
             <PriceDiv>{price} zł</PriceDiv>
           </div>
         </div>
         <div className="row mt-5">
-          <div className="col-md-4 col-12 mb-4">
-            <UperInfo>Form: </UperInfo>
+          <div className="col-md-6 col-12 mb-4">
+            <UperInfo>Opis marki: </UperInfo>
             <StyledAreas>
               <BoldStyle>{newFormArr[1]}</BoldStyle>
               <p>{newFormArr[2]}</p>
             </StyledAreas>
           </div>
-          <div className="col-md-4 col-12 mb-4">
-            <UperInfo>Materiał: </UperInfo>
+          <div className="col-md-6 col-12 mb-4">
+            <UperInfo>Opis produktu: </UperInfo>
             <StyledAreas>
               <BoldStyle>{newMaterialArr[1]}</BoldStyle>
               <p>{newMaterialArr[2]}</p>
-            </StyledAreas>
-          </div>
-          <div className="col-md-4 col-12 mb-4">
-            <UperInfo>Typ: </UperInfo>
-            <StyledAreas>
-              <BoldStyle>{newTypArr[1]}</BoldStyle>
               <p>{newTypArr[2]}</p>
             </StyledAreas>
           </div>
+          {/* <div className="col-md-4 col-12 mb-4">
+            <UperInfo>Typ: </UperInfo>
+            <StyledAreas>
+              <BoldStyle>{newTypArr[1]}</BoldStyle>
+            </StyledAreas>
+          </div> */}
         </div>
+        <CSSTransition
+          in={imageActive}
+          timeout={300}
+          classNames="alert"
+          unmountOnExit
+        >
+          <PositionImage onClick={handleClickImage}>
+            <SizeImageClicked>
+              <div className="imageWidth">
+                <Img fluid={productImage.fluid} />
+                <div className="closeButton">
+                  <MdClose />
+                </div>
+              </div>
+            </SizeImageClicked>
+          </PositionImage>
+        </CSSTransition>
       </section>
     </Layout>
   )
@@ -164,7 +263,7 @@ export const query = graphql`
       sex
       price
       productImage {
-        fluid {
+        fluid(maxWidth: 1000) {
           ...GatsbyContentfulFluid
         }
       }

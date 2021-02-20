@@ -17,7 +17,7 @@ const SectionStyle = styled.section`
 const TextSelect = styled.div`
   font-size: 0.9rem;
   font-weight: bold;
-  color: ${Colors.second};
+  color: ${Colors.basicDark};
 `
 
 const Shop = props => {
@@ -59,6 +59,19 @@ const Shop = props => {
       arrayProducersItems.push(producerItems)
     })
 
+    arrayProducersItems = arrayProducersItems.map(item => {
+      const findLogo = props.data.allLogos.nodes.find(
+        logo =>
+          logo.name.trim().toLowerCase() === item.producer.trim().toLowerCase()
+      )
+
+      return {
+        producer: item.producer,
+        producerItems: item.producerItems,
+        logo: !!findLogo ? findLogo.logo : null,
+      }
+    })
+
     setFilterProductsToRender(arrayProducersItems)
   }, [
     selectedSex,
@@ -79,6 +92,7 @@ const Shop = props => {
               handleAddProduct={handleAddProduct}
               location={props.location.origin}
               selectItem={false}
+              logo={item.logo}
             />
           </div>
         )
@@ -164,6 +178,17 @@ export const query = graphql`
       headerImage {
         fluid {
           ...GatsbyContentfulFluid
+        }
+      }
+    }
+
+    allLogos: allContentfulLogos {
+      nodes {
+        name
+        logo {
+          fixed(height: 80) {
+            ...GatsbyContentfulFixed
+          }
         }
       }
     }

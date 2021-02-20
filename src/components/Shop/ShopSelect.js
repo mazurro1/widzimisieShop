@@ -93,7 +93,7 @@ const ShopSelect = ({
           colors: {
             ...theme.colors,
             primary25: "#bdbdbd",
-            primary: Colors.second,
+            primary: Colors.basicDark,
           },
         })}
       />

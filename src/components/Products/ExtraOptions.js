@@ -37,73 +37,16 @@ const PriceDiv = styled.div`
   background-color: #f44336;
   padding: 5px 10px;
   color: white;
+  border-radius: 50%;
 `
 
-const ExtraOptions = ({ handleExtraOptionClick, selectionPrice }) => {
-  const extraOptions = [
-    {
-      id: 1,
-      title: "Łatwiej czyszczące",
-      content: "Opis",
-      priceBasic: 60,
-      priceSecond: 60,
-      priceThird: 60,
-    },
-    {
-      id: 2,
-      title: "Super czyszczące, dodatkowo utwardzone",
-      content: "Opis",
-      priceBasic: 150,
-      priceSecond: 200,
-      priceThird: 200,
-    },
-    {
-      id: 3,
-      title: "Fotochromowe",
-      content: "Opis",
-      priceBasic: 150,
-      priceSecond: 250,
-      priceThird: 450,
-    },
-    {
-      id: 4,
-      title: "Super czyszczące, dodatkowo utwardzone, fotochromowe",
-      content: "Opis",
-      priceBasic: 250,
-      priceSecond: 350,
-      priceThird: 450,
-    },
-    {
-      id: 5,
-      title: "Filtr do komputera, super czyszczące, dodatkowo utwardzone",
-      content: "Opis",
-      priceBasic: 299,
-      priceSecond: 150,
-      priceThird: 150,
-    },
-
-    {
-      id: 6,
-      title: "Przeciwsłoneczne",
-      content: "Opis",
-      priceBasic: 99,
-      priceSecond: 150,
-      priceThird: 150,
-    },
-  ]
-
-  const newExtraOption = [
-    {
-      id: 7,
-      title: "Specjalny filtr dla kierowców z certyfikatem TUV",
-      content: "Opis",
-      priceBasic: 0,
-      priceSecond: 400,
-      priceThird: 200,
-    },
-  ]
-
-  const mapType = extraOptions.map((item, index) => {
+const ExtraOptions = ({
+  handleExtraOptionClick,
+  selectionPrice,
+  allTypesExtraOptions,
+  allTypesExtraOptionsExtra,
+}) => {
+  const mapType = allTypesExtraOptions.map((item, index) => {
     return (
       <ElementStyle className="col-md-6 col-12 mx-auto mb-4" key={index}>
         <Button onClick={() => handleExtraOptionClick(item)}>
@@ -117,7 +60,7 @@ const ExtraOptions = ({ handleExtraOptionClick, selectionPrice }) => {
 
   const mapExtraType =
     selectionPrice === "priceSecond" || selectionPrice === "priceThird"
-      ? newExtraOption.map((item, index) => {
+      ? allTypesExtraOptionsExtra.map((item, index) => {
           return (
             <ElementStyle className="col-md-6 col-12 mx-auto mb-4" key={index}>
               <Button onClick={() => handleExtraOptionClick(item)}>

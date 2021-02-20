@@ -11,8 +11,8 @@ import { useStaticQuery, graphql } from "gatsby"
 
 const StyledIframe = styled.iframe`
   width: 100%;
-  height: calc(50vh - 88px);
-  margin-top: 88px;
+  height: calc(50vh - 135px);
+  margin-top: 135px;
 `
 
 const Field = styled.div`
@@ -25,9 +25,9 @@ const Field = styled.div`
   /* max-width: 300px; */
   cursor: auto !important;
   .text {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    color: ${Colors.second};
+    /* color: ${Colors.second}; */
     /* text-align: left; */
   }
   .field {
@@ -82,11 +82,25 @@ const ContainerLinks = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 100px;
+  margin-bottom: 60px;
 `
 
 const LinkItem = styled.div`
   width: 100px;
+`
+
+const AdressContent = styled.div`
+  text-align: center;
+  .title {
+    font-size: 1.2rem;
+    border-bottom: 2px solid ${Colors.second};
+    display: inline-block;
+    font-weight: bold;
+  }
+
+  .marginComponent {
+    margin-bottom: 60px;
+  }
 `
 
 const getData = graphql`
@@ -96,6 +110,10 @@ const getData = graphql`
       phoneNumber
       facebookLink
       instagramLink
+      companyAdress
+      openingHoursMondayFriday
+      openingHoursSaturday
+      openingHoursSunday
     }
   }
 `
@@ -107,67 +125,90 @@ const Contact = props => {
       phoneNumber: phoneNumber,
       facebookLink: facebookLink,
       instagramLink: instagramLink,
+      companyAdress: companyAdress,
+      openingHoursMondayFriday: openingHoursMondayFriday,
+      openingHoursSaturday: openingHoursSaturday,
+      openingHoursSunday: openingHoursSunday,
     },
   } = useStaticQuery(getData)
-return (
-  <>
-    <StyledIframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2517.79401891171!2d20.6331563157467!3d50.872012979535675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471827939ae594c9%3A0x26b94738cb9e3e68!2sSalon%20Optyczny%20-%20Twoje%20Widzimisi%C4%99%20-%20Optyk%20Kielce%20-%20okulary%20progresywne%2C%20przeciws%C5%82oneczne!5e0!3m2!1spl!2spl!4v1586897017137!5m2!1spl!2spl"
-      width="600"
-      height="450"
-      frameBorder="0"
-      style={{ border: 0 }}
-      allowFullScreen
-    ></StyledIframe>
-    <div className="container">
-      <Title>Kontakt</Title>
-      <ContainerLinks>
-        <LinkItem>
-          <a href={facebookLink} target="__blank">
-            <FacebookIcon>
-              <FaFacebookSquare />
-            </FacebookIcon>
-          </a>
-        </LinkItem>
-        <LinkItem>
-          <a href={instagramLink} target="__blank">
-            <InstagramIcon>
-              <FaInstagram />
-            </InstagramIcon>
-          </a>
-        </LinkItem>
-      </ContainerLinks>
-      <div className="row">
-        <div className="col-md-6 col-12">
-          <div className="text-center">
-            <Field>
-              <div className="text">Numer telefonu:</div>
-              <div className="field">
-                <div className="icon">
-                  <FaMobileAlt />
-                </div>
-                {phoneNumber}
-              </div>
-            </Field>
+  return (
+    <>
+      <StyledIframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2517.79401891171!2d20.6331563157467!3d50.872012979535675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471827939ae594c9%3A0x26b94738cb9e3e68!2sSalon%20Optyczny%20-%20Twoje%20Widzimisi%C4%99%20-%20Optyk%20Kielce%20-%20okulary%20progresywne%2C%20przeciws%C5%82oneczne!5e0!3m2!1spl!2spl!4v1586897017137!5m2!1spl!2spl"
+        width="600"
+        height="450"
+        frameBorder="0"
+        style={{ border: 0 }}
+        allowFullScreen
+      ></StyledIframe>
+      <div className="container">
+        <Title>Kontakt</Title>
+
+        <AdressContent className="row">
+          <div className="col-12 marginComponent">
+            <div className="title">Adres:</div>
+            <div>{companyAdress}</div>
           </div>
-        </div>
-        <div className="col-md-6 col-12">
-          <div className="text-center">
-            <Field>
-              <div className="text">Email:</div>
-              <div className="field">
-                <div className="icon">
-                  <FaMailBulk />
+          <div className="col-12 marginComponent">
+            <div className="title">Godziny otwarcia:</div>
+            <div>
+              Poniedziałek - Piątek: <b>{openingHoursMondayFriday}</b>
+            </div>
+            <div>
+              Sobota: <b>{openingHoursSaturday}</b>
+            </div>
+            <div>
+              Niedziela: <b>{openingHoursSunday}</b>
+            </div>
+          </div>
+        </AdressContent>
+        <ContainerLinks>
+          <LinkItem>
+            <a href={facebookLink} target="__blank">
+              <FacebookIcon>
+                <FaFacebookSquare />
+              </FacebookIcon>
+            </a>
+          </LinkItem>
+          <LinkItem>
+            <a href={instagramLink} target="__blank">
+              <InstagramIcon>
+                <FaInstagram />
+              </InstagramIcon>
+            </a>
+          </LinkItem>
+        </ContainerLinks>
+        <div className="row">
+          <div className="col-md-6 col-12">
+            <div className="text-center">
+              <Field>
+                <div className="text">Numer telefonu:</div>
+                <div className="field">
+                  <div className="icon">
+                    <FaMobileAlt />
+                  </div>
+                  {phoneNumber}
                 </div>
-                {eMail}
-              </div>
-            </Field>
+              </Field>
+            </div>
+          </div>
+          <div className="col-md-6 col-12">
+            <div className="text-center">
+              <Field>
+                <div className="text">Email:</div>
+                <div className="field">
+                  <div className="icon">
+                    <FaMailBulk />
+                  </div>
+                  {eMail}
+                </div>
+              </Field>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </>
-)
+    </>
+  )
 }
 
 export default Contact

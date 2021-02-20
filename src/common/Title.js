@@ -25,7 +25,7 @@ const WhiteLine = styled.div`
   width: 40px;
   max-width: 80%;
   height: 2px;
-  background-color: ${props => (props.dark ? Colors.second : Colors.basic)};
+  background-color: ${props => (props.dark ? Colors.basic : Colors.basic)};
   margin: 20px auto;
   margin-bottom: 20px;
 `

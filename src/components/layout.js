@@ -42,7 +42,7 @@ const TextStyledOneLine = styled.div`
 `
 
 const NoImageStyle = styled.div`
-  margin-top: 140px;
+  margin-top: 180px;
 `
 
 const Layout = ({
@@ -55,35 +55,14 @@ const Layout = ({
 }) => {
   const data = useStaticQuery(getData)
   const imageToHeader = image ? image : data.file.childImageSharp.fluid
-  const headerTextTyped = !home || (
-    <>
-      <TextStyled>
-        <div>
-          <Typed
-            strings={[headerText ? headerText.text1 : ""]}
-            typeSpeed={40}
-          ></Typed>
-        </div>
-        <TextStyledOneLine>
-          <Typed
-            strings={[headerText ? headerText.text2 : ""]}
-            typeSpeed={20}
-            startDelay={2500}
-            showCursor={false}
-          ></Typed>
-        </TextStyledOneLine>
-      </TextStyled>
-    </>
-  )
+
   return (
     <>
       {noImage ? (
         <NoImageStyle />
       ) : (
         <header>
-          <Header imageHeader={imageToHeader} home={home}>
-            {/* {headerTextTyped} */}
-          </Header>
+          <Header imageHeader={imageToHeader} home={home}></Header>
         </header>
       )}
       {children}

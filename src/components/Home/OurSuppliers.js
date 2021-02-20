@@ -2,7 +2,7 @@ import React from "react"
 import { Title, Section, Colors, AniLinkCustom } from "../../common"
 import styled from "styled-components"
 import { useStaticQuery, graphql, Link } from "gatsby"
-import CustomBackgroundImageSuppliers from "../../common/CustomBackgroundImageSuppliers"
+import CustomBackgroundImageSuppliersCustom from "../../common/CustomBackgroundImageSuppliersCustom"
 
 const DivContainer = styled.div`
   display: grid;
@@ -92,6 +92,10 @@ const ToLinkUper = styled.div`
     height: 100%;
     width: 100%;
   }
+`
+
+const GridItem = styled.div`
+  grid-area: ${props => (props.big ? "BigImage" : "")};
 `
 
 const getData = graphql`
@@ -289,20 +293,23 @@ const OurSuppliers = () => {
 
   const mapElements = elements.map((item, index) => {
     const elem = (
-      <CustomBackgroundImageSuppliers
-        big={item.big}
-        img={item.image.fluid}
-        key={index}
-      >
-        <TextPosition>{item.text}</TextPosition>
-        <ToLinkUper>
-          {item.url ? (
-            <AniLinkCustom to={`/sites/${index + 1}`}></AniLinkCustom>
-          ) : (
-            <Link to="/shop" state={item.dataToSite}></Link>
-          )}
-        </ToLinkUper>
-      </CustomBackgroundImageSuppliers>
+      <GridItem big={item.big} key={index}>
+        <CustomBackgroundImageSuppliersCustom
+          big={item.big}
+          img={item.image.fluid}
+          key={index}
+        >
+          <TextPosition>{item.text}</TextPosition>
+          <ToLinkUper>
+            {item.url ? (
+              <AniLinkCustom to={`/sites/${index + 1}`}></AniLinkCustom>
+            ) : (
+              <Link to="/shop" state={item.dataToSite}></Link>
+            )}
+          </ToLinkUper>
+        </CustomBackgroundImageSuppliersCustom>
+        {/* <PositionTextElement>{item.text}</PositionTextElement> */}
+      </GridItem>
     )
     return elem
   })

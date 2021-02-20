@@ -52,7 +52,10 @@ const ListItemStyled = styled.li`
     padding: 15px 10px 15px 10px;
     border-radius: 0px;
     border: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     background-color: "transparent";
+    margin: 0 1px;
     transition-property: background-color, color;
     transition-duration: 0.3s;
     transition-timing-function: ease;
@@ -108,8 +111,7 @@ const NavStyle = styled.nav`
   transform: none;
   background-color: white;
 
-  opacity: ${props =>
-    props.scrollPositionNavigation  ? "1" : "0.9"};
+  opacity: ${props => (props.scrollPositionNavigation ? "1" : "0.9")};
 
   transition-property: background-color, opacity;
   transition-duration: 0.3s;
@@ -167,12 +169,11 @@ const ButtonWidthDiv = styled.div`
   }
 `
 
-
 const getData = graphql`
   {
     contentfulPageContact {
       logo {
-        fixed(width: 250, height: 50) {
+        fixed(width: 400, height: 80) {
           ...GatsbyContentfulFixed
         }
       }
@@ -180,17 +181,13 @@ const getData = graphql`
   }
 `
 
-
-
 const Navigation = ({ history }) => {
   // const [scrollPositionNavigation, setSrollPositionNavigation] = useState(false)
   const [scrollPositionNavigation, setSrollPositionNavigation] = useState(true)
 
-    const {
-      contentfulPageContact: {
-        logo: logo,
-      },
-    } = useStaticQuery(getData)
+  const {
+    contentfulPageContact: { logo: logo },
+  } = useStaticQuery(getData)
 
   // useScrollPosition(({ prevPos, currPos }) => {
   //   if (currPos.y < 0) {
@@ -215,20 +212,20 @@ const Navigation = ({ history }) => {
       history.pathname === item.link || history.pathname === `${item.link}/`
 
     return (
-        <AniLinkCustom key={item.id} to={item.link}>
-          <ListItemStyled scrollPositionNavigation={scrollPositionNavigation}>
-            {isPathname ? (
-              <ListItemActive
-                scrollPositionNavigation={scrollPositionNavigation}
-                isIndex={isIndex}
-              >
-                {item.name}
-              </ListItemActive>
-            ) : (
-              <ButtonStyle>{item.name}</ButtonStyle>
-            )}
-          </ListItemStyled>
-        </AniLinkCustom>
+      <AniLinkCustom key={item.id} to={item.link}>
+        <ListItemStyled scrollPositionNavigation={scrollPositionNavigation}>
+          {isPathname ? (
+            <ListItemActive
+              scrollPositionNavigation={scrollPositionNavigation}
+              isIndex={isIndex}
+            >
+              {item.name}
+            </ListItemActive>
+          ) : (
+            <ButtonStyle>{item.name}</ButtonStyle>
+          )}
+        </ListItemStyled>
+      </AniLinkCustom>
     )
   })
 
@@ -273,14 +270,6 @@ const Navigation = ({ history }) => {
         scrollPositionNavigation={scrollPositionNavigation}
         isIndex={isIndex}
       >
-        <UpperDiv>
-          <div className="container">
-            <div className="text-md-right text-center">
-              <PhoneIcon />
-              796 000 777
-            </div>
-          </div>
-        </UpperDiv>
         <HeaderStyled
           scrollPositionNavigation={scrollPositionNavigation}
           isIndex={isIndex}
