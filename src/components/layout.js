@@ -6,6 +6,7 @@ import styled from "styled-components"
 import Typed from "react-typed"
 import { Colors } from "../common"
 import "./layout.css"
+import { AniLinkCustom } from "../common/AniLinkCustom"
 
 import MessengerCustomerChat from "react-messenger-customer-chat"
 

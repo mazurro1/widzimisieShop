@@ -1,4 +1,15 @@
 @import url("https://fonts.googleapis.com/css?family=Lato|Montserrat");
+
+@font-face {
+  font-family: "BATANG";
+  src: url("../fonts/BATANG.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "roxborough";
+  src: url("../fonts/roxborough.ttf") format("truetype");
+}
+
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -9,6 +20,23 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+div,
+a,
+p,
+button,
+li,
+ol,
+ul,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "BATANG" !important;
+}
+
 article,
 aside,
 details,
@@ -705,7 +733,6 @@ pre tt:after {
   transition: opacity 300ms;
 }
 
-
 .opacityUp-enter {
   opacity: 0;
 }
@@ -722,7 +749,7 @@ pre tt:after {
 .opacityUp-exit-active {
   opacity: 0;
   transform: scale(2);
-  
+
   transition-property: opacity, transform;
   transition-duration: 0.3s;
   /* transition-delay: 0.3s; */

@@ -47,9 +47,8 @@ const ListItemStyled = styled.li`
   display: inline-block;
   margin: 0;
   button {
-    font-family: "Montserrat", sans-serif !important;
     font-weight: 600;
-    padding: 15px 10px 15px 10px;
+    padding: 15px 25px;
     border-radius: 0px;
     border: none;
     border-top-left-radius: 5px;
@@ -77,9 +76,11 @@ const ListItemActive = styled.button`
   transition-property: background-color, color;
   transition-duration: 0.3s;
   transition-timing-function: ease;
+  font-family: "BATANG" !important;
   border: none;
   button {
     color: ${Colors.navTextActive};
+    font-family: "BATANG" !important;
   }
   @media (max-width: 768px) {
     background-color: ${Colors.second};
@@ -110,12 +111,16 @@ const NavStyle = styled.nav`
   z-index: 1000;
   transform: none;
   background-color: white;
+  transform: ${props =>
+    props.scrollPositionNavigation ? "translateY(-88px)" : "translateY(0)"};
 
-  opacity: ${props => (props.scrollPositionNavigation ? "1" : "0.9")};
-
-  transition-property: background-color, opacity;
+  transition-property: background-color, opacity, transform;
   transition-duration: 0.3s;
   transition-timing-function: ease;
+
+  @media (max-width: 768px) {
+    transform: translateY(0);
+  }
 `
 
 const DivMobile = styled.div`
@@ -156,8 +161,10 @@ const DivMobileMenu = styled.div`
 `
 
 const ButtonWidthDiv = styled.div`
+  position: relative;
   button {
     width: 100%;
+    text-align: center;
     padding: 15px 10px 15px 10px;
   }
 
@@ -182,20 +189,19 @@ const getData = graphql`
 `
 
 const Navigation = ({ history }) => {
-  // const [scrollPositionNavigation, setSrollPositionNavigation] = useState(false)
-  const [scrollPositionNavigation, setSrollPositionNavigation] = useState(true)
+  const [scrollPositionNavigation, setSrollPositionNavigation] = useState(false)
 
   const {
     contentfulPageContact: { logo: logo },
   } = useStaticQuery(getData)
 
-  // useScrollPosition(({ prevPos, currPos }) => {
-  //   if (currPos.y < 0) {
-  //     setSrollPositionNavigation(true)
-  //   } else {
-  //     setSrollPositionNavigation(false)
-  //   }
-  // })
+  useScrollPosition(({ prevPos, currPos }) => {
+    if (prevPos.y > currPos.y && currPos.y !== 0) {
+      setSrollPositionNavigation(true)
+    } else {
+      setSrollPositionNavigation(false)
+    }
+  })
   const isIndex = history.pathname === "/"
 
   const [menuActive, setMenuActive] = useState({

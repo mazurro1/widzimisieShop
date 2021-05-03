@@ -30,8 +30,16 @@ const TextStyle = styled.div`
   color: white;
 `
 
+const PositionItems = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+`
+
 const ProductItem = styled.div`
   padding: 20px 10px;
+  width: 280px;
 `
 const FlipBox = styled.div`
   .flip-box {
@@ -90,11 +98,14 @@ const PriceStyle = styled.div`
   background-color: #f44336;
   padding: 5px 10px;
   color: white;
-  border-radius: 50%;
+  border-radius: 5px;
 `
 
 const LogoProducerPositioin = styled.div`
   text-align: center;
+  .gatsby-image-wrapper {
+    max-width: 100%;
+  }
 `
 
 const ButtonStyle = styled.div`
@@ -102,8 +113,6 @@ const ButtonStyle = styled.div`
     background-color: ${props =>
       props.second ? Colors.basicLight : Colors.secondDark} !important;
     color: ${props => (props.second ? "white" : Colors.basicDark)};
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     transition-property: background-color, transform;
     transition-duration: 0.3s;
     transition-timing-function: ease;
@@ -205,7 +214,9 @@ const ProductListProducer = ({
       ) : (
         <Title bgDark>{producer}</Title>
       )}
-      <SlickSliderCustom {...carusellSettings}>{mapProducts}</SlickSliderCustom>
+      {/* {mapProducts} */}
+      <PositionItems>{mapProducts}</PositionItems>
+      {/* <SlickSliderCustom {...carusellSettings}>{mapProducts}</SlickSliderCustom> */}
     </div>
   )
 }
