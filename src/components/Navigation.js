@@ -69,6 +69,12 @@ const ListItemStyled = styled.li`
   }
 `
 
+const LogoText = styled.div`
+  /* font-family: "roxborough" !important; */
+  font-weight: 700;
+  font-size: 1.5rem;
+`
+
 const ListItemActive = styled.button`
   padding: 15px 10px 15px 10px;
   color: ${Colors.navTextActive};
@@ -281,11 +287,12 @@ const Navigation = ({ history }) => {
           isIndex={isIndex}
         >
           <ul className="m-0 text-center d-none d-md-block">
-            <div>
+            {/* <div>
               <AniLinkCustom to="/" key="image">
                 <Img fixed={logo.fixed} />
               </AniLinkCustom>
-            </div>
+            </div> */}
+            <LogoText>TWOJEWIDZIMSIĘ</LogoText>
             {links}
           </ul>
           <DivMobile className="d-md-none">

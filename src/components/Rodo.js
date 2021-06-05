@@ -48,7 +48,7 @@ const Rodo = () => {
       {!!rodoActive && (
         <RodoPosition>
           <PositionRelative>
-            <div class="container">
+            <div className="container">
               Ta strona używa plików cookies. Korzystanie ze strony bez zmiany
               ustawień przeglądarki w tym zakresie, oznacza zgodę na ich
               używanie. Więcej informacji na ten temat znajduje się w naszej
@@ -59,7 +59,7 @@ const Rodo = () => {
             </div>
           </PositionRelative>
           <PositionRodoButton>
-            <div class="container">
+            <div className="container">
               <ButtonStyle>
                 <Button onClick={handleClickRodo}>Akceptuj</Button>
               </ButtonStyle>

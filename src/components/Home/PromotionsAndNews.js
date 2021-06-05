@@ -2,6 +2,8 @@ import React from "react"
 import styled from "styled-components"
 import { Title, Section, Colors } from "../../common"
 import { useStaticQuery, graphql } from "gatsby"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { BLOCKS } from "@contentful/rich-text-types"
 
 const getData = graphql`
   {
@@ -13,8 +15,8 @@ const getData = graphql`
     allContentfulNewsAndPromotions {
       nodes {
         title
-        content {
-          content
+        contentText {
+          json
         }
       }
     }
@@ -52,12 +54,28 @@ const PromotionsAndNews = () => {
   } = useStaticQuery(getData)
 
   const mapNews = allContentfulNewsAndPromotions.nodes.map((item, index) => {
+    const options = {
+      renderNode: {
+        [BLOCKS.HEADING_1]: (node, children) => <h1>{children}</h1>,
+        [BLOCKS.HEADING_2]: (node, children) => <h2>{children}</h2>,
+        [BLOCKS.HEADING_3]: (node, children) => <h3>{children}</h3>,
+        [BLOCKS.HEADING_4]: (node, children) => <h4>{children}</h4>,
+        [BLOCKS.HEADING_5]: (node, children) => <h5>{children}</h5>,
+        [BLOCKS.HEADING_6]: (node, children) => <h6>{children}</h6>,
+        [BLOCKS.PARAGRAPH]: (node, children) => <p>{children}</p>,
+        [BLOCKS.EMBEDDED_ASSET]: (node, children) => (
+          <img src={`https:${node.data.target.fields.file["en-US"].url}`} />
+        ),
+      },
+      renderMark: {},
+    }
     return (
       <div className="col-12 col-md-6 mx-auto mb-4" key={index}>
         <NewsItem>
           <div className="borderItemNews">
-            <div className="title">{item.title}</div>
-            <p>{item.content.content}</p>
+            <div>
+              {documentToReactComponents(item.contentText.json, options)}
+            </div>
           </div>
         </NewsItem>
       </div>

@@ -95,7 +95,8 @@ const PriceStyle = styled.div`
   position: absolute;
   top: -10px;
   right: -10px;
-  background-color: #f44336;
+  /* background-color: #f44336; */
+  background-color: ${Colors.basicDark};
   padding: 5px 10px;
   color: white;
   border-radius: 5px;
@@ -212,7 +213,9 @@ const ProductListProducer = ({
           <Img fixed={logo.fixed} />
         </LogoProducerPositioin>
       ) : (
-        <Title bgDark>{producer}</Title>
+        <Title darkText bgDark>
+          {producer}
+        </Title>
       )}
       {/* {mapProducts} */}
       <PositionItems>{mapProducts}</PositionItems>

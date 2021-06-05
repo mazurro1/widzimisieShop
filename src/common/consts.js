@@ -38,12 +38,12 @@ export const Routes = [
     link: "/shop",
     icon: "MdShoppingCart",
   },
-  {
-    id: 2,
-    name: "Wyceń okulary",
-    link: "/products",
-    icon: "MdShoppingCart",
-  },
+  // {
+  //   id: 2,
+  //   name: "Wyceń okulary",
+  //   link: "/products",
+  //   icon: "MdShoppingCart",
+  // },
   {
     id: 3,
     name: "Aktualności i Promocj",

@@ -10,8 +10,9 @@ const H1Style = styled.h1`
   margin: 0 auto;
   font-weight: 300;
   text-align: center;
+  color: ${props => (props.darkText ? "black" : "white")};
   /* color: ${props => (props.bgDark ? Colors.basicDark : Colors.textBasic)}; */
-  color: white;
+  /* color: white; */
   font-weight: ${props => (props.bgDark ? "bold" : "normal")};
   background-color: ${props => (props.bgDark ? "transparent" : Colors.second)};
   border-radius: 3px;
@@ -36,10 +37,16 @@ const TextCenterH1 = styled.div`
   text-align: center;
 `
 
-export const Title = ({ children, width = 300, dark, bgDark }) => {
+export const Title = ({
+  children,
+  width = 300,
+  dark,
+  bgDark,
+  darkText = false,
+}) => {
   return (
     <TextCenterH1>
-      <H1Style width={width} dark={dark} bgDark={bgDark}>
+      <H1Style width={width} dark={dark} bgDark={bgDark} darkText={darkText}>
         {children}
       </H1Style>
       <WhiteLine dark={dark} />

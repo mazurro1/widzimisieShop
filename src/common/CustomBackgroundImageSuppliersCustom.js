@@ -30,7 +30,7 @@ const CustomBackgroundImageSuppliersCustom = ({
 }
 export default styled(CustomBackgroundImageSuppliersCustom)`
   position: relative;
-  min-height: ${props => (props.big ? "400px" : "200px")};
+  min-height: ${props => (props.big ? "400px" : "190px")};
   /* margin: 0 auto; */
   width: 100%;
   opacity: 1 !important;
@@ -38,7 +38,7 @@ export default styled(CustomBackgroundImageSuppliersCustom)`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  border-radius: 50%;
+  border-radius: 3px;
   overflow: hidden;
   transition-property: transform;
   transition-duration: 0.3s;
