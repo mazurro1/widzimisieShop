@@ -32,13 +32,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `TWOJEWIDZIMSIĘ`,
+        short_name: `TWOJEWIDZIMSIĘ`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/favicon.ico`, // This path is relative to the root of the site.
+        icon: `src/images/792-scaled.jpg`, // This path is relative to the root of the site.
       },
     },
     {
