@@ -6,6 +6,7 @@ import styled from "styled-components"
 import { Colors } from "../common"
 import { CSSTransition } from "react-transition-group"
 import { MdClose } from "react-icons/md"
+import SEO from "../components/seo"
 
 const StyledAreas = styled.div`
   background-color: #f4f4f4;
@@ -176,7 +177,13 @@ const ProductTemplate = ({
   const newTypArr = typ.includes("__") ? typ.split("__") : ["", "", typ]
   return (
     <Layout noImage>
-      <section className="container">
+      {!!producer && !!model && (
+        <SEO
+          title={`${producer} - ${model}`}
+          description={`${producer} - ${model}`}
+        />
+      )}
+      <section className="container pt-5">
         <div className="row">
           <div className="col-md-6 col-12">
             <DivProdModel className="row">

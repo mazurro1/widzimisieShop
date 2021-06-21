@@ -43,7 +43,16 @@ const TextStyledOneLine = styled.div`
 `
 
 const NoImageStyle = styled.div`
-  margin-top: 180px;
+  margin-top: 40px;
+  @media all and (min-width: 768px) and (max-width: 856px) {
+    margin-top: 200px;
+  }
+  @media all and (min-width: 857px) and (max-width: 1475px) {
+    margin-top: 140px;
+  }
+  @media all and (min-width: 1476px) {
+    margin-top: 80px;
+  }
 `
 
 const Layout = ({

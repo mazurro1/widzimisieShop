@@ -8,7 +8,8 @@ import Layout from "../components/layout"
 import CustomBackgroundImageParalaks from "../common/CustomBackgroundImageParalaks"
 import { graphql } from "gatsby"
 import sal from "sal.js"
-import styled from 'styled-components'
+import SEO from "../components/seo"
+import styled from "styled-components"
 
 const MarginBottom = styled.div`
   margin-bottom: 50px;
@@ -29,6 +30,7 @@ const IndexPage = props => {
       image={props.data.contentfulHeader.images}
       home
     >
+      <SEO title="O nas" description="O nas" />
       <div data-sal="slide-right" data-sal-duration="1000">
         <AboutUs />
       </div>
@@ -45,7 +47,7 @@ const IndexPage = props => {
         <Services />
       </div>
       <MarginBottom data-sal="slide-left" data-sal-duration="1000">
-        <Contact />
+        <Contact noSeo />
       </MarginBottom>
     </Layout>
   )

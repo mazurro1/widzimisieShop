@@ -1,9 +1,10 @@
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 import styled from "styled-components"
 import { Colors, Routes, AniLinkCustom } from "../common"
 import Button from "@material-ui/core/Button"
 import MenuMobile from "./MenuMobile"
-import { MdShoppingCart, MdPhoneIphone } from "react-icons/md"
+import { MdShoppingCart, MdPhoneIphone, MdScanner } from "react-icons/md"
+import { FaUserMd } from "react-icons/fa"
 import { IoMdHome } from "react-icons/io"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
@@ -51,10 +52,9 @@ const ListItemStyled = styled.li`
     padding: 15px 25px;
     border-radius: 0px;
     border: none;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-radius: 5px;
     background-color: "transparent";
-    margin: 0 1px;
+    margin: 1px 1px;
     transition-property: background-color, color;
     transition-duration: 0.3s;
     transition-timing-function: ease;
@@ -118,7 +118,9 @@ const NavStyle = styled.nav`
   transform: none;
   background-color: white;
   transform: ${props =>
-    props.scrollPositionNavigation ? "translateY(-88px)" : "translateY(0)"};
+    !props.scrollPositionNavigation
+      ? `translateY(-${props.menuHeight}px)`
+      : "translateY(0)"};
 
   transition-property: background-color, opacity, transform;
   transition-duration: 0.3s;
@@ -172,6 +174,7 @@ const ButtonWidthDiv = styled.div`
     width: 100%;
     text-align: center;
     padding: 15px 10px 15px 10px;
+    padding-left: 50px;
   }
 
   svg {
@@ -196,16 +199,23 @@ const getData = graphql`
 
 const Navigation = ({ history }) => {
   const [scrollPositionNavigation, setSrollPositionNavigation] = useState(false)
+  const [menuHeight, setMenuHeight] = useState(0)
+  const refMenu = useRef(null)
 
   const {
     contentfulPageContact: { logo: logo },
   } = useStaticQuery(getData)
 
   useScrollPosition(({ prevPos, currPos }) => {
-    if (prevPos.y > currPos.y && currPos.y !== 0) {
+    if (prevPos.y < currPos.y || currPos.y > -140) {
       setSrollPositionNavigation(true)
     } else {
       setSrollPositionNavigation(false)
+    }
+    if (!!refMenu) {
+      if (!!refMenu.current) {
+        setMenuHeight(refMenu.current.clientHeight)
+      }
     }
   })
   const isIndex = history.pathname === "/"
@@ -254,6 +264,12 @@ const Navigation = ({ history }) => {
         case "MdPhoneIphone":
           return <MdPhoneIphone />
 
+        case "FaUserMd":
+          return <FaUserMd />
+
+        case "MdScanner":
+          return <MdScanner />
+
         default:
           return <IoMdHome />
       }
@@ -281,6 +297,8 @@ const Navigation = ({ history }) => {
       <NavStyle
         scrollPositionNavigation={scrollPositionNavigation}
         isIndex={isIndex}
+        ref={refMenu}
+        menuHeight={menuHeight}
       >
         <HeaderStyled
           scrollPositionNavigation={scrollPositionNavigation}

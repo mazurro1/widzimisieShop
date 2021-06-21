@@ -22,6 +22,7 @@ import {
 import styled from "styled-components"
 import ProductDialog from "../components/Products/ProductDialog"
 import TableEyesValues from "../components/Products/TableEyesValues"
+import SEO from "../components/seo"
 
 const PositionProducts = styled.div`
   margin-top: 145px;
@@ -414,6 +415,7 @@ const Products = props => {
   )
   return (
     <PositionProducts>
+      <SEO title="Generator okularów" description="Generator okularów" />
       <TableEyesValues
         setSelectionPrice={setSelectionPrice}
         setOtherExtraPrice={setOtherExtraPrice}

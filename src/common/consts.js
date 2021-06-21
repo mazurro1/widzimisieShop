@@ -34,7 +34,7 @@ export const Routes = [
   },
   {
     id: 1,
-    name: "Sklep online",
+    name: "Oprawy i akcesoria",
     link: "/shop",
     icon: "MdShoppingCart",
   },
@@ -46,9 +46,21 @@ export const Routes = [
   // },
   {
     id: 3,
-    name: "Aktualności i Promocj",
+    name: "Aktualności i promocje",
     link: "/promotions",
     icon: "FaImages",
+  },
+  {
+    id: 5,
+    name: "Konsultant soczewek okularowych",
+    link: "/consultant",
+    icon: "FaUserMd",
+  },
+  {
+    id: 6,
+    name: "Nowy wymiar badania wzroku wraz ze skanerem DNEye®",
+    link: "/scanner",
+    icon: "MdScanner",
   },
   {
     id: 4,

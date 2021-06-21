@@ -9,6 +9,7 @@ import {
   getCategoriesString,
 } from "../components/Products/productsConsts"
 import ProductListProducer from "../components/Products/ProductListProducer"
+import SEO from "../components/seo"
 
 const SectionStyle = styled.section`
   min-height: calc(50vh - 31px);
@@ -103,6 +104,7 @@ const Shop = props => {
   const defaultDataToFilter = props.location.state ? props.location.state : {}
   return (
     <Layout history={props.location} noImage>
+      <SEO title="Sklep" description="Sklep" />
       <SectionStyle className="container pt-5">
         <Title>Sklep</Title>
         <div className="row">
