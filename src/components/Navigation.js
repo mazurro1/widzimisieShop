@@ -276,6 +276,9 @@ const Navigation = ({ history }) => {
         case "MdScanner":
           return <MdScanner />
 
+        case "FaHeart":
+          return <FaHeart />
+
         default:
           return <IoMdHome />
       }
@@ -314,7 +317,7 @@ const Navigation = ({ history }) => {
             <LogoText>
               TWOJEWIDZIMSIĘ
               <IconFavourite>
-                <AniLinkCustom to={`/favourite`}>
+                <AniLinkCustom to={`/favourites`}>
                   <FaHeart />
                 </AniLinkCustom>
                 {/* <CountFav count={localStoreFav.length}>

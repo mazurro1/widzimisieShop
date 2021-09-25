@@ -68,4 +68,10 @@ export const Routes = [
     link: "/contact",
     icon: "MdPhoneIphone",
   },
+  {
+    id: 5,
+    name: "Ulubione",
+    link: "/favourites",
+    icon: "FaHeart",
+  },
 ]
