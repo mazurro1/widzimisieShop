@@ -10,7 +10,7 @@ const RodoPosition = styled.div`
   left: 5px;
   right: 5px;
   border-radius: 5px;
-  background-color: ${Colors.secondDark};
+  background-color: rgba(0, 0, 0, 0.9);
   padding: 5px 10px;
   color: white;
   z-index: 2000;

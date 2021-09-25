@@ -23,16 +23,17 @@ const getData = graphql`
   }
 `
 
-const SectionColor = styled(Section)`
-  /* background-color: ${Colors.basicDark}; */
-`
+const SectionColor = styled(Section)``
 
 const NewsItem = styled.div`
+  width: 500px;
+  max-width: 100%;
   .title {
     font-size: 1.2rem;
     font-weight: bold;
     display: inline-block;
     border-bottom: 2px solid ${Colors.second};
+    text-align: center !important;
   }
 
   p {
@@ -85,7 +86,9 @@ const PromotionsAndNews = () => {
   return (
     <SectionColor>
       <div className="container">
-        <Title width={500}>{title}</Title>
+        <Title className="text-center" width={500}>
+          {title}
+        </Title>
         <p className="text-center">{underTitle}</p>
         <div className="row">{mapNews}</div>
       </div>

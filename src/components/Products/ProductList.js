@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import ProductListProducer from "./ProductListProducer"
 import Select from "react-select"
 import { Colors } from "../../common"
@@ -13,6 +13,35 @@ const ProductList = ({
   const [selectValue, setSelectValue] = useState("")
   const [producerFilter, setProducerFilter] = useState([])
   const producerCategories = getCategoriesString(products, "producer")
+
+  const [localStoreFav, setLocalStoreFav] = useState([])
+  useEffect(() => {
+    const storageFav = localStorage.getItem("favProducts")
+    const jsonData = JSON.parse(storageFav)
+    if (!!jsonData) {
+      setLocalStoreFav(jsonData)
+    }
+  }, [])
+
+  const handleAddFav = productId => {
+    let allStorageFav = localStoreFav
+    const isInStore = allStorageFav.some(
+      itemStore => itemStore.model === productId
+    )
+    if (isInStore) {
+      allStorageFav = allStorageFav.filter(
+        itemStore => itemStore.model !== productId
+      )
+      localStorage.setItem("favProducts", JSON.stringify(allStorageFav))
+    } else {
+      const newItem = {
+        model: productId,
+      }
+      allStorageFav.push(newItem)
+      localStorage.setItem("favProducts", JSON.stringify(allStorageFav))
+    }
+    setLocalStoreFav(allStorageFav)
+  }
 
   let arrayProducersItems = []
   if (selectValue.length > 0) {
@@ -53,6 +82,8 @@ const ProductList = ({
           handleAddProduct={handleAddProduct}
           location={location}
           logo={item.logo}
+          localStoreFav={localStoreFav}
+          handleAddFav={handleAddFav}
         />
       </div>
     )

@@ -32,7 +32,7 @@ const MeetUs = () => {
         </Title>
         <div className="row">
           <div className="col-12 col-md-10 mx-auto">
-            <p>{paragraph.paragraph}</p>
+            <p className="centerText">{paragraph.paragraph}</p>
           </div>
         </div>
       </div>

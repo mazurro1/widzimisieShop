@@ -44,14 +44,14 @@ const TextStyledOneLine = styled.div`
 
 const NoImageStyle = styled.div`
   margin-top: 40px;
-  @media all and (min-width: 768px) and (max-width: 856px) {
-    margin-top: 200px;
+  @media all and (min-width: 768px) and (max-width: 769px) {
+    margin-top: 240px;
   }
-  @media all and (min-width: 857px) and (max-width: 1475px) {
-    margin-top: 140px;
+  @media all and (min-width: 770px) and (max-width: 1329px) {
+    margin-top: 180px;
   }
-  @media all and (min-width: 1476px) {
-    margin-top: 80px;
+  @media all and (min-width: 1330px) {
+    margin-top: 130px;
   }
 `
 

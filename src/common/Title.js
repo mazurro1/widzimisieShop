@@ -8,29 +8,22 @@ const H1Style = styled.h1`
   text-align: center;
   max-width: 100%;
   margin: 0 auto;
-  font-weight: 300;
   text-align: center;
   color: ${props => (props.darkText ? "black" : "white")};
-  /* color: ${props => (props.bgDark ? Colors.basicDark : Colors.textBasic)}; */
-  /* color: white; */
-  font-weight: ${props => (props.bgDark ? "bold" : "normal")};
-  background-color: ${props => (props.bgDark ? "transparent" : Colors.second)};
+  font-family: "optima-light" !important;
+  color: ${Colors.second};
   border-radius: 3px;
-  transition-property: background-color;
-  transition-duration: 0.3s;
-  transition-timing-function: ease;
-  &:hover {
-    background-color: ${props => (props.bgDark ? "" : Colors.secondDark)};
-  }
 `
 
 const WhiteLine = styled.div`
   width: 40px;
   max-width: 80%;
-  height: 2px;
+  height: 1px;
   background-color: ${props => (props.dark ? Colors.basic : Colors.basic)};
   margin: 20px auto;
-  margin-bottom: 20px;
+  margin-top: 5px;
+  margin-bottom: 30px;
+  opacity: 0.4;
 `
 
 const TextCenterH1 = styled.div`

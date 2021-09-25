@@ -1,33 +1,23 @@
 import React, { useState, useEffect } from "react"
-import { Title, Colors } from "../common"
 import styled from "styled-components"
-import Layout from "../components/layout"
+import { Title } from "../common"
 import { graphql } from "gatsby"
-import ShopSelect from "../components/Shop/ShopSelect"
-import {
-  getCategories,
-  getCategoriesString,
-} from "../components/Products/productsConsts"
-import ProductListProducer from "../components/Products/ProductListProducer"
 import SEO from "../components/seo"
+import Layout from "../components/layout"
+import ProductListProducer from "../components/Products/ProductListProducer"
+import { getCategoriesString } from "../components/Products/productsConsts"
 
-const SectionStyle = styled.section`
-  min-height: calc(50vh - 31px);
+const MarginTopFav = styled.div`
+  padding-top: 40px;
 `
 
-const TextSelect = styled.div`
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: ${Colors.basicDark};
-`
-
-const Shop = props => {
+const Favourite = props => {
+  const [localStoreFav, setLocalStoreFav] = useState([])
   const [selectedSex, setSelectedSex] = useState({})
   const [selectedGlasses, setSelectedGlasses] = useState({})
   const [selectedProducer, setSelectedProducer] = useState({})
   const [filterProductsToRender, setFilterProductsToRender] = useState([])
 
-  const [localStoreFav, setLocalStoreFav] = useState([])
   useEffect(() => {
     const storageFav = localStorage.getItem("favProducts")
     const jsonData = JSON.parse(storageFav)
@@ -42,22 +32,30 @@ const Shop = props => {
       itemStore => itemStore.model === productId
     )
     if (isInStore) {
-      allStorageFav = allStorageFav.filter(itemStore => {
-        return itemStore.model !== productId
-      })
+      allStorageFav = allStorageFav.filter(
+        itemStore => itemStore.model !== productId
+      )
       localStorage.setItem("favProducts", JSON.stringify(allStorageFav))
     } else {
       const newItem = {
         model: productId,
       }
-      allStorageFav = [...localStoreFav, newItem]
+      allStorageFav.push(newItem)
       localStorage.setItem("favProducts", JSON.stringify(allStorageFav))
     }
     setLocalStoreFav(allStorageFav)
   }
 
+  const allProducts = !!props.data.products ? props.data.products.nodes : []
+  const filterProducts = allProducts.filter(itemProduct => {
+    return localStoreFav.some(
+      itemFav =>
+        itemFav.model === `${itemProduct.producer}-${itemProduct.model}`
+    )
+  })
+
   useEffect(() => {
-    const allProducts = [...props.data.products.nodes]
+    const allProducts = [...filterProducts]
     let allProductFilter = allProducts
     if (selectedSex.value) {
       allProductFilter = allProducts.filter(
@@ -108,6 +106,7 @@ const Shop = props => {
     selectedSex,
     selectedGlasses,
     selectedProducer,
+    localStoreFav,
     props.data.products.nodes,
   ])
 
@@ -130,49 +129,14 @@ const Shop = props => {
     ) : (
       <h1 className="text-center mt-4">Brak produktów</h1>
     )
-  const defaultDataToFilter = props.location.state ? props.location.state : {}
+
   return (
     <Layout history={props.location} noImage>
-      <SEO title="Sklep" description="Sklep" />
-      <SectionStyle className="container pt-5">
-        <Title>Sklep</Title>
-        <div className="row">
-          <div className="col-md-4 col-12 mt-2 mt-md-0">
-            <TextSelect>Płeć:</TextSelect>
-            <ShopSelect
-              sexOptions={props.data.typeOfSex.nodes}
-              setSelected={setSelectedSex}
-              nameFilterOption="sex"
-              nameDefaultOption="Dla każdego"
-              filter={getCategories}
-              dataToFilter={defaultDataToFilter}
-            />
-          </div>
-          <div className="col-md-4 col-12 mt-2 mt-md-0">
-            <TextSelect>Typ okularów:</TextSelect>
-            <ShopSelect
-              sexOptions={props.data.typeOfGlasses.nodes}
-              setSelected={setSelectedGlasses}
-              nameFilterOption="typeOfGlasses"
-              nameDefaultOption="Wszystkie typy okularów"
-              filter={getCategories}
-              dataToFilter={defaultDataToFilter}
-            />
-          </div>
-          <div className="col-md-4 col-12 mt-2 mt-md-0">
-            <TextSelect>Producent:</TextSelect>
-            <ShopSelect
-              sexOptions={props.data.products.nodes}
-              setSelected={setSelectedProducer}
-              nameFilterOption="producer"
-              nameDefaultOption="Wszyscy producenci"
-              filter={getCategoriesString}
-              dataToFilter={defaultDataToFilter}
-            />
-          </div>
-        </div>
-        <div className="mt-5">{producersMap}</div>
-      </SectionStyle>
+      <SEO title="Favourite" description="Moje ulubione" />
+      <MarginTopFav>
+        <Title>Ulubione</Title>
+      </MarginTopFav>
+      {producersMap}
     </Layout>
   )
 }
@@ -226,4 +190,4 @@ export const query = graphql`
   }
 `
 
-export default Shop
+export default Favourite

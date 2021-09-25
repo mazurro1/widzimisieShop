@@ -1,26 +1,16 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import styled from "styled-components"
 import { Colors, Routes, AniLinkCustom } from "../common"
 import Button from "@material-ui/core/Button"
 import MenuMobile from "./MenuMobile"
 import { MdShoppingCart, MdPhoneIphone, MdScanner } from "react-icons/md"
-import { FaUserMd } from "react-icons/fa"
+import { FaUserMd, FaHeart } from "react-icons/fa"
 import { IoMdHome } from "react-icons/io"
 import { useStaticQuery, graphql } from "gatsby"
-import Img from "gatsby-image"
 import { useScrollPosition } from "@n8tb1t/use-scroll-position"
 
-const UpperDiv = styled.div`
-  position: relative;
-  background-color: ${Colors.basicDark};
-  padding: 3px;
-  font-size: 0.9rem;
-  color: ${Colors.textBasic};
-  font-weight: 500;
-  min-height: 31px;
-`
-
 const HeaderStyled = styled.div`
+  padding-bottom: 10px;
   background-color: ${props =>
     props.isIndex
       ? props.scrollPositionNavigation
@@ -32,35 +22,50 @@ const HeaderStyled = styled.div`
   transition-timing-function: ease;
   ${props =>
     !props.scrollPositionNavigation
-      ? "box-shadow: 0px 0px 15px 1px #000"
-      : "box-shadow: 0px 0px 15px 1px #000"}
-`
-const PhoneIcon = styled(MdPhoneIphone)`
-  font-size: 1.3rem;
-  padding-bottom: 3px;
+      ? "box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.2)"
+      : "box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.2)"}
 `
 
 const ButtonStyle = styled.button`
   background-color: transparent;
 `
 
+const ListItemActive = styled.button`
+  padding: 15px 0px;
+  border-radius: 0px;
+  margin: 0 15px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid ${Colors.second} !important;
+  transition-property: background-color, color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+
+  @media (max-width: 768px) {
+    text-align: left;
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+`
+
 const ListItemStyled = styled.li`
   display: inline-block;
   margin: 0;
   button {
-    font-weight: 600;
-    padding: 15px 25px;
+    padding: 15px 0px;
     border-radius: 0px;
+    margin: 0 15px;
     border: none;
-    border-radius: 5px;
-    background-color: "transparent";
-    margin: 1px 1px;
-    transition-property: background-color, color;
+    border-bottom: 1px solid transparent;
+    background-color: transparent;
+    transition-property: background-color, color, border-color;
     transition-duration: 0.3s;
     transition-timing-function: ease;
     &:hover {
-      background-color: ${Colors.second};
-      color: ${Colors.navTextActive};
+      border-color: ${Colors.second};
     }
     &:active,
     &:focus {
@@ -70,42 +75,34 @@ const ListItemStyled = styled.li`
 `
 
 const LogoText = styled.div`
-  /* font-family: "roxborough" !important; */
-  font-weight: 700;
-  font-size: 1.5rem;
+  position: relative;
+  font-size: 2rem;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 60px;
+  letter-spacing: 0.6rem;
 `
 
-const ListItemActive = styled.button`
-  padding: 15px 10px 15px 10px;
-  color: ${Colors.navTextActive};
-  border-radius: 0px;
-  transition-property: background-color, color;
-  transition-duration: 0.3s;
-  transition-timing-function: ease;
-  font-family: "BATANG" !important;
-  border: none;
-  button {
-    color: ${Colors.navTextActive};
-    font-family: "BATANG" !important;
-  }
-  @media (max-width: 768px) {
-    background-color: ${Colors.second};
-    text-align: left;
-  }
-  @media (min-width: 769px) {
-    background-color: ${props =>
-      props.isIndex
-        ? props.scrollPositionNavigation
-          ? Colors.second
-          : Colors.basic
-        : Colors.second};
-  }
-  &:hover {
-    background-color: ${Colors.secondLight};
-  }
-  &:active,
-  &:focus {
-    outline: none;
+const CountFav = styled.div`
+  position: absolute;
+  top: 55%;
+  right: ${props => (props.count <= 9 ? "13px" : "11px")};
+  transform: translateY(-50%);
+  font-size: 0.6rem;
+  font-family: "Arial" !important;
+  color: white;
+  letter-spacing: 0rem;
+`
+
+const IconFavourite = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 25px;
+  transform: translateY(-50%);
+  font-size: 1.8rem;
+  cursor: pointer;
+  svg {
+    color: #e53935;
   }
 `
 
@@ -200,7 +197,16 @@ const getData = graphql`
 const Navigation = ({ history }) => {
   const [scrollPositionNavigation, setSrollPositionNavigation] = useState(false)
   const [menuHeight, setMenuHeight] = useState(0)
+  // const [localStoreFav, setLocalStoreFav] = useState([])
   const refMenu = useRef(null)
+
+  // useEffect(() => {
+  //   const storageFav = localStorage.getItem("favProducts")
+  //   const jsonData = JSON.parse(storageFav)
+  //   if (!!jsonData) {
+  //     setLocalStoreFav(jsonData)
+  //   }
+  // }, [localStorage])
 
   const {
     contentfulPageContact: { logo: logo },
@@ -305,12 +311,17 @@ const Navigation = ({ history }) => {
           isIndex={isIndex}
         >
           <ul className="m-0 text-center d-none d-md-block">
-            {/* <div>
-              <AniLinkCustom to="/" key="image">
-                <Img fixed={logo.fixed} />
-              </AniLinkCustom>
-            </div> */}
-            <LogoText>TWOJEWIDZIMSIĘ</LogoText>
+            <LogoText>
+              TWOJEWIDZIMSIĘ
+              <IconFavourite>
+                <AniLinkCustom to={`/favourite`}>
+                  <FaHeart />
+                </AniLinkCustom>
+                {/* <CountFav count={localStoreFav.length}>
+                  {localStoreFav.length}
+                </CountFav> */}
+              </IconFavourite>
+            </LogoText>
             {links}
           </ul>
           <DivMobile className="d-md-none">

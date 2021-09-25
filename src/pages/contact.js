@@ -13,7 +13,7 @@ import SEO from "../components/seo"
 const StyledIframe = styled.iframe`
   width: 100%;
   height: calc(50vh - 135px);
-  margin-top: 156px;
+  margin-top: 132px;
 
   @media all and (max-width: 768px) {
     margin-top: 57px;
@@ -27,23 +27,20 @@ const Field = styled.div`
   border: none;
   background-color: white;
   margin-bottom: 20px;
-  /* max-width: 300px; */
   cursor: auto !important;
   .text {
-    font-size: 1.2rem;
-    font-weight: 700;
-    /* color: ${Colors.second}; */
-    /* text-align: left; */
+    font-size: 1.5rem;
+    font-family: "optima-light" !important;
   }
   .field {
     position: relative;
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
-    border: 2px solid #e0e0e0;
+    border: 1px solid #e0e0e0;
     background-color: white;
     margin: 0 auto;
-    font-weight: 700;
+    font-family: "optima-bold" !important;
     letter-spacing: 0.1rem;
     padding-left: 40px;
     padding-right: 40px;
@@ -98,9 +95,13 @@ const AdressContent = styled.div`
   text-align: center;
   .title {
     font-size: 1.2rem;
-    border-bottom: 2px solid ${Colors.second};
     display: inline-block;
-    font-weight: bold;
+    font-size: 1.5rem;
+    font-family: "optima-light" !important;
+  }
+
+  .content {
+    font-family: "optima-bold" !important;
   }
 
   .marginComponent {
@@ -158,13 +159,14 @@ const Contact = ({ noSeo = false }) => {
           <div className="col-12 marginComponent">
             <div className="title">Godziny otwarcia:</div>
             <div>
-              Poniedziałek - Piątek: <b>{openingHoursMondayFriday}</b>
+              Poniedziałek - Piątek:{" "}
+              <span className="content">{openingHoursMondayFriday}</span>
             </div>
             <div>
-              Sobota: <b>{openingHoursSaturday}</b>
+              Sobota: <span className="content">{openingHoursSaturday}</span>
             </div>
             <div>
-              Niedziela: <b>{openingHoursSunday}</b>
+              Niedziela: <span className="content">{openingHoursSunday}</span>
             </div>
           </div>
         </AdressContent>

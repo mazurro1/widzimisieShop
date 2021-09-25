@@ -4,10 +4,21 @@
   font-family: "BATANG";
   src: url("../fonts/BATANG.ttf") format("truetype");
 }
-
 @font-face {
-  font-family: "roxborough";
-  src: url("../fonts/roxborough.ttf") format("truetype");
+  font-family: "optima-bold";
+  src: url("../fonts/OptimaNovaLTProBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "optima-medium";
+  src: url("../fonts/OptimaNovaLTProMedium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "optima-regular";
+  src: url("../fonts/OptimaNovaLTProRegular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "optima-light";
+  src: url("../fonts/OptimaNovaLTProLight.ttf") format("truetype");
 }
 
 html {
@@ -27,14 +38,31 @@ p,
 button,
 li,
 ol,
-ul,
+ul {
+  font-family: "optima-light" !important;
+  font-weight: 500;
+}
+
+div,
+a,
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: "BATANG" !important;
+  font-family: "optima-regular" !important;
+  /* font-family: "optima-light" !important; */
+  font-weight: 500;
+}
+
+p {
+  letter-spacing: 0.09rem;
+  line-height: 2rem;
+}
+
+.centerText {
+  text-align: center;
 }
 
 article,
@@ -304,7 +332,6 @@ h1 {
   color: inherit;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 2.25rem;
   line-height: 1.1;

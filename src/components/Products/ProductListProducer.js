@@ -1,34 +1,11 @@
-import React from "react"
-import Slider from "react-slick"
+import React, { useState, useEffect } from "react"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import styled from "styled-components"
 import { Title, Colors } from "../../common"
 import Img from "gatsby-image"
 import Button from "@material-ui/core/Button"
-
-const SlickSliderCustom = styled(Slider)`
-  .slick-prev {
-    &:before {
-      color: black !important;
-    }
-  }
-  .slick-next {
-    &:before {
-      color: black !important;
-    }
-  }
-`
-
-const TextStyle = styled.div`
-  position: absolute;
-  bottom: 3px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-weight: 500;
-  color: white;
-`
+import { FaHeart, FaRegHeart } from "react-icons/fa"
 
 const PositionItems = styled.div`
   display: flex;
@@ -37,15 +14,34 @@ const PositionItems = styled.div`
   flex-wrap: wrap;
 `
 
+const FavIcon = styled.div`
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  font-size: 2rem;
+  cursor: pointer;
+  svg {
+    color: ${props => (props.isInFavourite ? "#e53935" : "white")};
+  }
+`
+
+const FavIconProduct = styled.span`
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 5px;
+  svg {
+    color: ${props => (props.isInFavourite ? "#e53935" : "black")};
+  }
+`
+
 const ProductItem = styled.div`
   padding: 20px 10px;
-  width: 280px;
 `
 const FlipBox = styled.div`
   .flip-box {
     background-color: transparent;
-    max-width: 258px;
-    height: 175px;
+    width: 380px;
+    height: 300px;
     perspective: 1000px;
     margin: 0 auto;
   }
@@ -73,33 +69,55 @@ const FlipBox = styled.div`
   }
 
   .flip-box-front {
-    background-color: ${Colors.basic};
+    display: flex;
     color: black;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.05);
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
   }
 
   .flip-box-back {
     background-color: ${Colors.basicDark};
     color: white;
     transform: rotateY(180deg);
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.05);
   }
 `
 
 const ImageStyle = styled(Img)`
   border-bottom: 2px solid white;
   height: 175px;
-  /* border: 1px solid ${Colors.basicDark}; */
-  box-shadow: 0 0 5px 0 rgba(0,0,0,0.2);
+  width: 100%;
 `
 
 const PriceStyle = styled.div`
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  /* background-color: #f44336; */
-  background-color: ${Colors.basicDark};
   padding: 5px 10px;
-  color: white;
-  border-radius: 5px;
+  font-size: 1.8rem;
+  font-family: "optima-light" !important;
+`
+
+const ProducerStyleBack = styled.div`
+  padding: 5px 10px;
+  font-family: "optima-regular" !important;
+  letter-spacing: 0.5rem;
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+`
+
+const ProducerStyle = styled.div`
+  padding: 5px 10px;
+  font-family: "optima-regular" !important;
+  letter-spacing: 0.5rem;
+  font-size: 1.2rem;
+  margin-top: 5px;
+`
+
+const ProductStyle = styled.div`
+  padding: 0px 10px;
+  padding-top: 5px;
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
 `
 
 const LogoProducerPositioin = styled.div`
@@ -140,22 +158,15 @@ const ProductListProducer = ({
   location,
   selectItem = true,
   logo,
+  localStoreFav,
+  handleAddFav,
 }) => {
   const { producer } = producerItems[0]
 
-  const elementsOnPage = () => {
-    if (window.innerWidth > 1200) {
-      return producerItems.length >= 4 ? 4 : producerItems.length
-    } else if (window.innerWidth < 1199 && window.innerWidth > 992) {
-      return producerItems.length >= 3 ? 3 : producerItems.length
-    } else if (window.innerWidth < 991 && window.innerWidth > 768) {
-      return producerItems.length >= 2 ? 2 : producerItems.length
-    } else if (window.innerWidth < 767) {
-      return 1
-    }
-  }
-
   const mapProducts = producerItems.map((item, index) => {
+    const isInFavourite = localStoreFav.some(itemStore => {
+      return itemStore.model === `${item.producer}-${item.model}`
+    })
     return (
       <ProductItem key={index}>
         <FlipBox>
@@ -163,12 +174,33 @@ const ProductListProducer = ({
             <div className="flip-box-inner">
               <div className="flip-box-front">
                 <ImageStyle fluid={item.productImage.fluid} />
-                {/* <TextStyle>{item.model}</TextStyle> */}
-                <PriceStyle>{item.price} zł</PriceStyle>
+                <div>
+                  <ProducerStyle>{item.producer}</ProducerStyle>
+                  <ProductStyle>
+                    {item.model}
+                    {isInFavourite && (
+                      <FavIconProduct
+                        isInFavourite={isInFavourite}
+                        onClick={() =>
+                          handleAddFav(`${item.producer}-${item.model}`)
+                        }
+                      >
+                        {isInFavourite ? <FaHeart /> : <FaRegHeart />}
+                      </FavIconProduct>
+                    )}
+                  </ProductStyle>
+                  <PriceStyle>{item.price} zł</PriceStyle>
+                </div>
               </div>
               <div className="flip-box-back">
+                <FavIcon
+                  isInFavourite={isInFavourite}
+                  onClick={() => handleAddFav(`${item.producer}-${item.model}`)}
+                >
+                  {isInFavourite ? <FaHeart /> : <FaRegHeart />}
+                </FavIcon>
                 <BackStyle>
-                  <h2>{item.producer}</h2>
+                  <ProducerStyleBack>{item.producer}</ProducerStyleBack>
                   <ButtonStyle second>
                     <a
                       href={`${location}/products/${item.producer.toLowerCase()}-${item.model.toLowerCase()}`}
@@ -194,18 +226,6 @@ const ProductListProducer = ({
     )
   })
 
-  const carusellSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: elementsOnPage(),
-    lazyLoad: false,
-    slidesToScroll: elementsOnPage(),
-    autoplay: true,
-    autoplaySpeed: 10000,
-    pauseOnHover: true,
-  }
-
   return (
     <div className="container mb-5">
       {!!logo ? (
@@ -217,9 +237,7 @@ const ProductListProducer = ({
           {producer}
         </Title>
       )}
-      {/* {mapProducts} */}
       <PositionItems>{mapProducts}</PositionItems>
-      {/* <SlickSliderCustom {...carusellSettings}>{mapProducts}</SlickSliderCustom> */}
     </div>
   )
 }
