@@ -320,9 +320,6 @@ const Navigation = ({ history }) => {
                 <AniLinkCustom to={`/favourites`}>
                   <FaHeart />
                 </AniLinkCustom>
-                {/* <CountFav count={localStoreFav.length}>
-                  {localStoreFav.length}
-                </CountFav> */}
               </IconFavourite>
             </LogoText>
             {links}

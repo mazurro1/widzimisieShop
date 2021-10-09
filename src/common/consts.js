@@ -63,13 +63,13 @@ export const Routes = [
     icon: "MdScanner",
   },
   {
-    id: 4,
+    id: 7,
     name: "Kontakt",
     link: "/contact",
     icon: "MdPhoneIphone",
   },
   {
-    id: 5,
+    id: 8,
     name: "Ulubione",
     link: "/favourites",
     icon: "FaHeart",

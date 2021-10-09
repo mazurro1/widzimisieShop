@@ -1,31 +1,28 @@
 import React, { useState, useRef, useEffect } from "react"
-import CustomBackgroundImage from "../common/CustomBackgroundImage"
-import styled from 'styled-components'
-import Img from 'gatsby-image'
+import styled from "styled-components"
+import Img from "gatsby-image"
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa"
 import { Colors } from "../common/consts"
-
 
 const HeightHeader = styled.div`
   position: relative;
   height: 100vh;
   overflow: hidden;
-  
 `
 
 const BackgroundToArrow = styled.div`
-position: absolute;
-z-index: 20;
-top: 0;
-bottom: 0;
-left: 0;
-right: 0;
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background: linear-gradient(
     90deg,
-    rgba(0, 0, 0, 0.30) 0%,
+    rgba(0, 0, 0, 0.3) 0%,
     rgba(255, 255, 255, 0) 10%,
     rgba(255, 255, 255, 0) 90%,
-    rgba(0, 0, 0, 0.30) 100%
+    rgba(0, 0, 0, 0.3) 100%
   );
 `
 
@@ -106,16 +103,16 @@ const Header = ({ imageHeader = null, children, home }) => {
   const [selectedIndexImage, setSelectedIndexImage] = useState(0)
   const timerToClearSomewhere = useRef(null)
 
-  const handleClickArrow = (action) => {
+  const handleClickArrow = action => {
     const imagesLength = imageHeader.length - 1
-    
-    if(action === "plus"){
+
+    if (action === "plus") {
       const nextIndexImage =
-        selectedIndexImage >= imagesLength ? 0 : selectedIndexImage + 1;
+        selectedIndexImage >= imagesLength ? 0 : selectedIndexImage + 1
       setSelectedIndexImage(nextIndexImage)
-    }else{
+    } else {
       const prevIndexImage =
-        selectedIndexImage === 0 ? imagesLength : selectedIndexImage - 1 ;
+        selectedIndexImage === 0 ? imagesLength : selectedIndexImage - 1
       setSelectedIndexImage(prevIndexImage)
     }
   }
@@ -138,20 +135,29 @@ const Header = ({ imageHeader = null, children, home }) => {
     mapImages = imageHeader.map((item, index) => {
       return (
         <ImageItemStyle key={index} active={selectedIndexImage === index}>
-          <Img fixed={item.fixed} />
+          {!!item.fixed ? (
+            <Img fixed={item.fixed} />
+          ) : (
+            <video
+              width="100%"
+              height="100%"
+              loop
+              autoPlay={true}
+              name="media"
+              muted={true}
+            >
+              <source src={item.file.url} type="video/mp4" />
+            </video>
+          )}
         </ImageItemStyle>
       )
     })
     mapDots = imageHeader.map((item, index) => {
       return (
-          <DotItem key={index} active={selectedIndexImage === index}></DotItem>
+        <DotItem key={index} active={selectedIndexImage === index}></DotItem>
       )
     })
   }
-
-//  timerToClearSomewhere.current = setTimeout(() => {
-//    handleClickArrow("plus")
-//  }, 10000)
 
   return (
     <HeightHeader>

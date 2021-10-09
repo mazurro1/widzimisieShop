@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa"
 import { useStaticQuery, graphql } from "gatsby"
 import SEO from "../components/seo"
+import UE from "../images/ue.png"
 
 const StyledIframe = styled.iframe`
   width: 100%;
@@ -152,22 +153,32 @@ const Contact = ({ noSeo = false }) => {
         <Title>Kontakt</Title>
 
         <AdressContent className="row">
-          <div className="col-12 marginComponent">
-            <div className="title">Adres:</div>
-            <div>{companyAdress}</div>
+          <div className="col-md-6 col-12">
+            <div className="row">
+              <div className="col-12 marginComponent">
+                <div className="title">Adres:</div>
+                <div>{companyAdress}</div>
+              </div>
+              <div className="col-12 marginComponent">
+                <div className="title">Godziny otwarcia:</div>
+                <div>
+                  Poniedziałek - Piątek:{" "}
+                  <span className="content">{openingHoursMondayFriday}</span>
+                </div>
+                <div>
+                  Sobota:{" "}
+                  <span className="content">{openingHoursSaturday}</span>
+                </div>
+                <div>
+                  Niedziela:{" "}
+                  <span className="content">{openingHoursSunday}</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="col-12 marginComponent">
-            <div className="title">Godziny otwarcia:</div>
-            <div>
-              Poniedziałek - Piątek:{" "}
-              <span className="content">{openingHoursMondayFriday}</span>
-            </div>
-            <div>
-              Sobota: <span className="content">{openingHoursSaturday}</span>
-            </div>
-            <div>
-              Niedziela: <span className="content">{openingHoursSunday}</span>
-            </div>
+
+          <div className="col-md-6 col-12">
+            <img src={UE} alr="" />
           </div>
         </AdressContent>
         <ContainerLinks>
