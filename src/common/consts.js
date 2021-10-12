@@ -58,7 +58,7 @@ export const Routes = [
   },
   {
     id: 6,
-    name: "Nowy wymiar badania wzroku wraz ze skanerem DNEye®",
+    name: "Soczewki biometryczne",
     link: "/scanner",
     icon: "MdScanner",
   },
