@@ -315,7 +315,7 @@ const Navigation = ({ history }) => {
         >
           <ul className="m-0 text-center d-none d-md-block">
             <LogoText>
-              TWOJEWIDZIMSIĘ
+              TWOJEWIDZIMISIĘ
               <IconFavourite>
                 <AniLinkCustom to={`/favourites`}>
                   <FaHeart />

@@ -3,8 +3,8 @@ require("dotenv").config({
 })
 module.exports = {
   siteMetadata: {
-    title: `TWOJEWIDZIMSIĘ`,
-    description: `Salon optyczny TWOJEWIDZIMSIĘ.`,
+    title: `TWOJEWIDZIMISIĘ`,
+    description: `Salon optyczny TWOJEWIDZIMISIĘ.`,
     author: `Hubert Mazur`,
     twitterUsername: "@mazullo",
     image: "./favicon.ico",
@@ -32,8 +32,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `TWOJEWIDZIMSIĘ`,
-        short_name: `TWOJEWIDZIMSIĘ`,
+        name: `TWOJEWIDZIMISIĘ`,
+        short_name: `TWOJEWIDZIMISIĘ`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,
