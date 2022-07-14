@@ -6,8 +6,16 @@ import { Colors } from "../common/consts"
 
 const HeightHeader = styled.div`
   position: relative;
-  height: 100vh;
+  height: 60vh;
   overflow: hidden;
+  margin-top: 130px;
+`
+
+const HeightHeaderMobile = styled.div`
+  position: relative;
+  overflow: hidden;
+  min-height: 25vh;
+  margin-top: 65px;
 `
 
 const BackgroundToArrow = styled.div`
@@ -30,7 +38,7 @@ const ArrowRightPosition = styled.div`
   position: relative;
   z-index: 20;
   position: absolute;
-  top: 50%;
+  top: 30%;
   right: 20px;
 `
 
@@ -38,7 +46,7 @@ const ArrowLeftPosition = styled.div`
   position: relative;
   z-index: 20;
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 20px;
 `
 
@@ -160,21 +168,42 @@ const Header = ({ imageHeader = null, children, home }) => {
   }
 
   return (
-    <HeightHeader>
-      <BackgroundToArrow />
-      {mapImages}
-      <ArrowRightPosition>
-        <ArrowProps onClick={() => handleClickArrow("plus")}>
-          <FaArrowRight />
-        </ArrowProps>
-      </ArrowRightPosition>
-      <ArrowLeftPosition>
-        <ArrowProps onClick={() => handleClickArrow("minus")}>
-          <FaArrowLeft />
-        </ArrowProps>
-      </ArrowLeftPosition>
-      <Dots>{mapDots}</Dots>
-    </HeightHeader>
+    <>
+      <div className="d-none d-md-block">
+        <HeightHeader>
+          <BackgroundToArrow />
+          {mapImages}
+          <ArrowRightPosition>
+            <ArrowProps onClick={() => handleClickArrow("plus")}>
+              <FaArrowRight />
+            </ArrowProps>
+          </ArrowRightPosition>
+          <ArrowLeftPosition>
+            <ArrowProps onClick={() => handleClickArrow("minus")}>
+              <FaArrowLeft />
+            </ArrowProps>
+          </ArrowLeftPosition>
+          <Dots>{mapDots}</Dots>
+        </HeightHeader>
+      </div>
+      <div className="d-md-none">
+        <HeightHeaderMobile>
+          <BackgroundToArrow />
+          {mapImages}
+          <ArrowRightPosition>
+            <ArrowProps onClick={() => handleClickArrow("plus")}>
+              <FaArrowRight />
+            </ArrowProps>
+          </ArrowRightPosition>
+          <ArrowLeftPosition>
+            <ArrowProps onClick={() => handleClickArrow("minus")}>
+              <FaArrowLeft />
+            </ArrowProps>
+          </ArrowLeftPosition>
+          <Dots>{mapDots}</Dots>
+        </HeightHeaderMobile>
+      </div>
+    </>
   )
 }
 export default Header

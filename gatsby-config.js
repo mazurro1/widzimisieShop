@@ -35,8 +35,8 @@ module.exports = {
         name: `TWOJEWIDZIMISIĘ`,
         short_name: `TWOJEWIDZIMISIĘ`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#000000`,
+        theme_color: `#000000`,
         display: `minimal-ui`,
         icon: `src/images/792-scaled.jpg`, // This path is relative to the root of the site.
       },
