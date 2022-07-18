@@ -149,10 +149,14 @@ const Header = ({ imageHeader = null, children, home }) => {
             <video
               width="100%"
               height="100%"
-              loop
-              autoPlay={true}
+              autoplay="autoplay"
+              loop="loop"
               name="media"
-              muted={true}
+              muted
+              defaultMuted
+              playsinline
+              oncontextmenu="return false;"
+              preload="auto"
             >
               <source src={item.file.url} type="video/mp4" />
             </video>
